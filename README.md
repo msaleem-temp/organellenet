@@ -1,4 +1,4 @@
-# Baseline Model
+# OrganelleNet
 
 This repository contains the **baseline model** for the project.
 
