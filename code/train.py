@@ -113,6 +113,14 @@ def main():
     model, device = build_model(config)
     criterion = build_loss(config, device)
 
+    # 7.1. Log model parameters
+    model_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    print(f"Trainable Parameters: {model_params:,}")
+    params_log_path = os.path.join(run_paths["results_dir"], "model_parameters.txt")
+    with open(params_log_path, "w") as f:
+        f.write(f"Experiment: {config.experiment_name}\n")
+        f.write(f"Trainable Parameters: {model_params:,}\n")
+
     if args.dry_run:
         print("\n[DRY RUN] Config parsed, directories created, model instantiated.")
         print(f"  Model params: {sum(p.numel() for p in model.parameters()):,}")

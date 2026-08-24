@@ -18,6 +18,7 @@ from torch.optim import AdamW
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.cuda.amp import autocast, GradScaler
 from monai.metrics import DiceMetric
+from tqdm import tqdm
 from monai.transforms import AsDiscrete
 
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -235,7 +236,8 @@ class Trainer:
         train_epoch_loss = 0.0
         self.optimizer.zero_grad(set_to_none=True)
 
-        for step, (em_batch, lbl_batch) in enumerate(train_loader):
+        pbar = tqdm(train_loader, desc=f"Train Epoch {epoch + 1}/{self.num_epochs}", leave=False)
+        for step, (em_batch, lbl_batch) in enumerate(pbar):
             em_batch = em_batch.to(self.device)
             if lbl_batch.dim() == 4:
                 lbl_batch = lbl_batch.unsqueeze(1)
@@ -258,7 +260,7 @@ class Trainer:
             train_epoch_loss += actual_loss
 
             if (step + 1) % self.print_freq == 0:
-                print(f"  [Train] Step {step + 1}/{len(train_loader)} | Loss: {actual_loss:.4f}")
+                pbar.set_postfix(loss=f"{actual_loss:.4f}")
 
         return train_epoch_loss / len(train_loader)
 
@@ -269,7 +271,8 @@ class Trainer:
         mean_dice = 0.0
 
         with torch.no_grad():
-            for step, (em_batch, lbl_batch) in enumerate(val_loader):
+            pbar = tqdm(val_loader, desc=f"Val Epoch {epoch + 1}/{self.num_epochs}", leave=False)
+            for step, (em_batch, lbl_batch) in enumerate(pbar):
                 em_batch = em_batch.to(self.device)
                 if lbl_batch.dim() == 4:
                     lbl_batch = lbl_batch.unsqueeze(1)
@@ -288,7 +291,7 @@ class Trainer:
                     self.dice_metric(y_pred=val_outputs, y=val_labels)
 
                 if (step + 1) % self.print_freq == 0:
-                    print(f"  [Val] Step {step + 1}/{len(val_loader)} | Loss: {val_loss.item():.4f}")
+                    pbar.set_postfix(loss=f"{val_loss.item():.4f}")
 
         avg_val_loss = val_epoch_loss / len(val_loader)
 
