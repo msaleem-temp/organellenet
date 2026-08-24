@@ -42,7 +42,7 @@ json_dir = f"{main_dir}/all_jsons"
 checkpoints_dir = f"{main_dir}/checkpoints"
 outputs_dir = f"{main_dir}/outputs"
 # +===================================================================================================
-json_path = f"{json_dir}/baseline.json"
+json_path = f"{json_dir}/static_dynamic_baseline.json"
 save_path = f"{json_dir}/targets_only.json"
 
 target_classes = {
