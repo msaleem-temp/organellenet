@@ -126,12 +126,36 @@ class TrainingConfig:
 
 
 @dataclass
+class AugmentationConfig:
+    """Configuration for the 3D EM augmentation pipeline."""
+    enabled: bool = False
+    # Geometric
+    flip: bool = True
+    rotate90: bool = True
+    # Intensity (EM only)
+    intensity_scale_range: List[float] = field(default_factory=lambda: [0.8, 1.2])
+    intensity_shift_range: List[float] = field(default_factory=lambda: [-0.1, 0.1])
+    gaussian_noise_std: float = 0.03
+    gamma_range: List[float] = field(default_factory=lambda: [0.7, 1.5])
+    # Elastic deformation
+    elastic_enabled: bool = True
+    elastic_alpha: float = 80.0
+    elastic_sigma: float = 10.0
+    elastic_prob: float = 0.3
+    # Resolution augmentation (novel)
+    resolution_aug_enabled: bool = False
+    resolution_scale_range: List[float] = field(default_factory=lambda: [0.25, 1.0])
+    resolution_aug_prob: float = 0.4
+
+
+@dataclass
 class ExperimentConfig:
     experiment_name: str = "unnamed-experiment"
     paths: PathsConfig = field(default_factory=PathsConfig)
     data: DataConfig = field(default_factory=DataConfig)
     model: ModelConfig = field(default_factory=ModelConfig)
     training: TrainingConfig = field(default_factory=TrainingConfig)
+    augmentation: AugmentationConfig = field(default_factory=AugmentationConfig)
 
     # Derived helpers (populated after load)
     label_map: Dict[int, int] = field(default_factory=dict, repr=False)
@@ -177,6 +201,7 @@ def _dict_to_config(raw: dict) -> ExperimentConfig:
         data=DataConfig(**raw.get("data", {})),
         model=ModelConfig(**raw.get("model", {})),
         training=TrainingConfig(**raw.get("training", {})),
+        augmentation=AugmentationConfig(**raw.get("augmentation", {})),
     )
     return cfg
 

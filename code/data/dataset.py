@@ -17,6 +17,7 @@ if _PROJECT_ROOT not in sys.path:
     sys.path.insert(0, _PROJECT_ROOT)
 
 from code.data.zarr_utils import extract_safe
+from code.data.augmentations import apply_augmentations
 
 
 class PatchDataset(Dataset):
@@ -37,11 +38,13 @@ class PatchDataset(Dataset):
         Maximum random spatial jitter in voxels. 0 = static sampling. Default 0.
     """
 
-    def __init__(self, json_path, zarr_map, label_map, patch_dim=128, max_jitter=0):
+    def __init__(self, json_path, zarr_map, label_map, patch_dim=128, max_jitter=0,
+                 augmentation_config=None):
         self.patch_dim = patch_dim
         self.max_jitter = max_jitter
         self.zarr_map = zarr_map
         self.zarr_cache = {}
+        self.augmentation_config = augmentation_config
 
         with open(json_path, "r") as f:
             raw_patches = json.load(f)
@@ -171,7 +174,24 @@ class PatchDataset(Dataset):
         # 7. Semantic Remapping and Tensor Conversion
         remapped_lbl = self.label_lookup[lbl_np]
 
-        em_tensor = torch.from_numpy(em_np.astype(np.float32) / 255.0).unsqueeze(0)
+        # 8. Normalize EM to [0, 1] float32
+        em_float = em_np.astype(np.float32) / 255.0
+
+        # 9. Apply augmentations (only if config is provided and enabled)
+        if self.augmentation_config is not None and self.augmentation_config.enabled:
+            em_float, remapped_lbl = apply_augmentations(
+                em_float, remapped_lbl, self.augmentation_config
+            )
+
+        em_tensor = torch.from_numpy(em_float).unsqueeze(0)
         lbl_tensor = torch.from_numpy(remapped_lbl)
 
         return em_tensor, lbl_tensor
+
+    def get_patch_metadata(self, idx):
+        """
+        Return the raw metadata dict for a patch (dataset, crop, resolution, class, etc.).
+
+        Used by evaluate_detailed.py to record per-patch provenance alongside metrics.
+        """
+        return self.patches[idx]

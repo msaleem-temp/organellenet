@@ -80,6 +80,7 @@ def main():
         label_map=config.label_map,
         patch_dim=config.data.patch_dim,
         max_jitter=config.data.max_jitter,
+        augmentation_config=config.augmentation,
     )
     val_dataset = PatchDataset(
         json_path=split_paths["val_path"],

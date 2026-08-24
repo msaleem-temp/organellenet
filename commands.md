@@ -162,3 +162,120 @@ tail -f runs/static-unet-13cls-nojitter/logs/training_log.csv
 # Check GPU utilization
 watch -n 1 nvidia-smi
 ```
+
+---
+
+## 8. New Augmented Model Training (Paper Experiments)
+
+These two models add augmentation on top of the latest_unet configuration.
+They can run in parallel on separate GPUs if I/O bandwidth allows.
+
+**Terminal 3 — Latest UNet + Standard EM Augmentation (GPU 0 or 1):**
+```bash
+# Standard EM augmentation: flips, rotations, intensity, elastic deform
+python code/train.py --config configs/latest_unet_em_aug.yaml --gpu 0
+```
+
+**Terminal 4 — Latest UNet + Resolution Augmentation (GPU 0 or 1):**
+```bash
+# EM augmentation + novel resolution augmentation
+python code/train.py --config configs/latest_unet_res_aug.yaml --gpu 1
+```
+
+### With nohup (if running unattended):
+```bash
+nohup python code/train.py --config configs/latest_unet_em_aug.yaml --gpu 0 \
+    > logs/em_aug_train.log 2>&1 &
+
+nohup python code/train.py --config configs/latest_unet_res_aug.yaml --gpu 1 \
+    > logs/res_aug_train.log 2>&1 &
+```
+
+### Dry run (validate the new configs):
+```bash
+python code/train.py --config configs/latest_unet_em_aug.yaml --dry-run
+python code/train.py --config configs/latest_unet_res_aug.yaml --dry-run
+```
+
+---
+
+## 9. Detailed Evaluation (Per-Patch with Metadata)
+
+After training completes, run the detailed evaluator on each model.
+This produces JSONL files with per-patch metrics + dataset/resolution metadata.
+
+```bash
+# Static UNet (baseline)
+python code/evaluation/evaluate_detailed.py \
+    --config configs/static_unet.yaml \
+    --checkpoint runs/static-unet-13cls-nojitter/ckpts/best_model.pth \
+    --output runs/static-unet-13cls-nojitter/results/detailed_metrics.jsonl \
+    --gpu 0
+
+# Latest UNet (jitter only, no real augmentation)
+python code/evaluation/evaluate_detailed.py \
+    --config configs/latest_unet.yaml \
+    --checkpoint runs/latest-unet-14cls-jitter48-dice/ckpts/best_model.pth \
+    --output runs/latest-unet-14cls-jitter48-dice/results/detailed_metrics.jsonl \
+    --gpu 0
+
+# Latest UNet + EM Augmentation
+python code/evaluation/evaluate_detailed.py \
+    --config configs/latest_unet_em_aug.yaml \
+    --checkpoint runs/latest-unet-14cls-em-aug/ckpts/best_model.pth \
+    --output runs/latest-unet-14cls-em-aug/results/detailed_metrics.jsonl \
+    --gpu 0
+
+# Latest UNet + Resolution Augmentation (proposed method)
+python code/evaluation/evaluate_detailed.py \
+    --config configs/latest_unet_res_aug.yaml \
+    --checkpoint runs/latest-unet-14cls-res-aug/ckpts/best_model.pth \
+    --output runs/latest-unet-14cls-res-aug/results/detailed_metrics.jsonl \
+    --gpu 0
+```
+
+---
+
+## 10. Generate Paper Tables
+
+After all detailed evaluations are complete, generate CSV tables:
+
+```bash
+python code/evaluation/analyze_results.py \
+    --inputs \
+        runs/static-unet-13cls-nojitter/results/detailed_metrics.jsonl \
+        runs/latest-unet-14cls-jitter48-dice/results/detailed_metrics.jsonl \
+        runs/latest-unet-14cls-em-aug/results/detailed_metrics.jsonl \
+        runs/latest-unet-14cls-res-aug/results/detailed_metrics.jsonl \
+    --labels \
+        "Static (No Aug)" \
+        "Latest (Jitter)" \
+        "Latest+EM Aug" \
+        "Latest+Res Aug" \
+    --output-dir results/paper_tables/
+```
+
+This produces:
+- `per_class_comparison.csv` — Per-class IoU/Dice across all models
+- `per_dataset_comparison.csv` — Per-CellMap-dataset mean metrics
+- `per_resolution_band.csv` — Fine/Medium/Coarse resolution band metrics
+- `resolution_x_class.csv` — Class × resolution band heatmap
+- `resolution_x_class_delta.csv` — Improvement over baseline per band × class
+- `summary.csv` — Overall metrics + fine-coarse gap
+
+---
+
+## 11. Copy Results to Local Machine (for paper writing)
+
+```bash
+# From the GPU server, tar up everything needed:
+tar czf organellenet_results.tar.gz \
+    runs/*/logs/training_log.csv \
+    runs/*/results/detailed_metrics.jsonl \
+    runs/*/results/test_metrics.txt \
+    results/paper_tables/
+
+# Then scp to your local machine:
+scp organellenet_results.tar.gz your_local_machine:~/
+```
+
