@@ -36,7 +36,7 @@ import matplotlib.patches as mpatches
 from scipy.spatial import cKDTree
 
 # +===================================================================================================
-main_dir = "/mnt/voxelcell_vol1"
+main_dir = "/mnt/voxelcell_vol1" # project main directory
 dataset_dir = f"{main_dir}/raw_data"
 json_dir = f"{main_dir}/all_jsons"
 checkpoints_dir = f"{main_dir}/checkpoints"
@@ -84,9 +84,6 @@ train_patches = patches[:train_end]
 val_patches = patches[train_end:val_end]
 test_patches = patches[val_end:]
 
-train_patches = train_patches[:50]
-val_patches = val_patches[:50]
-test_patches = test_patches[:50]
 
 train_path = os.path.join(output_dir, "train.json")
 val_path = os.path.join(output_dir, "val.json")
