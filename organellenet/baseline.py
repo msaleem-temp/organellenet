@@ -23,6 +23,9 @@ from torch.cuda.amp import autocast, GradScaler
 from monai.networks.nets import UNet
 from monai.losses import DiceCELoss
 
+import collections
+
+
 from monai.inferers import SlidingWindowInferer
 import collections
 from monai.metrics import DiceMetric
@@ -32,58 +35,39 @@ import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 from scipy.spatial import cKDTree
 
-
-
-# ----------------------------------------------------------------------------
-# Path 
-main_dir = "/mnt/voxelcell_vol1", # project main folder
-dataset_dir = f"{main_dir}/raw_data" # If dataset is sub-folder, then no need to update this path
+# +===================================================================================================
+main_dir = "/mnt/voxelcell_vol1"
+dataset_dir = f"{main_dir}/raw_data"
 json_dir = f"{main_dir}/all_jsons"
 checkpoints_dir = f"{main_dir}/checkpoints"
 outputs_dir = f"{main_dir}/outputs"
-# ----------------------------------------------------------------------------
+# +===================================================================================================
+json_path = f"{json_dir}/baseline.json"
+save_path = f"{json_dir}/targets_only.json"
 
-
-
-json_path = f"{json_dir}/all_centroids.json"
-save_path = f"{json_dir}/targets_only.json" 
-
-target_classes = {'endo', 'ld', 'lyso', 'mito', 'mt', 'np', 'nuc', 'perox', 'ves', 'vim', 'golgi', 'er', 'eres'}
-excluded_crop = "crop234"
+target_classes = {
+    # Original 10 Targets
+    'endo', 'ld', 'lyso', 'mito', 'mt', 
+    'np', 'nuc', 'perox', 'ves', 
+    
+    # Elevated Semantic Targets
+    'golgi', 'er', 'eres'
+}
 
 with open(json_path, 'r') as f:
     blueprint = json.load(f)
 
-train_patches = []
-excluded_datasets = set()
-
-for patch in blueprint:
-    # 1. Check if the patch belongs to the held-out crop
-    if patch.get("crop") == excluded_crop:
-        excluded_datasets.add(patch.get("dataset"))
-        continue # Skip this patch entirely; it belongs to the test set
-        
-    # 2. If it is a valid training crop, check if it belongs to a target class
-    if patch.get("class") in target_classes:
-        train_patches.append(patch)
+target_patches = [patch for patch in blueprint if patch.get("class") in target_classes]
 
 with open(save_path, 'w') as f:
-    json.dump(train_patches, f, indent=4)
+    json.dump(target_patches, f, indent=4)
 
-print(f"Total original patches: {len(blueprint)}")
-print(f"Total training patches extracted: {len(train_patches)}")
-
-# 3. Print the dataset name for the excluded crop
-if excluded_datasets:
-    print(f"\nExcluded {excluded_crop} belonged to the following dataset(s): {', '.join(excluded_datasets)}")
-else:
-    print(f"\nWarning: {excluded_crop} was not found in the original JSON. Check your crop naming convention.")
-
-
-
-
+print(f"Total original patches (All Classes): {len(blueprint)}")
+print(f"Total target patches extracted:       {len(target_patches)}")
+print(f"Filtered blueprint safely saved to:   {save_path}")
+# +===================================================================================================
 input_json = f"{json_dir}/targets_only.json"
-output_dir = f"{json_dir}"
+output_dir = f"{json_dir}/"
 
 with open(input_json, 'r') as f:
     patches = json.load(f)
@@ -92,14 +76,17 @@ random.seed(42)
 random.shuffle(patches)
 
 total_patches = len(patches)
-train_end = int(total_patches * 0.85)
-val_end = int(total_patches * 0.94)
+train_end = int(total_patches * 0.80)
+val_end = int(total_patches * 0.90)
 
 # 4. Slice the list into Train (80%), Val (10%), and Test (10%)
 train_patches = patches[:train_end]
 val_patches = patches[train_end:val_end]
 test_patches = patches[val_end:]
 
+train_patches = train_patches[:50]
+val_patches = val_patches[:50]
+test_patches = test_patches[:50]
 
 train_path = os.path.join(output_dir, "train.json")
 val_path = os.path.join(output_dir, "val.json")
@@ -118,7 +105,7 @@ print(f"-> Train Dataset (80%): {len(train_patches)}")
 print(f"-> Val Dataset   (10%): {len(val_patches)}")
 print(f"-> Test Dataset  (10%): {len(test_patches)}")
 
-
+# +===================================================================================================
 def extract_safe(zarr_arr, start_coords, patch_shape, pad_value=0, out_dtype=None):
     arr_shape = zarr_arr.shape
     z_min, z_max = max(0, start_coords[0]), min(arr_shape[0], start_coords[0] + patch_shape[0])
@@ -135,7 +122,7 @@ def extract_safe(zarr_arr, start_coords, patch_shape, pad_value=0, out_dtype=Non
             zarr_arr[z_min:z_max, y_min:y_max, x_min:x_max]
             
     return patch
-
+# +===================================================================================================
 
 def build_zarr_map_modal_direct(data_root):
     zarr_map = {}
@@ -157,6 +144,7 @@ def build_zarr_map_modal_direct(data_root):
     return zarr_map
 
 # Execute mapping
+# +===================================================================================================
 class Patches(Dataset):
     
     def __init__(self, json_path, zarr_map, patch_dim=128, max_jitter=32):
@@ -168,21 +156,21 @@ class Patches(Dataset):
             raw_patches = json.load(f)
             
         self.zarr_cache = {}
-
+        
+        # 14-Class Architecture (0 Background + 13 Targets)
         semantic_to_instance_map = {
-            3: 1, 4: 1, 5: 1,                                       # 1. Mitochondria
-            8: 2, 9: 2,                                             # 2. Vesicles
-            10: 3, 11: 3,                                           # 3. Endosomes
-            12: 4, 13: 4,                                           # 4. Lysosomes
-            14: 5, 15: 5,                                           # 5. Lipid Droplets
-            20: 6, 21: 6, 24: 6, 25: 6, 26: 6, 27: 6, 28: 6, 29: 6, # 6. Nucleus
-            22: 7, 23: 7,                                           # 7. Nuclear Pores
-            30: 8, 36: 8,                                           # 8. Microtubules
-            47: 9, 48: 9,                                           # 9. Peroxisomes
-            6: 10, 7: 10,                                           # 10. Golgi Apparatus
-            16: 11, 17: 11,                                         # 11. Endoplasmic Reticulum
-            18: 12, 19: 12,                                         # 12. ER Exit Sites
-            38: 13,                                                 # 13. Vimentin
+            3: 1, 4: 1, 5: 1,                                       
+            8: 2, 9: 2,                                             
+            10: 3, 11: 3,                                           
+            12: 4, 13: 4,                                           
+            14: 5, 15: 5,                                           
+            20: 6, 21: 6, 24: 6, 25: 6, 26: 6, 27: 6, 28: 6, 29: 6, 
+            22: 7, 23: 7,                                           
+            30: 8, 36: 8,                                           
+            47: 9, 48: 9,                                           
+            6: 10, 7: 10,                                           
+            16: 11, 17: 11,                                         
+            18: 12, 19: 12                                          
         }
         
         self.label_lookup = np.zeros(256, dtype=np.int64)
@@ -292,10 +280,7 @@ class Patches(Dataset):
         lbl_tensor = torch.from_numpy(remapped_lbl)
         
         return em_tensor, lbl_tensor
-
-
-
-
+# +===================================================================================================
 def create_balanced_sampler(dataset):
     class_list = [patch.get("class", "unknown") for patch in dataset.patches]
     class_counts = collections.Counter(class_list)
@@ -310,22 +295,24 @@ def create_balanced_sampler(dataset):
     )
     return sampler
 
-dataset_path = build_zarr_map_modal_direct(dataset_dir)
+# ==========================================
+# 3. PIPELINE INITIALIZATION
+# ==========================================
+ZARR_MAP = build_zarr_map_modal_direct(dataset_dir)
 train_json_path = f"{json_dir}/train.json"
 val_json_path = f"{json_dir}/val.json"
 
-train_dataset = Patches(train_path, zarr_map=dataset_path, patch_dim=128, max_jitter=48)
-val_dataset = Patches(val_path, zarr_map=dataset_path, patch_dim=128, max_jitter=0) # Static for validation
+train_dataset = Patches(train_path, zarr_map=ZARR_MAP, patch_dim=128, max_jitter=48)
+val_dataset = Patches(val_path, zarr_map=ZARR_MAP, patch_dim=128, max_jitter=0) # Static for validation
 
 train_sampler = create_balanced_sampler(train_dataset)
 
 train_dataloader = DataLoader(
     train_dataset, 
     batch_size=4, 
-    sampler=train_sampler, 
+    sampler=train_sampler, # Replaces shuffle=True
     num_workers=2,   
-    pin_memory=True,
-    drop_last=True  
+    pin_memory=True  
 )
 
 val_dataloader = DataLoader(
@@ -333,15 +320,9 @@ val_dataloader = DataLoader(
     batch_size=4, 
     shuffle=False, 
     num_workers=2,   
-    pin_memory=True,
-    drop_last=False  
+    pin_memory=True  
 )
-
-
-
-
-
-
+# +===================================================================================================
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 num_gpus = torch.cuda.device_count()
 print(f"Training on device: {device} with {num_gpus} GPUs")
@@ -349,18 +330,15 @@ print(f"Training on device: {device} with {num_gpus} GPUs")
 model = UNet(
     spatial_dims=3,
     in_channels=1,
-    out_channels=14,  
+    out_channels=13,  # 12 Target Classes + 1 Background (Class 0)
     channels=(64, 128, 256, 512, 1024),
-    strides=(1, 2, 2, 2),
+    strides=(2, 2, 2, 2),
     kernel_size=3,
     up_kernel_size=3,
     num_res_units=2,
     act="PRELU",
     norm="INSTANCE"
 ).to(device)
-
-if num_gpus > 1:
-    model = nn.DataParallel(model)
 
 manual_weights = torch.tensor([
     0.8419,  # 1  Background
@@ -376,70 +354,36 @@ manual_weights = torch.tensor([
     0.7276,  # 11 Golgi Apparatus
     1.5408,  # 12 Endoplasmic Reticulum
     1.5923,  # 13 ER Exit Sites
-    1.7003  # 14 Vimentin
+    # 1.7003  # 14 Vimentin
 ], dtype=torch.float32).to(device)
 
 
-# -----------------------------------------------------------------------------
 criterion = DiceCELoss(
-    to_onehot_y=True,
-    softmax=True,
-    include_background=False,
+    to_onehot_y=True, 
+    softmax=True, 
+    include_background=False, 
     weight=manual_weights
 )
-
-
-
+# +===================================================================================================
 optimizer = AdamW(model.parameters(), lr=1e-4, weight_decay=1e-5)
 scaler = GradScaler()
+scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=5)
 
-scheduler = ReduceLROnPlateau(optimizer, mode='max', factor=0.5, patience=5)
+num_epochs = 2
+best_val_loss = float('inf')
+print_freq = 1
 
-load_checkpoint_path = f"{checkpoints_dir}/resumde_checkpoindt.pth"
-save_checkpoint_path = f"{checkpoints_dir}/resumde_checkpoint.pth"
-best_model_path = f"{outputs_dir}/baseline.pth"
-epoch_log_file = f"{outputs_dir}/training_log.csv"
 
-start_epoch = 0  
-num_epochs = 2   
-# CHANGED: Initialize to -1.0 for maximization
-best_val_dice = -1.0 
-early_stopping_patience = 15
+early_stopping_patience = 12
 early_stopping_counter = 0
 
-accumulation_steps = 2
-print_freq = 200
+epoch_log_file = f"{outputs_dir}/training_log.csv"
+best_model_path = f"{outputs_dir}/baseline_model.pth"
 
-# NEW: Initialize MONAI metric and discretizers
-dice_metric = DiceMetric(include_background=False, reduction="mean")
-post_pred = AsDiscrete(argmax=True, to_onehot=14)
-post_label = AsDiscrete(to_onehot=14)
+with open(epoch_log_file, "w") as f:
+    f.write("epoch,lr,train_loss,val_loss\n")
 
-
-if os.path.exists(load_checkpoint_path):
-    print(f"Loading checkpoint from {load_checkpoint_path}...")
-    checkpoint = torch.load(load_checkpoint_path, map_location=device)
-    
-    if isinstance(model, nn.DataParallel):
-        model.module.load_state_dict(checkpoint['model_state_dict'])
-    else:
-        model.load_state_dict(checkpoint['model_state_dict'])
-        
-    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-    scaler.load_state_dict(checkpoint['scaler_state_dict'])
-    scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
-    
-    # CHANGED: Overwrite best_val_dice instead of best_val_loss
-    best_val_dice = checkpoint.get('best_val_dice', -1.0)
-    print(f"Resuming training starting at epoch {start_epoch}")
-else:
-    print(f"Historical checkpoint not found at {load_checkpoint_path}. Starting from scratch.")
-    start_epoch = 0
-    # CHANGED: Added val_dice to log header
-    with open(epoch_log_file, "w") as f:
-        f.write("epoch,lr,train_loss,val_loss,val_dice\n")
-
-for epoch in range(start_epoch, num_epochs):
+for epoch in range(num_epochs):
     
     current_lr = optimizer.param_groups[0]['lr']
     print(f"\n=== Epoch [{epoch+1}/{num_epochs}] | LR: {current_lr:.2e} ===")
@@ -447,30 +391,28 @@ for epoch in range(start_epoch, num_epochs):
     # --- PHASE 1: TRAINING ---
     model.train()
     train_epoch_loss = 0.0
-    optimizer.zero_grad(set_to_none=True)
     
     for step, (em_batch, lbl_batch) in enumerate(train_dataloader):
         em_batch = em_batch.to(device)
+        
         if lbl_batch.dim() == 4:
             lbl_batch = lbl_batch.unsqueeze(1)
         lbl_batch = lbl_batch.to(device, dtype=torch.long)
         
+        optimizer.zero_grad(set_to_none=True)
+        
         with autocast():
             outputs = model(em_batch)
             loss = criterion(outputs, lbl_batch)
-            loss = loss / accumulation_steps
         
         scaler.scale(loss).backward()
+        scaler.step(optimizer)
+        scaler.update()
         
-        if (step + 1) % accumulation_steps == 0 or (step + 1) == len(train_dataloader):
-            scaler.step(optimizer)
-            scaler.update()
-            optimizer.zero_grad(set_to_none=True)
-        
-        train_epoch_loss += (loss.item() * accumulation_steps)
+        train_epoch_loss += loss.item()
         
         if (step + 1) % print_freq == 0:
-            print(f"  [Train] Step {step+1}/{len(train_dataloader)} | Loss: {(loss.item() * accumulation_steps):.4f}")
+            print(f"  [Train] Step {step+1}/{len(train_dataloader)} | Loss: {loss.item():.4f}")
             
     avg_train_loss = train_epoch_loss / len(train_dataloader)
     
@@ -481,6 +423,7 @@ for epoch in range(start_epoch, num_epochs):
     with torch.no_grad():
         for step, (em_batch, lbl_batch) in enumerate(val_dataloader):
             em_batch = em_batch.to(device)
+            
             if lbl_batch.dim() == 4:
                 lbl_batch = lbl_batch.unsqueeze(1)
             lbl_batch = lbl_batch.to(device, dtype=torch.long)
@@ -491,66 +434,33 @@ for epoch in range(start_epoch, num_epochs):
                 
             val_epoch_loss += val_loss.item()
             
-            # NEW: Apply discretization for metric computation
-            val_outputs = [post_pred(i) for i in outputs]
-            val_labels = [post_label(i) for i in lbl_batch]
-            
-            # NEW: Accumulate metric for the batch
-            dice_metric(y_pred=val_outputs, y=val_labels)
-            
             if (step + 1) % print_freq == 0:
                 print(f"  [Val] Step {step+1}/{len(val_dataloader)} | Loss: {val_loss.item():.4f}")
-                
+            
     avg_val_loss = val_epoch_loss / len(val_dataloader)
     
-    # NEW: Aggregate the final Dice score and reset the metric
-    mean_dice = dice_metric.aggregate().item()
-    dice_metric.reset()
+    scheduler.step(avg_val_loss)
     
-    # CHANGED: Scheduler now steps based on Dice score
-    scheduler.step(mean_dice)
+    print(f"Epoch [{epoch+1}/{num_epochs}] Summary | Train Loss: {avg_train_loss:.4f} | Val Loss: {avg_val_loss:.4f}")
     
-    print(f"Epoch [{epoch+1}/{num_epochs}] Summary | Train Loss: {avg_train_loss:.4f} | Val Loss: {avg_val_loss:.4f} | Val Dice: {mean_dice:.4f}")
-    
-    # CHANGED: Append to log file including mean_dice
-    if not os.path.exists(epoch_log_file) and epoch == 0:
-        with open(epoch_log_file, "w") as f:
-            f.write("epoch,lr,train_loss,val_loss,val_dice\n")
     with open(epoch_log_file, "a") as f:
-        f.write(f"{epoch+1},{current_lr:.2e},{avg_train_loss:.4f},{avg_val_loss:.4f},{mean_dice:.4f}\n")
+        f.write(f"{epoch+1},{current_lr:.2e},{avg_train_loss:.4f},{avg_val_loss:.4f}\n")
         
     # --- PHASE 3: CHECKPOINTING & EARLY STOPPING ---
-    resume_state = {
-        'epoch': epoch,
-        'model_state_dict': model.module.state_dict() if isinstance(model, nn.DataParallel) else model.state_dict(),
-        'optimizer_state_dict': optimizer.state_dict(),
-        'scaler_state_dict': scaler.state_dict(),
-        'scheduler_state_dict': scheduler.state_dict(),
-        'best_val_dice': best_val_dice  # CHANGED: Saving the best dice score
-    }
-    
-    torch.save(resume_state, save_checkpoint_path)
-
-    # CHANGED: Early stopping evaluates based on maximizing Dice
-    if mean_dice > best_val_dice:
-        print(f">>> Validation Dice improved from {best_val_dice:.4f} to {mean_dice:.4f}. Saving best model.")
-        best_val_dice = mean_dice
-        torch.save(model.module.state_dict() if isinstance(model, nn.DataParallel) else model.state_dict(), best_model_path)
-        early_stopping_counter = 0 
+    if avg_val_loss < best_val_loss:
+        print(f">>> Validation loss improved from {best_val_loss:.4f} to {avg_val_loss:.4f}. Saving checkpoint.")
+        best_val_loss = avg_val_loss
+        torch.save(model.state_dict(), best_model_path)
+        early_stopping_counter = 0  # Reset patience counter on improvement
     else:
         early_stopping_counter += 1
-        print(f">>> Validation Dice did not improve. Early stopping counter: {early_stopping_counter}/{early_stopping_patience}")
+        print(f">>> Validation loss did not improve. Early stopping counter: {early_stopping_counter}/{early_stopping_patience}")
         
     if early_stopping_counter >= early_stopping_patience:
-        print(f"\nEarly stopping triggered. Validation Dice has not improved for {early_stopping_patience} consecutive epochs.")
+        print(f"\nEarly stopping triggered. Validation loss has not improved for {early_stopping_patience} consecutive epochs.")
         break
 
-print("\nSession complete.")
-
-
-
-# -----------------------------------------------------------------------------
-
+# +===================================================================================================
 
 log_path = f"{outputs_dir}/training_log.csv"
 
@@ -595,17 +505,13 @@ plt.tight_layout()
 
 # Render the plot
 plt.show()
+# +===================================================================================================
 
-
-
-
-
-# -----------------------------------------------------------------------------
 test_json = f"{json_dir}/test.json"
-best_model_path = f"{outputs_dir}/baseline.pth"
+best_model_path = f"{outputs_dir}/baseline_model.pth"
 
 
-test_dataset = Patches(test_json, zarr_map=dataset_path, patch_dim=128, max_jitter=0)
+test_dataset = Patches(test_json, zarr_map=ZARR_MAP, patch_dim=128, max_jitter=0)
 test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=2)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -616,7 +522,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = UNet(
     spatial_dims=3,
     in_channels=1,
-    out_channels=14,  
+    out_channels=13,  
     channels=(64, 128, 256, 512, 1024),
     strides=(2, 2, 2, 2),
     kernel_size=3,
@@ -629,7 +535,7 @@ model = UNet(
 model.load_state_dict(torch.load(best_model_path, map_location=device))
 model.eval()  
 
-
+# +===================================================================================================
 
 
 def compute_hd95(pred_mask, gt_mask):
@@ -725,7 +631,7 @@ class SegmentationEvaluator:
         return iou, dice, precision, recall, f1_score, hd95, hist
 
 # --- 1. Initialization ---
-evaluator = SegmentationEvaluator(num_classes=14)
+evaluator = SegmentationEvaluator(num_classes=13)
 
 
 # --- 2. Evaluation Loop ---
@@ -757,14 +663,14 @@ class_names = {
     10: "Golgi", 
     11: "ER", 
     12: "ERES",
-    13: "Vim"
+    # 13: "Vim"
 }
 
 print("\n" + "="*105)
 print(f"{'Class':<15} | {'Dice':<10} | {'IoU':<10} | {'Precision':<10} | {'Recall':<10} | {'F1 Score':<10} | {'HD95 (px)':<10}")
 print("="*105)
 
-for idx in range(14):
+for idx in range(13):
     print(f"{class_names[idx]:<15} | {dice[idx]:<10.4f} | {iou[idx]:<10.4f} | {precision[idx]:<10.4f} | {recall[idx]:<10.4f} | {f1_score[idx]:<10.4f} | {hd95[idx]:<10.4f}")
 
 print("="*105)
@@ -776,8 +682,7 @@ print(f"Mean Recall:   {np.mean(recall[1:]):.4f}")
 print(f"Mean F1 Score: {np.mean(f1_score[1:]):.4f}")
 print(f"Mean HD95:     {np.mean(hd95[1:]):.4f}")
 
-
-# -----------------------------------------------------------------------------
+# +===================================================================================================
 
 def get_scale_trans(base_path, level="s0"):
     """Reads the exact scale and translation offsets from .zattrs"""
@@ -850,7 +755,7 @@ dataset_base = f"{dataset_dir}/jrc_cos7-1a/jrc_cos7-1a.zarr"
 em_3d, lbl_3d = extract_aligned_volumes(dataset_base, "crop234")
 
 
-# -----------------------------------------------------------------------------
+# +===================================================================================================
 
 
 
@@ -870,9 +775,12 @@ semantic_to_instance_map = {
     6: 10, 7: 10,                                           # 10. Golgi Apparatus
     16: 11, 17: 11,                                         # 11. Endoplasmic Reticulum
     18: 12, 19: 12,                                         # 12. ER Exit Sites
-    38: 13,                                                 # 13. Vimentin
+    # 38: 13,                                                 # 13. Vimentin
 }
 
+# 2. Build the high-speed lookup array
+# We make the array slightly larger than the maximum possible ID in the raw label 
+# to prevent any "index out of bounds" errors.
 max_raw_id = max(256, lbl_3d.max() + 1)
 label_lookup = np.zeros(max_raw_id, dtype=np.int64)
 
@@ -885,6 +793,8 @@ lbl_3d_remapped = label_lookup[lbl_3d]
 
 # Verify the remapping worked
 present_classes = np.unique(lbl_3d_remapped)
+
+# +===================================================================================================
 
 
 print("Preparing tensors for inference...")
@@ -927,7 +837,7 @@ pred_slice = pred_3d[z_slice, :, :]
 # ---------------------------------------------------------
 # Extract distinct bright colors from tab20 (skipping the dark blues/greys)
 base_colors = plt.get_cmap("tab20").colors
-foreground_colors = list(base_colors[:13])  
+foreground_colors = list(base_colors[:12])  
 
 # Index 0 is strictly Black
 custom_colors = [(0.0, 0.0, 0.0, 1.0)] + foreground_colors
@@ -935,7 +845,7 @@ custom_cmap = mcolors.ListedColormap(custom_colors)
 
 # Because we have exactly 13 colors (0 to 12), vmax must be exactly 12
 vmin = 0
-vmax = 13 
+vmax = 12 
 
 # ---------------------------------------------------------
 # 3. Spatial Prediction Visualization
@@ -982,7 +892,16 @@ fig.legend(
 # Squeeze plots to leave room for the legend at the bottom
 plt.tight_layout(rect=[0, 0.15, 1, 1])
 plt.show()
+# +===================================================================================================
 
 
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
