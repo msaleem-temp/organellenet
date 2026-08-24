@@ -299,7 +299,7 @@ ZARR_MAP = build_zarr_map_modal_direct(dataset_dir)
 train_json_path = f"{json_dir}/train.json"
 val_json_path = f"{json_dir}/val.json"
 
-train_dataset = Patches(train_path, zarr_map=ZARR_MAP, patch_dim=128, max_jitter=48)
+train_dataset = Patches(train_path, zarr_map=ZARR_MAP, patch_dim=128, max_jitter=0) #static sampling
 val_dataset = Patches(val_path, zarr_map=ZARR_MAP, patch_dim=128, max_jitter=0) # Static for validation
 
 train_sampler = create_balanced_sampler(train_dataset)
