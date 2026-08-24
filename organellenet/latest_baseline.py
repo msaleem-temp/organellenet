@@ -45,7 +45,7 @@ outputs_dir = f"{main_dir}/outputs"
 
 
 
-json_path = f"{json_dir}/all_centroids.json"
+json_path = f"{json_dir}/latest_baseline_centroids"
 save_path = f"{json_dir}/targets_only.json" 
 
 target_classes = {'endo', 'ld', 'lyso', 'mito', 'mt', 'np', 'nuc', 'perox', 'ves', 'vim', 'golgi', 'er', 'eres'}
