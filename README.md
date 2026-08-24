@@ -1,65 +1,119 @@
 # OrganelleNet
 
-This repository contains the **baseline model** for the project.
+3D organelle segmentation for the [CellMap Segmentation Challenge](https://github.com/janelia-cellmap/cellmap-segmentation-challenge), targeting [NewInML 2026 @ NeurIPS](https://newinml.github.io/NewInML2026NeurIPS/).
 
-## Installation
+## Project Structure
 
-First, install the required Python packages using the provided `requirements.txt` file:
+```text
+organellenet/
+├── configs/                     # YAML experiment configs
+│   ├── base.yaml                #   Shared defaults
+│   ├── static_unet.yaml         #   13-class, no jitter
+│   ├── dynamic_unet.yaml        #   13-class, jitter=32
+│   └── latest_unet.yaml         #   14-class, jitter=48, Dice-based
+├── code/
+│   ├── data/                    # Data loading pipeline
+│   │   ├── dataset.py           #   PatchDataset (zarr → tensors)
+│   │   ├── sampler.py           #   Balanced class sampling
+│   │   ├── splits.py            #   Train/val/test split generation
+│   │   └── zarr_utils.py        #   Zarr I/O, metadata, extraction
+│   ├── models/
+│   │   └── unet.py              #   Model factory (MONAI UNet)
+│   ├── training/
+│   │   ├── trainer.py           #   Training loop (AMP, early stopping, resume)
+│   │   └── losses.py            #   Loss factory (DiceCELoss)
+│   ├── evaluation/
+│   │   ├── evaluator.py         #   Metrics (Dice, IoU, HD95, confusion matrix)
+│   │   └── visualize.py         #   Training curves, inference visualization
+│   ├── utils/
+│   │   ├── config.py            #   YAML config loader with inheritance
+│   │   └── paths.py             #   Run directory management
+│   ├── train.py                 #   Training entry point
+│   ├── evaluate.py              #   Evaluation entry point
+│   └── infer.py                 #   Sliding window inference entry point
+├── patch_sampling/
+│   └── improved.py              # Patch extraction from raw zarr volumes
+├── legacy/                      # Original monolithic scripts (preserved)
+├── runs/                        # Auto-created experiment output directories
+├── configs/                     # YAML experiment configurations
+├── commands.md                  # GPU server deployment guide
+├── changelog.md                 # Detailed change log
+├── requirements.txt             # Python dependencies
+└── plan.md                      # Research plan and instructions
+```
+
+## Quick Start
+
+### 1. Install dependencies
 
 ```bash
 pip install -r requirements.txt
+pip install pyyaml
 ```
 
-## Project Directory
+### 2. Train a model
 
-Set `main_dir` in the configuration/code to the path of your main project folder:
+```bash
+# Static UNet on GPU 0
+python code/train.py --config configs/static_unet.yaml --gpu 0
 
-```python
-main_dir = "replace with your project folder"
-
-dataset_dir = f"{main_dir}/raw_data"
-json_dir = f"{main_dir}/all_jsons"
-checkpoints_dir = f"{main_dir}/checkpoints"
-outputs_dir = f"{main_dir}/outputs"
+# Dry run (validate setup without training)
+python code/train.py --config configs/static_unet.yaml --dry-run
 ```
 
-Replace `"replace with your project folder"` with the absolute path to your project directory.
+### 3. Evaluate
 
-## Required Directory Structure
-
-The project directory must follow this structure:
-
-```text
-main_project/
-│
-├── raw_data/
-│   ├── dataset_1/
-│   ├── dataset_2/
-│   ├── ...
-│   └── dataset_22/
-│
-├── all_jsons/
-│   └── all_centroids.json
-│
-├── checkpoints/
-│
-└── outputs/
+```bash
+python code/evaluate.py \
+    --config configs/static_unet.yaml \
+    --checkpoint runs/static-unet-13cls-nojitter/ckpts/best_model.pth
 ```
 
-### Directories
+### 4. Full-crop inference
 
-* **`raw_data/`** — Contains the 22 datasets required by the baseline model.
-* **`all_jsons/`** — Contains the JSON metadata files. The required file is `all_centroids.json`.
-* **`checkpoints/`** — Used to store model checkpoints.
-* **`outputs/`** — Used to store model predictions, evaluation results, metrics, and other generated outputs.
+```bash
+python code/infer.py \
+    --config configs/static_unet.yaml \
+    --checkpoint runs/static-unet-13cls-nojitter/ckpts/best_model.pth \
+    --dataset jrc_cos7-1a --crop crop234
+```
 
 ## Configuration
 
-Before running the scripts, make sure that:
+All behavior is driven by YAML configs. Configs use inheritance:
 
-1. `main_dir` points to the correct project directory.
-2. All 22 datasets are present inside `raw_data/` or if data is in another folder, then path can be replace here.
-3. `all_centroids.json` is present inside `all_jsons/`.
-4. The required Python packages have been installed from `requirements.txt`.
+```yaml
+# configs/static_unet.yaml
+inherits: base.yaml
+experiment_name: static-unet-13cls-nojitter
+data:
+  max_jitter: 0
+model:
+  out_channels: 13
+```
 
-Once the directory structure and dependencies are set up, the baseline model can be run using the provided scripts.
+Only parameters that differ from `base.yaml` need to be specified. See [commands.md](commands.md) for full deployment instructions.
+
+## Model Variants
+
+| Config | Classes | Jitter | Strides | Early Stop | Grad Accum |
+|--------|---------|--------|---------|------------|------------|
+| `static_unet.yaml` | 13 | 0 | (2,2,2,2) | val_loss | 1 |
+| `dynamic_unet.yaml` | 13 | 32 | (2,2,2,2) | val_loss | 1 |
+| `latest_unet.yaml` | 14 | 48 | (1,2,2,2) | val_dice | 2 |
+
+## Data
+
+Data is expected in zarr format following the CellMap challenge directory structure at the path configured in `configs/base.yaml`:
+
+```
+data_dir/
+├── jrc_cos7-1a/
+│   └── jrc_cos7-1a.zarr/
+│       └── recon-1/
+│           ├── em/fibsem-uint8/s0/
+│           └── labels/groundtruth/crop*/all/s0/
+├── jrc_hela-2/
+│   └── ...
+└── ... (22 datasets)
+```

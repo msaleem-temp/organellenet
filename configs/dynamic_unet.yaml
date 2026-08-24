@@ -1,0 +1,22 @@
+# ============================================================================
+# Dynamic UNet — 13 classes, jitter=32, loss-based early stopping
+# ============================================================================
+# Corresponds to the original dynamic_baseline.py
+inherits: base.yaml
+
+experiment_name: dynamic-unet-13cls-jitter32
+
+data:
+  max_jitter: 32
+  num_classes: 13
+  blueprint_json: static_dynamic_baseline.json
+
+model:
+  out_channels: 13
+  strides: [2, 2, 2, 2]
+
+training:
+  early_stop_metric: val_loss
+  early_stop_patience: 12
+  accumulation_steps: 1
+  print_freq: 1

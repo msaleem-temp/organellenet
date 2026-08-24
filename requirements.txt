@@ -9,3 +9,5 @@ scikit-learn==1.6.1
 scipy==1.16.3
 pydantic-zarr
 xarray-ome-ngff
+pyyaml>=6.0
+torch>=2.0.0

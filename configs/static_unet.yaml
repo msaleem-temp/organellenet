@@ -1,0 +1,22 @@
+# ============================================================================
+# Static UNet — 13 classes, no spatial jitter, loss-based early stopping
+# ============================================================================
+# Corresponds to the original static_baseline.py
+inherits: base.yaml
+
+experiment_name: static-unet-13cls-nojitter
+
+data:
+  max_jitter: 0
+  num_classes: 13
+  blueprint_json: static_dynamic_baseline.json
+
+model:
+  out_channels: 13
+  strides: [2, 2, 2, 2]
+
+training:
+  early_stop_metric: val_loss
+  early_stop_patience: 12
+  accumulation_steps: 1
+  print_freq: 1

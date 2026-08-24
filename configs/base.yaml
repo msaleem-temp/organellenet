@@ -1,0 +1,60 @@
+# ============================================================================
+# OrganelleNet — Base Configuration (Shared Defaults)
+# ============================================================================
+# All experiment configs inherit from this file via `inherits: base.yaml`.
+# Override only the parameters that differ per experiment.
+
+experiment_name: unnamed-experiment
+
+paths:
+  main_dir: /mnt/graid/codebases_other/cellmap-segmentation-challenge/saleem/organellenet
+  data_dir: /mnt/graid/codebases_other/cellmap-segmentation-challenge/data
+
+data:
+  patch_dim: 128
+  max_jitter: 0
+  seed: 42
+  num_classes: 13
+  target_classes:
+    - endo
+    - ld
+    - lyso
+    - mito
+    - mt
+    - np
+    - nuc
+    - perox
+    - ves
+    - golgi
+    - er
+    - eres
+  blueprint_json: static_dynamic_baseline.json
+  split_ratios: [0.80, 0.10, 0.10]
+  excluded_crop: null
+
+model:
+  spatial_dims: 3
+  in_channels: 1
+  out_channels: 13
+  channels: [64, 128, 256, 512, 1024]
+  strides: [2, 2, 2, 2]
+  kernel_size: 3
+  up_kernel_size: 3
+  num_res_units: 2
+  act: PRELU
+  norm: INSTANCE
+
+training:
+  batch_size: 4
+  lr: 0.0001
+  weight_decay: 0.00001
+  num_epochs: 100
+  scheduler_patience: 5
+  scheduler_factor: 0.5
+  scheduler_mode: min
+  early_stop_patience: 12
+  early_stop_metric: val_loss
+  accumulation_steps: 1
+  print_freq: 1
+  num_workers: 2
+  class_weights: null   # null = use defaults from config.py
