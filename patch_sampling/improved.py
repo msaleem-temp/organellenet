@@ -88,7 +88,7 @@ def find_matching_em_level(em_base, target_scale):
 # --- Core Extraction Pipeline ---
 def patch_extractor(dataset, single_crop=None):
   # ========================================================================
-    main_dir = "/mnt/voxelcell_vol1" # replace with project folder. 
+    main_dir = "" # replace with project folder. 
     out_dir = f"{main_dir}/patch_json"
     dataset_dir = f"{main_dir}/raw_data"
   # ========================================================================
@@ -97,11 +97,7 @@ def patch_extractor(dataset, single_crop=None):
     suffix = f"_{single_crop}" if single_crop else "_full_dataset"
     output_file = os.path.join(out_dir, f"{dataset}{suffix}_anchors.json")
     
-    black_ship_crop = [
-        # "crop282", "crop337", 
-        # "crop357", "crop358", 
-        "crop247"                      # jrc_cos7-1a
-    ]
+    black_ship_crop = []
 
     def resolve_path(sub_path):
         p = f"{dataset_dir}/{dataset}/{dataset}.zarr/{sub_path}"
