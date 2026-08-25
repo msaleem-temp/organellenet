@@ -9,6 +9,7 @@ experiment_name: sdt-unet-14cls-baseline
 
 data:
   target_type: sdt
+  patch_dim: 64
 
 training:
   loss_type: mse
