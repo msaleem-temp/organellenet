@@ -88,11 +88,42 @@ python code/train.py \
     --config configs/dynamic_unet.yaml \
     --name dynamic-unet-13cls-jitter32-p64 \
     --patch-dim 64 \
-    --batch-size 16 \
     --gpu 1
 ```
 
-You can apply these `--patch-dim`, `--name`, and `--batch-size` overrides to any training command in this guide to run the 64-voxel equivalent!
+**Latest UNet at 64³:**
+```bash
+python code/train.py \
+    --config configs/latest_unet.yaml \
+    --name latest-unet-14cls-jitter48-p64 \
+    --patch-dim 64
+```
+
+**Latest UNet + EM Aug at 64³:**
+```bash
+python code/train.py \
+    --config configs/latest_unet_em_aug.yaml \
+    --name latest-unet-14cls-em-aug-p64 \
+    --patch-dim 64
+```
+
+**Latest UNet + Res Aug at 64³:**
+```bash
+python code/train.py \
+    --config configs/latest_unet_res_aug.yaml \
+    --name latest-unet-14cls-res-aug-p64 \
+    --patch-dim 64
+```
+
+**Scale Conditioned UNet at 64³:**
+```bash
+python code/train.py \
+    --config configs/scale_conditioned_unet.yaml \
+    --name scale-conditioned-unet-14cls-p64 \
+    --patch-dim 64
+```
+
+You can apply these `--patch-dim` and `--name` overrides to any training command in this guide to run the 64-voxel equivalent!
 
 
 ### Option C: tmux sessions (recommended)
