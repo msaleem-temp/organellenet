@@ -65,6 +65,36 @@ nohup python code/train.py --config configs/latest_unet.yaml \
     > logs/latest_train.log 2>&1 &
 ```
 
+
+---
+
+## 2b. Training at 64 Voxel Patch Size (Faster Training)
+
+By overriding the patch dimension and experiment name, you can train 64-voxel variants of your models without altering the original 128-voxel configurations. We also increase the batch size from 4 to 16 to utilize the GPU efficiently since the patches are 8x smaller.
+
+**Static UNet at 64³ (GPU 0):**
+```bash
+python code/train.py \
+    --config configs/static_unet.yaml \
+    --name static-unet-13cls-nojitter-p64 \
+    --patch-dim 64 \
+    --batch-size 16 \
+    --gpu 0
+```
+
+**Dynamic UNet at 64³ (GPU 1):**
+```bash
+python code/train.py \
+    --config configs/dynamic_unet.yaml \
+    --name dynamic-unet-13cls-jitter32-p64 \
+    --patch-dim 64 \
+    --batch-size 16 \
+    --gpu 1
+```
+
+You can apply these `--patch-dim`, `--name`, and `--batch-size` overrides to any training command in this guide to run the 64-voxel equivalent!
+
+
 ### Option C: tmux sessions (recommended)
 
 ```bash
@@ -128,6 +158,12 @@ Results are saved to `runs/<experiment_name>/results/test_metrics.txt`.
 python code/infer.py \
     --config configs/static_unet.yaml \
     --checkpoint runs/static-unet-13cls-nojitter/ckpts/best_model.pth \
+    --dataset jrc_cos7-1a --crop crop234 --z-slice 70 --gpu 0
+
+# Dynamic UNet on crop234
+python code/infer.py \
+    --config configs/dynamic_unet.yaml \
+    --checkpoint runs/dynamic-unet-13cls-jitter32/ckpts/best_model.pth \
     --dataset jrc_cos7-1a --crop crop234 --z-slice 70 --gpu 0
 
 # Latest UNet on crop234

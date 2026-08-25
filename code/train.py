@@ -36,6 +36,9 @@ def parse_args():
     parser.add_argument("--config", type=str, required=True, help="Path to YAML config file")
     parser.add_argument("--gpu", type=str, default=None, help="GPU index (e.g., '0' or '0,1')")
     parser.add_argument("--dry-run", action="store_true", help="Validate config and exit without training")
+    parser.add_argument("--name", type=str, default=None, help="Override experiment name")
+    parser.add_argument("--patch-dim", type=int, default=None, help="Override patch dimension")
+    parser.add_argument("--batch-size", type=int, default=None, help="Override batch size")
     return parser.parse_args()
 
 
@@ -48,6 +51,15 @@ def main():
 
     # 1. Load config
     config = load_config(args.config)
+    
+    # CLI Overrides
+    if args.name is not None:
+        config.experiment_name = args.name
+    if args.patch_dim is not None:
+        config.data.patch_dim = args.patch_dim
+    if args.batch_size is not None:
+        config.training.batch_size = args.batch_size
+
     print(f"\n{'='*60}")
     print(f"Experiment: {config.experiment_name}")
     print(f"{'='*60}")
