@@ -5,6 +5,7 @@ Loss function factory for OrganelleNet.
 import sys
 import os
 import torch
+import torch.nn as nn
 from monai.losses import DiceCELoss
 
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
