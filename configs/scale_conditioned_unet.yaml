@@ -1,0 +1,14 @@
+# ============================================================================
+# Scale Conditioned UNet
+# ============================================================================
+# Inherits from the EM-Augmented latest UNet, but turns on Scale Conditioning
+# (Channel Injection) where the 3 physical resolutions are passed as
+# constant channels to the network.
+#
+# Purpose: Compare explicit architectural conditioning vs data augmentation.
+inherits: latest_unet_em_aug.yaml
+
+experiment_name: scale-conditioned-unet-14cls
+
+model:
+  scale_conditioned: true

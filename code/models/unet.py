@@ -40,9 +40,14 @@ def build_model(config, device=None, multi_gpu=True):
 
     mc = config.model
 
+    in_channels = mc.in_channels
+    if getattr(mc, "scale_conditioned", False):
+        in_channels += 3
+        print(f"Scale conditioning enabled: in_channels increased to {in_channels}")
+
     model = UNet(
         spatial_dims=mc.spatial_dims,
-        in_channels=mc.in_channels,
+        in_channels=in_channels,
         out_channels=mc.out_channels,
         channels=tuple(mc.channels),
         strides=tuple(mc.strides),

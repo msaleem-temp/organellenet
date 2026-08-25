@@ -141,7 +141,7 @@ def get_scale_trans(base_path: str, level: str = "s0"):
     return scale, trans
 
 
-def extract_aligned_volumes(dataset_base: str, crop_id: str = "crop234"):
+def extract_aligned_volumes(dataset_base: str, crop_id: str = "crop234", em_scale: str = "s0"):
     """
     Extract spatially aligned EM and label 3D volumes for a crop.
 
@@ -154,24 +154,26 @@ def extract_aligned_volumes(dataset_base: str, crop_id: str = "crop234"):
         Path to the dataset.zarr root (e.g., `.../jrc_cos7-1a.zarr`).
     crop_id : str
         Crop identifier (e.g., "crop234").
+    em_scale : str
+        The scale to load EM data from (e.g. "s0", "s1"). Default "s0".
 
     Returns
     -------
     tuple of (np.ndarray, np.ndarray)
         (em_volume, label_volume) — aligned 3D arrays.
     """
-    print(f"--- Extracting 3D Volumes for {crop_id} ---")
+    print(f"--- Extracting 3D Volumes for {crop_id} at EM scale {em_scale} ---")
 
     lbl_base = os.path.join(dataset_base, "recon-1", "labels", "groundtruth", crop_id, "all")
     em_base = os.path.join(dataset_base, "recon-1", "em", "fibsem-uint8")
 
     # 1. Get Scales and Translations
     scale_lbl, trans_lbl = get_scale_trans(lbl_base, "s0")
-    scale_em, trans_em = get_scale_trans(em_base, "s0")
+    scale_em, trans_em = get_scale_trans(em_base, em_scale)
 
     # 2. Open Zarr Arrays (metadata only, no RAM used yet)
     lbl_zarr = zarr.open(os.path.join(lbl_base, "s0"), mode="r")
-    em_zarr = zarr.open(os.path.join(em_base, "s0"), mode="r")
+    em_zarr = zarr.open(os.path.join(em_base, em_scale), mode="r")
 
     lbl_shape = np.array(lbl_zarr.shape)
 

@@ -81,6 +81,9 @@ def main():
         patch_dim=config.data.patch_dim,
         max_jitter=config.data.max_jitter,
         augmentation_config=config.augmentation,
+        target_type=config.data.target_type,
+        num_classes=config.data.num_classes,
+        scale_conditioned=config.model.scale_conditioned,
     )
     val_dataset = PatchDataset(
         json_path=split_paths["val_path"],
@@ -88,6 +91,9 @@ def main():
         label_map=config.label_map,
         patch_dim=config.data.patch_dim,
         max_jitter=0,  # Always static for validation
+        target_type=config.data.target_type,
+        num_classes=config.data.num_classes,
+        scale_conditioned=config.model.scale_conditioned,
     )
 
     # 6. Create data loaders

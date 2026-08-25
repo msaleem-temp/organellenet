@@ -85,6 +85,7 @@ class DataConfig:
     max_jitter: int = 0
     seed: int = 42
     num_classes: int = 13
+    target_type: str = "labels"
     target_classes: List[str] = field(default_factory=lambda: [
         "endo", "ld", "lyso", "mito", "mt", "np", "nuc", "perox", "ves",
         "golgi", "er", "eres",
@@ -99,6 +100,7 @@ class ModelConfig:
     spatial_dims: int = 3
     in_channels: int = 1
     out_channels: int = 13
+    scale_conditioned: bool = False
     channels: List[int] = field(default_factory=lambda: [64, 128, 256, 512, 1024])
     strides: List[int] = field(default_factory=lambda: [2, 2, 2, 2])
     kernel_size: int = 3
@@ -119,6 +121,7 @@ class TrainingConfig:
     scheduler_mode: str = "min"     # 'min' for loss, 'max' for dice
     early_stop_patience: int = 12
     early_stop_metric: str = "val_loss"   # 'val_loss' or 'val_dice'
+    loss_type: str = "dice_ce"
     accumulation_steps: int = 1
     print_freq: int = 1
     num_workers: int = 2

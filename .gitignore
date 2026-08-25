@@ -1,0 +1,67 @@
+# ============================================================================
+# OrganelleNet — .gitignore
+# ============================================================================
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ----- Training runs (large files) -----
+# Ignore checkpoints, logs, plots, and results inside runs/
+runs/*/ckpts/
+runs/*/logs/
+runs/*/plots/
+runs/*/results/
+runs/*/splits/
+runs/*/config.yaml
+
+# ----- Large data files -----
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.hdf5
+*.zarr/
+*.npy
+*.npz
+*.tar
+*.tar.gz
+*.zip
+
+# ----- Legacy large JSONs (already in all_jsons/) -----
+legacy/*.json
+
+# ----- OS files -----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ----- IDE -----
+.vscode/
+.idea/
+*.iml
+
+# ----- Logs -----
+logs/
+*.log
+nohup.out
+
+# ----- Results (generated outputs, paper tables) -----
+results/
+
+# ============================================================================
+# KEEP: The following ARE tracked and required to run the code
+# ============================================================================
+# all_jsons/*.json           — Blueprint JSONs needed for patch sampling
+# configs/*.yaml             — Experiment configuration files
+# code/**/*.py               — All source code
+# requirements.txt           — Python dependencies
+# patch_sampling/*.py        — Patch extraction scripts

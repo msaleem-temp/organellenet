@@ -189,6 +189,9 @@ nohup python code/train.py --config configs/latest_unet_em_aug.yaml --gpu 0 \
 
 nohup python code/train.py --config configs/latest_unet_res_aug.yaml --gpu 1 \
     > logs/res_aug_train.log 2>&1 &
+
+nohup python code/train.py --config configs/scale_conditioned_unet.yaml --gpu 0 \
+    > logs/scale_cond_train.log 2>&1 &
 ```
 
 ### Dry run (validate the new configs):
@@ -232,6 +235,13 @@ python code/evaluation/evaluate_detailed.py \
     --checkpoint runs/latest-unet-14cls-res-aug/ckpts/best_model.pth \
     --output runs/latest-unet-14cls-res-aug/results/detailed_metrics.jsonl \
     --gpu 0
+
+# Scale Conditioned UNet (proposed architectural method)
+python code/evaluation/evaluate_detailed.py \
+    --config configs/scale_conditioned_unet.yaml \
+    --checkpoint runs/scale-conditioned-unet-14cls/ckpts/best_model.pth \
+    --output runs/scale-conditioned-unet-14cls/results/detailed_metrics.jsonl \
+    --gpu 0
 ```
 
 ---
@@ -247,11 +257,13 @@ python code/evaluation/analyze_results.py \
         runs/latest-unet-14cls-jitter48-dice/results/detailed_metrics.jsonl \
         runs/latest-unet-14cls-em-aug/results/detailed_metrics.jsonl \
         runs/latest-unet-14cls-res-aug/results/detailed_metrics.jsonl \
+        runs/scale-conditioned-unet-14cls/results/detailed_metrics.jsonl \
     --labels \
         "Static (No Aug)" \
         "Latest (Jitter)" \
         "Latest+EM Aug" \
         "Latest+Res Aug" \
+        "Scale Cond" \
     --output-dir results/paper_tables/
 ```
 
@@ -265,7 +277,39 @@ This produces:
 
 ---
 
-## 11. Copy Results to Local Machine (for paper writing)
+## 11. Train SDT Baseline (Distance Transform)
+
+The SDT model predicts physical distance transforms (in nanometers) instead of raw masks.
+
+**Train the SDT Baseline:**
+```bash
+python code/train.py --config configs/sdt_unet.yaml --gpu 0
+```
+
+**Dry-run to validate setup:**
+```bash
+python code/train.py --config configs/sdt_unet.yaml --dry-run
+```
+
+---
+
+## 12. Stratified Robustness Evaluation (Scale Robustness)
+
+Evaluates how a model degrades (hallucinates false positives) across different physical scales on the exact same crop.
+
+**Run the Stratified Evaluation on a trained model (e.g., Dynamic UNet) against crop234:**
+```bash
+python code/evaluation/evaluate_stratified.py \
+    --config configs/dynamic_unet.yaml \
+    --checkpoint runs/dynamic-unet-13cls-jitter32/ckpts/best_model.pth \
+    --dataset jrc_cos7-1a --crop crop234 \
+    --scales s0 s1 s2 s3
+```
+This produces a `stratified_metrics_jrc_cos7-1a_crop234.csv` in the run's `results/` directory containing FPR and Dice across varying scales.
+
+---
+
+## 13. Copy Results to Local Machine (for paper writing)
 
 ```bash
 # From the GPU server, tar up everything needed:
@@ -273,6 +317,7 @@ tar czf organellenet_results.tar.gz \
     runs/*/logs/training_log.csv \
     runs/*/results/detailed_metrics.jsonl \
     runs/*/results/test_metrics.txt \
+    runs/*/results/stratified_metrics_*.csv \
     results/paper_tables/
 
 # Then scp to your local machine:

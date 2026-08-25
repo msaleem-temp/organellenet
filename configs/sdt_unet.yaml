@@ -1,0 +1,15 @@
+# ============================================================================
+# SDT Baseline — COSEM / Heinrich et al. Reproduction
+# ============================================================================
+# Regresses a Signed Distance Transform (SDT) instead of discrete semantic labels.
+# Target values are physical distances (nm) scaled via tanh.
+inherits: latest_unet.yaml
+
+experiment_name: sdt-unet-14cls-baseline
+
+data:
+  target_type: sdt
+
+training:
+  loss_type: mse
+  early_stop_metric: val_dice

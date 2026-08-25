@@ -39,12 +39,16 @@ class PatchDataset(Dataset):
     """
 
     def __init__(self, json_path, zarr_map, label_map, patch_dim=128, max_jitter=0,
-                 augmentation_config=None):
+                 augmentation_config=None, target_type="labels", num_classes=13,
+                 scale_conditioned=False):
         self.patch_dim = patch_dim
         self.max_jitter = max_jitter
         self.zarr_map = zarr_map
         self.zarr_cache = {}
         self.augmentation_config = augmentation_config
+        self.target_type = target_type
+        self.num_classes = num_classes
+        self.scale_conditioned = scale_conditioned
 
         with open(json_path, "r") as f:
             raw_patches = json.load(f)
@@ -183,8 +187,36 @@ class PatchDataset(Dataset):
                 em_float, remapped_lbl, self.augmentation_config
             )
 
+        # 10. Generate Targets
+        if self.target_type == "sdt":
+            import scipy.ndimage as ndi
+            resolution = patch.get("resolution", [8.0, 8.0, 8.0])
+            sdt_scale = 40.0 # nm
+            
+            sdt_tensor = np.zeros((self.num_classes, self.patch_dim, self.patch_dim, self.patch_dim), dtype=np.float32)
+            for c in range(self.num_classes):
+                mask = (remapped_lbl == c)
+                if not np.any(mask):
+                    # Class not in patch. Target is -1 (far outside).
+                    sdt_tensor[c] = -1.0
+                else:
+                    in_dist = ndi.distance_transform_edt(mask, sampling=resolution)
+                    out_dist = ndi.distance_transform_edt(~mask, sampling=resolution)
+                    sdt = in_dist - out_dist
+                    sdt_tensor[c] = np.tanh(sdt / sdt_scale)
+            
+            lbl_tensor = torch.from_numpy(sdt_tensor)
+        else:
+            lbl_tensor = torch.from_numpy(remapped_lbl)
+
         em_tensor = torch.from_numpy(em_float).unsqueeze(0)
-        lbl_tensor = torch.from_numpy(remapped_lbl)
+        
+        if getattr(self, "scale_conditioned", False):
+            res = patch.get("resolution", [8.0, 8.0, 8.0])
+            z_chan = torch.full_like(em_tensor, res[0])
+            y_chan = torch.full_like(em_tensor, res[1])
+            x_chan = torch.full_like(em_tensor, res[2])
+            em_tensor = torch.cat([em_tensor, z_chan, y_chan, x_chan], dim=0)
 
         return em_tensor, lbl_tensor
 

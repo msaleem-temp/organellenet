@@ -87,8 +87,12 @@ class Trainer:
         self.use_dice_metric = (self.early_stop_metric == "val_dice")
         if self.use_dice_metric:
             self.dice_metric = DiceMetric(include_background=False, reduction="mean")
-            self.post_pred = AsDiscrete(argmax=True, to_onehot=config.model.out_channels)
-            self.post_label = AsDiscrete(to_onehot=config.model.out_channels)
+            if getattr(config.data, "target_type", "labels") == "sdt":
+                self.post_pred = lambda x: (x > 0.0).float()
+                self.post_label = lambda x: (x > 0.0).float()
+            else:
+                self.post_pred = AsDiscrete(argmax=True, to_onehot=config.model.out_channels)
+                self.post_label = AsDiscrete(to_onehot=config.model.out_channels)
 
         # Epoch tracking
         self.start_epoch = 0
@@ -241,7 +245,11 @@ class Trainer:
             em_batch = em_batch.to(self.device)
             if lbl_batch.dim() == 4:
                 lbl_batch = lbl_batch.unsqueeze(1)
-            lbl_batch = lbl_batch.to(self.device, dtype=torch.long)
+            
+            if getattr(self.config.data, "target_type", "labels") == "sdt":
+                lbl_batch = lbl_batch.to(self.device, dtype=torch.float32)
+            else:
+                lbl_batch = lbl_batch.to(self.device, dtype=torch.long)
 
             with autocast():
                 outputs = self.model(em_batch)
@@ -276,7 +284,11 @@ class Trainer:
                 em_batch = em_batch.to(self.device)
                 if lbl_batch.dim() == 4:
                     lbl_batch = lbl_batch.unsqueeze(1)
-                lbl_batch = lbl_batch.to(self.device, dtype=torch.long)
+                
+                if getattr(self.config.data, "target_type", "labels") == "sdt":
+                    lbl_batch = lbl_batch.to(self.device, dtype=torch.float32)
+                else:
+                    lbl_batch = lbl_batch.to(self.device, dtype=torch.long)
 
                 with autocast():
                     outputs = self.model(em_batch)

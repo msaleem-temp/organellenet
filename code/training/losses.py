@@ -15,7 +15,7 @@ if _PROJECT_ROOT not in sys.path:
 
 def build_loss(config, device=None):
     """
-    Build a DiceCELoss from an ExperimentConfig.
+    Build a Loss function from an ExperimentConfig.
 
     Parameters
     ----------
@@ -26,20 +26,31 @@ def build_loss(config, device=None):
 
     Returns
     -------
-    DiceCELoss
-        The loss function with class weights.
+    nn.Module
+        The loss function.
     """
     if device is None:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    weights = torch.tensor(config.training.class_weights, dtype=torch.float32).to(device)
+    loss_type = getattr(config.training, "loss_type", "dice_ce")
 
-    criterion = DiceCELoss(
-        to_onehot_y=True,
-        softmax=True,
-        include_background=False,
-        weight=weights,
-    )
+    if loss_type == "mse":
+        criterion = torch.nn.MSELoss()
+        print(f"Loss: MSELoss (for Regression)")
+        return criterion
+    elif loss_type == "smooth_l1":
+        criterion = torch.nn.SmoothL1Loss()
+        print(f"Loss: SmoothL1Loss (for Regression)")
+        return criterion
+    else:
+        weights = torch.tensor(config.training.class_weights, dtype=torch.float32).to(device)
 
-    print(f"Loss: DiceCELoss | Class weights: {len(config.training.class_weights)} classes")
-    return criterion
+        criterion = DiceCELoss(
+            to_onehot_y=True,
+            softmax=True,
+            include_background=False,
+            weight=weights,
+        )
+
+        print(f"Loss: DiceCELoss | Class weights: {len(config.training.class_weights)} classes")
+        return criterion
