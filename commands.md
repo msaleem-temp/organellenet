@@ -78,7 +78,7 @@ python code/train.py \
     --config configs/static_unet.yaml \
     --name static-unet-13cls-nojitter-p64 \
     --patch-dim 64 \
-    --batch-size 16 \
+    --batch-size 4 \
     --gpu 0
 ```
 
