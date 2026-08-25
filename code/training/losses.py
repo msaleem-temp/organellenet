@@ -13,6 +13,19 @@ if _PROJECT_ROOT not in sys.path:
     sys.path.insert(0, _PROJECT_ROOT)
 
 
+class BoundaryWeightedMSELoss(nn.Module):
+    def __init__(self, boundary_weight=10.0, threshold=0.95):
+        super().__init__()
+        self.boundary_weight = boundary_weight
+        self.threshold = threshold
+
+    def forward(self, pred, target):
+        mse = torch.nn.functional.mse_loss(pred, target, reduction='none')
+        weight_mask = torch.ones_like(target)
+        weight_mask[torch.abs(target) < self.threshold] = self.boundary_weight
+        return (mse * weight_mask).mean()
+
+
 def build_loss(config, device=None):
     """
     Build a Loss function from an ExperimentConfig.
@@ -35,8 +48,8 @@ def build_loss(config, device=None):
     loss_type = getattr(config.training, "loss_type", "dice_ce")
 
     if loss_type == "mse":
-        criterion = torch.nn.MSELoss()
-        print(f"Loss: MSELoss (for Regression)")
+        criterion = BoundaryWeightedMSELoss(boundary_weight=10.0, threshold=0.95)
+        print(f"Loss: BoundaryWeightedMSELoss (Weight: 10.0 | for SDT Regression)")
         return criterion
     elif loss_type == "smooth_l1":
         criterion = torch.nn.SmoothL1Loss()

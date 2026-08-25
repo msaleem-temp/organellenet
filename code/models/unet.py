@@ -58,6 +58,17 @@ def build_model(config, device=None, multi_gpu=True):
         norm=mc.norm,
     ).to(device)
 
+    if getattr(config.data, "target_type", "labels") == "sdt":
+        class TanhWrapper(nn.Module):
+            def __init__(self, base_model):
+                super().__init__()
+                self.base_model = base_model
+            def forward(self, x):
+                return torch.tanh(self.base_model(x))
+        
+        model = TanhWrapper(model)
+        print("Wrapped model with Tanh activation for SDT Regression.")
+
     num_gpus = torch.cuda.device_count()
     print(f"Model built: {mc.out_channels}-class UNet | Device: {device} | GPUs: {num_gpus}")
 
@@ -69,7 +80,9 @@ def build_model(config, device=None, multi_gpu=True):
 
 
 def get_raw_model(model):
-    """Unwrap DataParallel if present to access the raw model."""
+    """Unwrap DataParallel or Wrappers if present to access the raw model."""
     if isinstance(model, nn.DataParallel):
-        return model.module
+        model = model.module
+    if hasattr(model, "base_model"):
+        model = model.base_model
     return model
