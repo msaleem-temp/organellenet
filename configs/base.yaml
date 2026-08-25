@@ -53,7 +53,7 @@ training:
   scheduler_factor: 0.5
   scheduler_mode: min
   early_stop_patience: 12
-  early_stop_metric: val_loss
+  early_stop_metric: val_dice
   accumulation_steps: 1
   print_freq: 1
   num_workers: 2

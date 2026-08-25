@@ -16,7 +16,7 @@ model:
   strides: [2, 2, 2, 2]
 
 training:
-  early_stop_metric: val_loss
+  early_stop_metric: val_dice
   early_stop_patience: 12
   accumulation_steps: 1
   print_freq: 1

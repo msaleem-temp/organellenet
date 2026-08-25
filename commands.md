@@ -78,7 +78,6 @@ python code/train.py \
     --config configs/static_unet.yaml \
     --name static-unet-13cls-nojitter-p64 \
     --patch-dim 64 \
-    --batch-size 4 \
     --gpu 0
 ```
 
@@ -96,7 +95,7 @@ python code/train.py \
 python code/train.py \
     --config configs/latest_unet.yaml \
     --name latest-unet-14cls-jitter48-p64 \
-    --patch-dim 64
+    --patch-dim 64 --gpu 0
 ```
 
 **Latest UNet + EM Aug at 64³:**
@@ -104,7 +103,7 @@ python code/train.py \
 python code/train.py \
     --config configs/latest_unet_em_aug.yaml \
     --name latest-unet-14cls-em-aug-p64 \
-    --patch-dim 64
+    --patch-dim 64 --gpu 0
 ```
 
 **Latest UNet + Res Aug at 64³:**
@@ -112,7 +111,7 @@ python code/train.py \
 python code/train.py \
     --config configs/latest_unet_res_aug.yaml \
     --name latest-unet-14cls-res-aug-p64 \
-    --patch-dim 64
+    --patch-dim 64 --gpu 0
 ```
 
 **Scale Conditioned UNet at 64³:**
