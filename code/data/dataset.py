@@ -140,7 +140,13 @@ class PatchDataset(Dataset):
         # 1. Load exact centers from the JSON
         l_center = np.array(patch["l_center"], dtype=float)
         e_center = np.array(patch["e_center"], dtype=float)
-        e_shape = np.array(patch["e_shape"], dtype=int)
+        e_shape = np.array(patch["e_shape"], dtype=float)
+        
+        # Scale e_shape if patch_dim differs from the blueprint's base 128
+        if self.patch_dim != 128:
+            ratio = self.patch_dim / 128.0
+            e_shape = e_shape * ratio
+        e_shape = np.round(e_shape).astype(int)
 
         # 2. Fetch Cached Zarr Handles
         em_zarr, label_zarr = self._get_zarr_handles(dataset, crop_id, em_lvl, lbl_lvl)
