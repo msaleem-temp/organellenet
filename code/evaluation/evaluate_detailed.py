@@ -42,6 +42,7 @@ from code.utils.paths import setup_run_directory
 from code.data.zarr_utils import build_zarr_map
 from code.data.dataset import PatchDataset
 from code.models.unet import build_model, get_raw_model
+from code.evaluation.evaluator import compute_hd95
 
 
 def compute_per_class_metrics(pred, target, num_classes):
@@ -64,6 +65,10 @@ def compute_per_class_metrics(pred, target, num_classes):
     """
     iou = {}
     dice = {}
+    precision = {}
+    recall = {}
+    f1 = {}
+    hd95_dict = {}
 
     for c in range(num_classes):
         pred_c = (pred == c)
@@ -79,10 +84,23 @@ def compute_per_class_metrics(pred, target, num_classes):
             continue
 
         eps = 1e-8
-        iou[c] = float(intersection / (union + eps))
-        dice[c] = float(2 * intersection / (pred_sum + target_sum + eps))
+        iou_val = float(intersection / (union + eps))
+        dice_val = float(2 * intersection / (pred_sum + target_sum + eps))
+        prec_val = float(intersection / (pred_sum + eps))
+        rec_val = float(intersection / (target_sum + eps))
 
-    return {"iou": iou, "dice": dice}
+        iou[c] = iou_val
+        dice[c] = dice_val
+        precision[c] = prec_val
+        recall[c] = rec_val
+        f1[c] = dice_val  # F1 is equivalent to Dice for segmentation
+
+        if pred_sum > 0 or target_sum > 0:
+            hd = compute_hd95(pred_c, target_c)
+            if not np.isnan(hd):
+                hd95_dict[c] = float(hd)
+
+    return {"iou": iou, "dice": dice, "precision": precision, "recall": recall, "f1": f1, "hd95": hd95_dict}
 
 
 def parse_args():
@@ -188,14 +206,12 @@ def main():
                 patch_metrics = compute_per_class_metrics(pred, target, num_classes)
 
                 # Convert class indices to names for readability
-                iou_named = {
-                    class_names.get(c, f"class_{c}"): v
-                    for c, v in patch_metrics["iou"].items()
-                }
-                dice_named = {
-                    class_names.get(c, f"class_{c}"): v
-                    for c, v in patch_metrics["dice"].items()
-                }
+                iou_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["iou"].items()}
+                dice_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["dice"].items()}
+                hd95_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["hd95"].items()}
+                precision_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["precision"].items()}
+                recall_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["recall"].items()}
+                f1_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["f1"].items()}
 
                 # Accumulate for summary (skip background)
                 for c, v in patch_metrics["iou"].items():
@@ -205,9 +221,13 @@ def main():
                     if c > 0:
                         class_dice_accum[c].append(v)
 
-                # Compute mean IoU/Dice for this patch (excl. background)
+                # Compute mean metrics for this patch (excl. background)
                 fg_ious = [v for c, v in patch_metrics["iou"].items() if c > 0]
                 fg_dices = [v for c, v in patch_metrics["dice"].items() if c > 0]
+                fg_hd95s = [v for c, v in patch_metrics["hd95"].items() if c > 0]
+                fg_precs = [v for c, v in patch_metrics["precision"].items() if c > 0]
+                fg_recs = [v for c, v in patch_metrics["recall"].items() if c > 0]
+                fg_f1s = [v for c, v in patch_metrics["f1"].items() if c > 0]
 
                 record = {
                     "patch_idx": idx,
@@ -219,8 +239,16 @@ def main():
                     "label_scale": metadata.get("label_scale"),
                     "per_class_iou": iou_named,
                     "per_class_dice": dice_named,
+                    "per_class_hd95": hd95_named,
+                    "per_class_precision": precision_named,
+                    "per_class_recall": recall_named,
+                    "per_class_f1": f1_named,
                     "mean_iou": float(np.mean(fg_ious)) if fg_ious else 0.0,
                     "mean_dice": float(np.mean(fg_dices)) if fg_dices else 0.0,
+                    "mean_hd95": float(np.mean(fg_hd95s)) if fg_hd95s else 0.0,
+                    "mean_precision": float(np.mean(fg_precs)) if fg_precs else 0.0,
+                    "mean_recall": float(np.mean(fg_recs)) if fg_recs else 0.0,
+                    "mean_f1": float(np.mean(fg_f1s)) if fg_f1s else 0.0,
                 }
                 f_out.write(json.dumps(record) + "\n")
 

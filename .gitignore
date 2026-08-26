@@ -67,3 +67,6 @@ results/
 # code/**/*.py               — All source code
 # requirements.txt           — Python dependencies
 # patch_sampling/*.py        — Patch extraction scripts
+
+# ----- Analysis files -----
+results_analysis.md

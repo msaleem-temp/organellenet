@@ -1,0 +1,8 @@
+experiment: latest-unet-14cls-jitter48-dice
+created: 2026-08-24T15:44:28.813806
+num_classes: 14
+model_out_channels: 14
+strides: [1, 2, 2, 2]
+max_jitter: 48
+early_stop_metric: val_dice
+accumulation_steps: 2

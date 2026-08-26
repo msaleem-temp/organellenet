@@ -1,0 +1,8 @@
+experiment: static-unet-13cls-nojitter-p64
+created: 2026-08-25T19:46:22.393638
+num_classes: 13
+model_out_channels: 13
+strides: [2, 2, 2, 2]
+max_jitter: 0
+early_stop_metric: val_loss
+accumulation_steps: 1

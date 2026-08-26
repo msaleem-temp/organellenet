@@ -1,0 +1,8 @@
+experiment: dynamic-unet-13cls-jitter32
+created: 2026-08-24T15:42:13.535309
+num_classes: 13
+model_out_channels: 13
+strides: [2, 2, 2, 2]
+max_jitter: 32
+early_stop_metric: val_loss
+accumulation_steps: 1

@@ -1,0 +1,8 @@
+experiment: static-unet-13cls-nojitter-p128-valdice
+created: 2026-08-26T11:16:54.069499
+num_classes: 13
+model_out_channels: 13
+strides: [2, 2, 2, 2]
+max_jitter: 0
+early_stop_metric: val_dice
+accumulation_steps: 1

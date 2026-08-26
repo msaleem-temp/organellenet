@@ -121,20 +121,25 @@ def main():
         writer = csv.writer(f)
         header = ["Class"]
         for label in args.labels:
-            header.extend([f"{label} IoU", f"{label} Dice"])
+            header.extend([f"{label} IoU", f"{label} Dice", f"{label} HD95", f"{label} Precision", f"{label} Recall", f"{label} F1"])
         writer.writerow(header)
 
         for cls in sorted_classes:
             row = [cls]
             for label in args.labels:
-                ious = [r["per_class_iou"].get(cls)
-                        for r in all_results[label]
-                        if cls in r.get("per_class_iou", {})]
-                dices = [r["per_class_dice"].get(cls)
-                         for r in all_results[label]
-                         if cls in r.get("per_class_dice", {})]
+                ious = [r["per_class_iou"].get(cls) for r in all_results[label] if cls in r.get("per_class_iou", {})]
+                dices = [r["per_class_dice"].get(cls) for r in all_results[label] if cls in r.get("per_class_dice", {})]
+                hd95s = [r.get("per_class_hd95", {}).get(cls) for r in all_results[label] if cls in r.get("per_class_hd95", {})]
+                precs = [r.get("per_class_precision", {}).get(cls) for r in all_results[label] if cls in r.get("per_class_precision", {})]
+                recs = [r.get("per_class_recall", {}).get(cls) for r in all_results[label] if cls in r.get("per_class_recall", {})]
+                f1s = [r.get("per_class_f1", {}).get(cls) for r in all_results[label] if cls in r.get("per_class_f1", {})]
+                
                 row.append(f"{np.mean(ious):.4f}" if ious else "N/A")
                 row.append(f"{np.mean(dices):.4f}" if dices else "N/A")
+                row.append(f"{np.mean(hd95s):.4f}" if hd95s else "N/A")
+                row.append(f"{np.mean(precs):.4f}" if precs else "N/A")
+                row.append(f"{np.mean(recs):.4f}" if recs else "N/A")
+                row.append(f"{np.mean(f1s):.4f}" if f1s else "N/A")
             writer.writerow(row)
 
     print(f"  → {out_path}")
@@ -279,14 +284,19 @@ def main():
     out_path = os.path.join(args.output_dir, "summary.csv")
     with open(out_path, "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["Model", "N patches", "Mean IoU", "Mean Dice",
+        writer.writerow(["Model", "N patches", "Mean IoU", "Mean Dice", 
+                          "Mean HD95", "Mean Precision", "Mean Recall", "Mean F1",
                           "Fine IoU", "Medium IoU", "Coarse IoU",
                           "Fine-Coarse Gap"])
 
         for label in args.labels:
             records = all_results[label]
-            all_mious = [r["mean_iou"] for r in records]
-            all_mdices = [r["mean_dice"] for r in records]
+            all_mious = [r.get("mean_iou", 0) for r in records]
+            all_mdices = [r.get("mean_dice", 0) for r in records]
+            all_hd95 = [r.get("mean_hd95", 0) for r in records]
+            all_prec = [r.get("mean_precision", 0) for r in records]
+            all_rec = [r.get("mean_recall", 0) for r in records]
+            all_f1 = [r.get("mean_f1", 0) for r in records]
 
             band_ious = {}
             for band in bands:
@@ -301,6 +311,10 @@ def main():
                 len(records),
                 f"{np.mean(all_mious):.4f}" if all_mious else "N/A",
                 f"{np.mean(all_mdices):.4f}" if all_mdices else "N/A",
+                f"{np.mean(all_hd95):.4f}" if all_hd95 else "N/A",
+                f"{np.mean(all_prec):.4f}" if all_prec else "N/A",
+                f"{np.mean(all_rec):.4f}" if all_rec else "N/A",
+                f"{np.mean(all_f1):.4f}" if all_f1 else "N/A",
                 f"{band_ious['fine']:.4f}" if not np.isnan(band_ious.get('fine', float('nan'))) else "N/A",
                 f"{band_ious['medium']:.4f}" if not np.isnan(band_ious.get('medium', float('nan'))) else "N/A",
                 f"{band_ious['coarse']:.4f}" if not np.isnan(band_ious.get('coarse', float('nan'))) else "N/A",
