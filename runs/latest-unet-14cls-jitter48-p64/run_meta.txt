@@ -1,8 +1,0 @@
-experiment: latest-unet-14cls-jitter48-p64
-created: 2026-08-25T19:45:28.169295
-num_classes: 14
-model_out_channels: 14
-strides: [1, 2, 2, 2]
-max_jitter: 48
-early_stop_metric: val_dice
-accumulation_steps: 2

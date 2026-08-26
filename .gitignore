@@ -70,3 +70,4 @@ results/
 
 # ----- Analysis files -----
 results_analysis.md
+runs/*/run_meta.txt
