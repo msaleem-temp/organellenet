@@ -21,38 +21,52 @@ declare -a MODELS=(
 # - runs/scale-conditioned-unet-14cls
 # - runs/static-unet-13cls-nojitter-p128-valdice
 
+MAX_JOBS=4
+job_idx=0
+
+echo "Starting parallel evaluation (max $MAX_JOBS concurrent jobs)..."
 
 for item in "${MODELS[@]}"; do
     # Parse the space-separated fields
     run_dir=$(echo $item | awk '{print $1}')
     config=$(echo $item | awk '{print $2}')
     
-    echo "=========================================================="
-    echo "Evaluating: $run_dir"
-    echo "=========================================================="
+    # Distribute load evenly across your 2 GPUs (0 and 1)
+    GPU=$((job_idx % 2))
     
-    # Ensure results directory exists
-    mkdir -p "${run_dir}/results"
-    
-    # 1. Detailed Evaluation (Per-patch metrics)
-    echo "Running Detailed Eval..."
-    python code/evaluation/evaluate_detailed.py \
-        --config "$config" \
-        --checkpoint "${run_dir}/ckpts/best_model.pth" \
-        --output "${run_dir}/results/detailed_metrics.jsonl" \
-        --gpu 0
+    (
+        echo "--> [GPU $GPU] Evaluating: $run_dir"
+        mkdir -p "${run_dir}/results"
         
-    # 2. Inference (Qualitative Plots on a standard test crop)
-    echo "Running Inference (Qualitative Plotting)..."
-    python code/infer.py \
-        --config "$config" \
-        --checkpoint "${run_dir}/ckpts/best_model.pth" \
-        --dataset jrc_cos7-1a \
-        --crop crop234 \
-        --z-slice 70 \
-        --gpu 0
+        # 1. Detailed Evaluation (Per-patch metrics)
+        python code/evaluation/evaluate_detailed.py \
+            --config "$config" \
+            --checkpoint "${run_dir}/ckpts/best_model.pth" \
+            --output "${run_dir}/results/detailed_metrics.jsonl" \
+            --gpu $GPU > "${run_dir}/results/eval_stdout.log" 2>&1
+            
+        # 2. Inference (Qualitative Plots on a standard test crop)
+        python code/infer.py \
+            --config "$config" \
+            --checkpoint "${run_dir}/ckpts/best_model.pth" \
+            --dataset jrc_cos7-1a \
+            --crop crop234 \
+            --z-slice 70 \
+            --gpu $GPU >> "${run_dir}/results/eval_stdout.log" 2>&1
+            
+        echo "--> [GPU $GPU] Finished: $run_dir"
+    ) &
+    
+    ((job_idx++))
+    
+    # Throttle: Wait for any background job to finish before spawning more if we hit MAX_JOBS
+    if [[ $(jobs -r -p | wc -l) -ge $MAX_JOBS ]]; then
+        wait -n
+    fi
 done
 
+# Wait for all remaining background jobs to finish
+wait
 
 echo "=========================================================="
 echo "Consolidating Results for all completed models..."
@@ -62,10 +76,8 @@ INPUTS=()
 LABELS=()
 for item in "${MODELS[@]}"; do
     run_dir=$(echo $item | awk '{print $1}')
-    # Extract the string between single quotes for the label
     label=$(echo "$item" | cut -d"'" -f2) 
     
-    # Only include if the JSONL was successfully created
     if [ -f "${run_dir}/results/detailed_metrics.jsonl" ]; then
         INPUTS+=("${run_dir}/results/detailed_metrics.jsonl")
         LABELS+=("$label")
