@@ -101,6 +101,8 @@ def parse_args():
                         help="Override test JSON path")
     parser.add_argument("--max-patches", type=int, default=None,
                         help="Evaluate only the first N patches (for debugging)")
+    parser.add_argument("--name", type=str, default=None, help="Override experiment name")
+    parser.add_argument("--patch-dim", type=int, default=None, help="Override patch dim")
     return parser.parse_args()
 
 
@@ -112,6 +114,11 @@ def main():
 
     # 1. Load config
     config = load_config(args.config)
+    
+    if args.name:
+        config.experiment_name = args.name
+    if args.patch_dim:
+        config.data.patch_dim = args.patch_dim
     print(f"\n{'='*60}")
     print(f"Detailed Evaluation: {config.experiment_name}")
     print(f"Checkpoint: {args.checkpoint}")

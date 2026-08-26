@@ -38,11 +38,19 @@ for item in "${MODELS[@]}"; do
         echo "--> [GPU $GPU] Evaluating: $run_dir"
         mkdir -p "${run_dir}/results"
         
+        run_name=$(basename "$run_dir")
+        patch_dim=128
+        if [[ "$run_name" == *"-p64"* ]]; then
+            patch_dim=64
+        fi
+
         # 1. Detailed Evaluation (Per-patch metrics)
         python code/evaluation/evaluate_detailed.py \
             --config "$config" \
             --checkpoint "${run_dir}/ckpts/best_model.pth" \
             --output "${run_dir}/results/detailed_metrics.jsonl" \
+            --name "$run_name" \
+            --patch-dim $patch_dim \
             --gpu $GPU > "${run_dir}/results/eval_stdout.log" 2>&1
             
         # 2. Inference (Qualitative Plots on a standard test crop)
@@ -52,6 +60,8 @@ for item in "${MODELS[@]}"; do
             --dataset jrc_cos7-1a \
             --crop crop234 \
             --z-slice 70 \
+            --name "$run_name" \
+            --patch-dim $patch_dim \
             --gpu $GPU >> "${run_dir}/results/eval_stdout.log" 2>&1
             
         echo "--> [GPU $GPU] Finished: $run_dir"

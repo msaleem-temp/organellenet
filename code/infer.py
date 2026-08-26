@@ -35,6 +35,8 @@ def parse_args():
     parser.add_argument("--z-slice", type=int, default=70, help="Z-slice for visualization")
     parser.add_argument("--gpu", type=str, default=None, help="GPU index")
     parser.add_argument("--overlap", type=float, default=0.5, help="Sliding window overlap")
+    parser.add_argument("--name", type=str, default=None, help="Override experiment name")
+    parser.add_argument("--patch-dim", type=int, default=None, help="Override patch dim")
     return parser.parse_args()
 
 
@@ -46,6 +48,11 @@ def main():
 
     # 1. Load config
     config = load_config(args.config)
+    
+    if args.name:
+        config.experiment_name = args.name
+    if args.patch_dim:
+        config.data.patch_dim = args.patch_dim
     print(f"\n{'='*60}")
     print(f"Inference: {config.experiment_name}")
     print(f"Dataset: {args.dataset} | Crop: {args.crop}")
