@@ -80,6 +80,23 @@ python code/train.py \
     --patch-dim 64 \
     --gpu 0
 ```
+- Val Dice for Static UNet patch 64
+```bash
+python code/train.py \
+    --config configs/static_unet.yaml \
+    --name static-unet-13cls-nojitter-p64-valdice \
+    --patch-dim 64 \
+    --gpu 0
+```
+
+- Val Dice for Static UNet patch 128
+```bash
+python code/train.py \
+    --config configs/static_unet.yaml \
+    --name static-unet-13cls-nojitter-p128-valdice \
+    --patch-dim 128 \
+    --gpu 0
+```
 
 **Dynamic UNet at 64³ (GPU 1):**
 ```bash
