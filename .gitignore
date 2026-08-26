@@ -20,6 +20,8 @@ runs/*/plots/
 runs/*/results/
 runs/*/splits/
 runs/*/config.yaml
+runs/paper_tables
+runs/*/paper_tables
 
 # ----- Large data files -----
 *.pth
