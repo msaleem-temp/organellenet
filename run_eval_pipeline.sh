@@ -15,6 +15,8 @@ declare -a MODELS=(
     "runs/latest-unet-14cls-res-aug configs/latest_unet_res_aug.yaml 'Latest+Res (p128)'"
     "runs/latest-unet-14cls-res-aug-p64 configs/latest_unet_res_aug.yaml 'Latest+Res (p64)'"
     "runs/sdt-unet-14cls-baseline configs/sdt_unet.yaml 'SDT Baseline'"
+    "runs/scale-conditioned-unet-14cls configs/scale_conditioned_unet.yaml 'Scale Conditioned'"
+    "runs/static-unet-13cls-nojitter-p128-valdice configs/static_unet.yaml 'Static (p128, valdice)'"
 )
 
 # Note: Excluded because they are currently running:
