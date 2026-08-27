@@ -24,8 +24,6 @@ runs/*/splits/
 runs/*/config.yaml
 runs/paper_tables
 runs/*/paper_tables
-runs/paper_tables_stress_resolution/
-runs/stress_test_combined/
 
 # ----- Large data files -----
 *.pth
@@ -76,6 +74,8 @@ results/
 results_analysis.md
 runs/*/run_meta.txt
 runs/saleem_results.pdf
+runs/paper_tables_stress_resolution/
+runs/stress_test_combined/
 
 #--- Paper artefacts ---
 paper/
