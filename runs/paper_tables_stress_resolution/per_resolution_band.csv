@@ -1,0 +1,4 @@
+Resolution Band,N patches,Evidence Status,Latest+EM stress mIoU,Latest+EM stress mDice,Latest+Res stress mIoU,Latest+Res stress mDice
+Fine (≤4 nm),73,evaluated,0.1803,0.2446,0.1484,0.2240
+Medium (5-8 nm),222,evaluated,0.2803,0.3386,0.2708,0.3258
+Coarse (≥16 nm),24,evaluated,0.0000,0.0000,0.0000,0.0000

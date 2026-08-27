@@ -1,0 +1,17 @@
+Model,Class,N finite patches,Mean HD95 nm,Median HD95 nm,Std HD95 nm
+Latest+EM stress,Background,319,5.4688,0.0000,14.0874
+Latest+EM stress,ER,283,97.9533,78.7909,103.8458
+Latest+EM stress,Endosomes,237,392.0075,403.9802,252.9952
+Latest+EM stress,Lysosomes,159,117.5861,8.0000,323.5181
+Latest+EM stress,Microtubules,41,50.0193,25.4558,54.3712
+Latest+EM stress,Mitochondria,211,92.7265,0.0000,255.5901
+Latest+EM stress,Peroxisomes,33,227.2636,103.0728,344.6542
+Latest+EM stress,Vesicles,253,218.7103,214.6998,126.9981
+Latest+Res stress,Background,319,8.4364,0.0000,17.8770
+Latest+Res stress,ER,277,100.2675,85.7904,92.9439
+Latest+Res stress,Endosomes,237,372.4788,352.0227,252.5698
+Latest+Res stress,Lysosomes,151,64.3001,8.0000,228.3634
+Latest+Res stress,Microtubules,42,64.8196,35.5214,66.9833
+Latest+Res stress,Mitochondria,211,107.3379,0.0000,237.0833
+Latest+Res stress,Peroxisomes,38,276.2233,106.7329,352.1142
+Latest+Res stress,Vesicles,251,213.3180,203.8038,113.9172

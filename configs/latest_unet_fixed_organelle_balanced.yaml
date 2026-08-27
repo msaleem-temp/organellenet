@@ -1,0 +1,9 @@
+# ============================================================================
+# Latest UNet FIXED + organelle-level patch balancing
+# ============================================================================
+inherits: latest_unet_fixed.yaml
+
+experiment_name: latest-unet-14cls-fixed-organelle-balanced
+
+training:
+  sampler_balance_level: organelle

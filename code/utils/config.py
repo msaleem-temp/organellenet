@@ -125,6 +125,7 @@ class TrainingConfig:
     accumulation_steps: int = 1
     print_freq: int = 1
     num_workers: int = 2
+    sampler_balance_level: str = "raw"  # raw or organelle
     class_weights: Optional[List[float]] = None   # if None, uses defaults
 
 

@@ -1,0 +1,4 @@
+Δ IoU (Latest+Res stress - Latest+EM stress),,ER,ERES,Endosomes,Golgi,Lipid Droplets,Lysosomes,Microtubules,Mitochondria,Nuclear Pores,Nucleus,Peroxisomes,Vesicles,Vimentin
+Fine (≤4 nm),,-0.1716,+0.0000,-0.1031,N/E,+0.0000,-0.0053,+0.0502,-0.4231,N/E,+0.0000,+0.0000,-0.0581,+0.0000
+Medium (5-8 nm),,-0.0363,+0.0000,-0.0079,+0.0000,+0.0000,+0.0112,+0.0000,-0.0095,+0.0000,+0.0000,-0.1137,+0.0426,N/E
+Coarse (≥16 nm),,+0.0000,N/E,+0.0000,N/E,N/E,+0.0000,+0.0000,+0.0000,N/E,N/E,N/E,+0.0000,N/E

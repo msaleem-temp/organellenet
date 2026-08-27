@@ -109,7 +109,10 @@ def main():
     )
 
     # 6. Create data loaders
-    train_sampler = create_balanced_sampler(train_dataset)
+    train_sampler = create_balanced_sampler(
+        train_dataset,
+        balance_level=config.training.sampler_balance_level,
+    )
 
     train_loader = DataLoader(
         train_dataset,
