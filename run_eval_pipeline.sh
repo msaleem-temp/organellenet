@@ -21,6 +21,23 @@ declare -a MODELS=(
 # - runs/scale-conditioned-unet-14cls
 # - runs/static-unet-13cls-nojitter-p128-valdice
 
+echo "=========================================================="
+echo "Generating Pristine Global Holdout Test Set (crop234)..."
+echo "=========================================================="
+mkdir -p results/global_splits
+python3 -c "
+import sys
+sys.path.append('.')
+from code.data.splits import prepare_splits
+prepare_splits(
+    blueprint_json_path='all_jsons/latest_baseline_centroids.json',
+    output_dir='results/global_splits',
+    target_classes=['endo', 'ld', 'lyso', 'mito', 'mt', 'np', 'nuc', 'perox', 'ves', 'vim', 'golgi', 'er', 'eres'],
+    split_ratios=[0.85, 0.09, 0.06],
+    excluded_crop='crop234'
+)
+"
+
 MAX_JOBS=4
 job_idx=0
 
@@ -49,6 +66,7 @@ for item in "${MODELS[@]}"; do
             --config "$config" \
             --checkpoint "${run_dir}/ckpts/best_model.pth" \
             --output "${run_dir}/results/detailed_metrics.jsonl" \
+            --test-json "results/global_splits/test.json" \
             --name "$run_name" \
             --patch-dim $patch_dim \
             --gpu $GPU > "${run_dir}/results/eval_stdout.log" 2>&1
