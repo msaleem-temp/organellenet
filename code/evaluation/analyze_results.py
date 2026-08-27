@@ -227,6 +227,35 @@ def main():
                 row.append(f"{iou:.4f}" if iou is not None else "N/A")
             writer.writerow(row)
 
+    # Table 4b: Resolution × Class Heatmap Delta (Missing from rewrite)
+    if len(args.labels) >= 2:
+        baseline_label = args.labels[0]
+        proposed_label = args.labels[-1]
+        baseline_records = all_results[baseline_label]
+        proposed_records = all_results[proposed_label]
+
+        out_path2 = os.path.join(args.output_dir, "resolution_x_class_delta.csv")
+        with open(out_path2, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow([f"Δ IoU ({proposed_label} - {baseline_label})", ""] + sorted_classes)
+            
+            for band in bands:
+                row = [band_labels_map[band], ""]
+                base_band_records = [r for r in baseline_records if get_resolution_band(r.get("resolution", [])) == band]
+                prop_band_records = [r for r in proposed_records if get_resolution_band(r.get("resolution", [])) == band]
+                
+                for cls in sorted_classes:
+                    base_iou, _, _, _, _ = compute_global_class_metrics(base_band_records, cls)
+                    prop_iou, _, _, _, _ = compute_global_class_metrics(prop_band_records, cls)
+                    
+                    if base_iou is not None and prop_iou is not None:
+                        delta = prop_iou - base_iou
+                        row.append(f"{delta:+.4f}")
+                    else:
+                        row.append("N/A")
+                writer.writerow(row)
+        print(f"  → {out_path2}")
+
     # Table 5: Overall Summary
     print("Generating summary.csv ...")
     out_path = os.path.join(args.output_dir, "summary.csv")

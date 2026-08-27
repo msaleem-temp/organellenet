@@ -24,6 +24,8 @@ def prepare_splits(
     target_classes: list,
     split_ratios: list = None,
     excluded_crop: str = None,
+    class_mapping: dict = None,
+    strip_suffixes: bool = True,
     seed: int = 42,
 ) -> dict:
     """
@@ -70,8 +72,20 @@ def prepare_splits(
         if excluded_crop and patch.get("crop") == excluded_crop:
             excluded_datasets.add(patch.get("dataset"))
             test_patches.append(patch)
-        elif patch.get("class") in target_set:
-            filtered_patches.append(patch)
+        else:
+            cls = patch.get("class", "")
+            
+            # 1. Explicit mapping override
+            if class_mapping and cls in class_mapping:
+                base_cls = class_mapping[cls]
+            # 2. Dynamic suffix stripping (if enabled)
+            elif strip_suffixes and "_" in cls and cls.rsplit("_", 1)[-1] in ["lum", "mem", "in", "out"]:
+                base_cls = cls.rsplit("_", 1)[0]
+            else:
+                base_cls = cls
+
+            if base_cls in target_set:
+                filtered_patches.append(patch)
 
     print(f"Total original patches: {len(blueprint)}")
     print(f"Total filtered (train/val) patches: {len(filtered_patches)}")

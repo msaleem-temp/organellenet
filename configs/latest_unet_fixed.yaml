@@ -1,0 +1,40 @@
+# ============================================================================
+# Latest UNet FIXED — 14 classes, correct targeted sampling of ER/Golgi
+# ============================================================================
+inherits: base.yaml
+
+experiment_name: latest-unet-14cls-fixed
+
+data:
+  max_jitter: 48
+  num_classes: 14
+  target_classes:
+    - endo
+    - ld
+    - lyso
+    - mito
+    - mt
+    - np
+    - nuc
+    - perox
+    - ves
+    - vim
+    - golgi
+    - er
+    - eres
+  blueprint_json: latest_baseline_centroids.json
+  split_ratios: [0.85, 0.09, 0.06]
+  excluded_crop: crop234
+
+model:
+  out_channels: 14
+  strides: [1, 2, 2, 2]
+
+training:
+  batch_size: 4
+  accumulation_steps: 2
+  early_stop_patience: 15
+  early_stop_metric: val_dice
+  scheduler_mode: max
+  print_freq: 200
+  num_epochs: 100
