@@ -7,7 +7,7 @@ import os
 import numpy as np
 
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 SUMMARY_CSV = ROOT / "runs" / "paper_tables" / "summary.csv"
 OUT_DIR = ROOT / "paper" / "figures"
 CACHE_DIR = ROOT / ".matplotlib-cache"
