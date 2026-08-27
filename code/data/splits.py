@@ -63,36 +63,48 @@ def prepare_splits(
 
     # 2. Filter by target classes and optionally exclude a crop
     filtered_patches = []
+    test_patches = []
     excluded_datasets = set()
 
     for patch in blueprint:
+        if patch.get("class") not in target_set:
+            continue
+            
         if excluded_crop and patch.get("crop") == excluded_crop:
             excluded_datasets.add(patch.get("dataset"))
-            continue
-        if patch.get("class") in target_set:
+            test_patches.append(patch)
+        else:
             filtered_patches.append(patch)
 
     print(f"Total original patches: {len(blueprint)}")
-    print(f"Total filtered patches: {len(filtered_patches)}")
+    print(f"Total filtered (train/val) patches: {len(filtered_patches)}")
     if excluded_crop and excluded_datasets:
-        print(f"Excluded {excluded_crop} from dataset(s): {', '.join(excluded_datasets)}")
+        print(f"Held out {excluded_crop} for test set from dataset(s): {', '.join(excluded_datasets)}")
+        print(f"Total holdout test patches: {len(test_patches)}")
 
-    # 3. Save filtered patches
+    # 3. Save targets only patches
     targets_only_path = os.path.join(output_dir, "targets_only.json")
     with open(targets_only_path, "w") as f:
-        json.dump(filtered_patches, f, indent=4)
+        json.dump(filtered_patches + test_patches, f, indent=4)
 
     # 4. Shuffle and split
     random.seed(seed)
     random.shuffle(filtered_patches)
 
-    total = len(filtered_patches)
-    train_end = int(total * split_ratios[0])
-    val_end = int(total * (split_ratios[0] + split_ratios[1]))
-
-    train_patches = filtered_patches[:train_end]
-    val_patches = filtered_patches[train_end:val_end]
-    test_patches = filtered_patches[val_end:]
+    total_train_val = len(filtered_patches)
+    # If no test_patches, we do standard 3-way split, else 2-way split of the remaining
+    if len(test_patches) > 0:
+        # Normalize train/val ratios to sum to 1
+        train_frac = split_ratios[0] / (split_ratios[0] + split_ratios[1])
+        train_end = int(total_train_val * train_frac)
+        train_patches = filtered_patches[:train_end]
+        val_patches = filtered_patches[train_end:]
+    else:
+        train_end = int(total_train_val * split_ratios[0])
+        val_end = int(total_train_val * (split_ratios[0] + split_ratios[1]))
+        train_patches = filtered_patches[:train_end]
+        val_patches = filtered_patches[train_end:val_end]
+        test_patches = filtered_patches[val_end:]
 
     # 5. Write splits
     train_path = os.path.join(output_dir, "train.json")

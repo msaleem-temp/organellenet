@@ -69,6 +69,9 @@ def compute_per_class_metrics(pred, target, num_classes):
     recall = {}
     f1 = {}
     hd95_dict = {}
+    tp_dict = {}
+    fp_dict = {}
+    fn_dict = {}
 
     for c in range(num_classes):
         pred_c = (pred == c)
@@ -94,13 +97,22 @@ def compute_per_class_metrics(pred, target, num_classes):
         precision[c] = prec_val
         recall[c] = rec_val
         f1[c] = dice_val  # F1 is equivalent to Dice for segmentation
+        
+        # Output raw counts for global metrics
+        tp_dict[c] = int(intersection)
+        fp_dict[c] = int(pred_sum - intersection)
+        fn_dict[c] = int(target_sum - intersection)
 
         if pred_sum > 0 or target_sum > 0:
             hd = compute_hd95(pred_c, target_c)
             if not np.isnan(hd):
                 hd95_dict[c] = float(hd)
 
-    return {"iou": iou, "dice": dice, "precision": precision, "recall": recall, "f1": f1, "hd95": hd95_dict}
+    return {
+        "iou": iou, "dice": dice, "precision": precision, 
+        "recall": recall, "f1": f1, "hd95": hd95_dict,
+        "tp": tp_dict, "fp": fp_dict, "fn": fn_dict
+    }
 
 
 def parse_args():
@@ -212,6 +224,10 @@ def main():
                 precision_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["precision"].items()}
                 recall_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["recall"].items()}
                 f1_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["f1"].items()}
+                
+                tp_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["tp"].items()}
+                fp_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["fp"].items()}
+                fn_named = {class_names.get(c, f"class_{c}"): v for c, v in patch_metrics["fn"].items()}
 
                 # Accumulate for summary (skip background)
                 for c, v in patch_metrics["iou"].items():
@@ -243,6 +259,9 @@ def main():
                     "per_class_precision": precision_named,
                     "per_class_recall": recall_named,
                     "per_class_f1": f1_named,
+                    "per_class_tp": tp_named,
+                    "per_class_fp": fp_named,
+                    "per_class_fn": fn_named,
                     "mean_iou": float(np.mean(fg_ious)) if fg_ious else 0.0,
                     "mean_dice": float(np.mean(fg_dices)) if fg_dices else 0.0,
                     "mean_hd95": float(np.mean(fg_hd95s)) if fg_hd95s else 0.0,
