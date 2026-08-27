@@ -67,13 +67,10 @@ def prepare_splits(
     excluded_datasets = set()
 
     for patch in blueprint:
-        if patch.get("class") not in target_set:
-            continue
-            
         if excluded_crop and patch.get("crop") == excluded_crop:
             excluded_datasets.add(patch.get("dataset"))
             test_patches.append(patch)
-        else:
+        elif patch.get("class") in target_set:
             filtered_patches.append(patch)
 
     print(f"Total original patches: {len(blueprint)}")
