@@ -21,6 +21,24 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
+DISPLAY_LABELS = {
+    "Dynamic (p128)": "Dynamic jitter, 128-voxel patches",
+    "Static (p128)": "Static anchors, 128-voxel patches",
+    "Static (p128, valdice)": "Static anchors, 128-voxel validation-Dice checkpoint",
+    "Latest (p128)": "Latest 14-class model, 128-voxel patches",
+    "Scale Conditioned": "Scale-conditioned model, 128-voxel patches",
+    "Latest Fixed (p128)": "Corrected-label model, 128-voxel patches",
+    "Latest+EM (p128)": "EM augmentation, 128-voxel patches",
+    "Latest (p64)": "Latest 14-class model, 64-voxel patches",
+    "Latest+Res (p128)": "Resolution augmentation, 128-voxel patches",
+    "SDT Baseline": "Signed-distance target, 128-voxel patches",
+    "Latest+EM (p64)": "EM augmentation, 64-voxel patches",
+    "Latest+Res (p64)": "Resolution augmentation, 64-voxel patches",
+    "Static (p64, valdice)": "Static anchors, 64-voxel validation-Dice checkpoint",
+    "Static (p64)": "Static anchors, 64-voxel patches",
+}
+
+
 def _to_float(value):
     if value in {"", "N/A", None}:
         return np.nan
@@ -34,7 +52,7 @@ def load_summary():
 
 
 def plot_summary(rows):
-    labels = [r["Model"] for r in rows]
+    labels = [DISPLAY_LABELS.get(r["Model"], r["Model"]) for r in rows]
     miou = [_to_float(r["Mean IoU"]) for r in rows]
     mdice = [_to_float(r["Mean Dice"]) for r in rows]
 
@@ -43,17 +61,18 @@ def plot_summary(rows):
     miou = [miou[i] for i in order]
     mdice = [mdice[i] for i in order]
 
-    x = np.arange(len(labels))
-    width = 0.38
+    y = np.arange(len(labels))
+    height = 0.38
 
-    fig, ax = plt.subplots(figsize=(10.5, 4.8))
-    ax.bar(x - width / 2, miou, width, label="Mean IoU", color="#376b8c")
-    ax.bar(x + width / 2, mdice, width, label="Mean Dice", color="#c27d38")
-    ax.set_ylabel("Score")
-    ax.set_ylim(0, max(max(miou), max(mdice)) * 1.18)
-    ax.set_xticks(x)
-    ax.set_xticklabels(labels, rotation=35, ha="right")
-    ax.grid(axis="y", color="0.88", linewidth=0.8)
+    fig, ax = plt.subplots(figsize=(7.2, 6.2))
+    ax.barh(y + height / 2, miou, height, label="Mean IoU", color="#376b8c")
+    ax.barh(y - height / 2, mdice, height, label="Mean Dice", color="#c27d38")
+    ax.set_xlabel("Score")
+    ax.set_xlim(0, max(max(miou), max(mdice)) * 1.18)
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels, fontsize=8)
+    ax.invert_yaxis()
+    ax.grid(axis="x", color="0.88", linewidth=0.8)
     ax.set_axisbelow(True)
     ax.legend(frameon=False)
     ax.set_title("Held-out crop performance by model variant")

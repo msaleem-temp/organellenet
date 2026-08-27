@@ -11,6 +11,10 @@ import os
 import sys
 
 import numpy as np
+try:
+    from scipy import ndimage
+except ImportError:  # pragma: no cover - depends on server environment
+    ndimage = None
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -93,7 +97,7 @@ def remap_labels(lbl_volume, config):
 
 
 def choose_slices(lbl_volume, num_slices, min_separation):
-    """Pick slices with many foreground classes and pixels."""
+    """Pick separated slices with many foreground classes and pixels."""
     scores = []
     for z in range(lbl_volume.shape[0]):
         vals, counts = np.unique(lbl_volume[z], return_counts=True)
@@ -114,6 +118,28 @@ def choose_slices(lbl_volume, num_slices, min_separation):
     if not selected:
         selected = [lbl_volume.shape[0] // 2]
     return sorted(selected)
+
+
+def remove_small_components(pred, min_component_size):
+    """Remove tiny 3D connected components from each foreground class."""
+    if min_component_size <= 0:
+        return pred
+    if ndimage is None:
+        print("scipy is unavailable; skipping connected-component cleanup.")
+        return pred
+
+    cleaned = pred.copy()
+    structure = np.ones((3, 3, 3), dtype=bool)
+    for class_id in sorted(int(v) for v in np.unique(pred) if int(v) != 0):
+        mask = pred == class_id
+        labels, num_labels = ndimage.label(mask, structure=structure)
+        if num_labels == 0:
+            continue
+        sizes = np.bincount(labels.ravel())
+        remove = sizes < min_component_size
+        remove[0] = False
+        cleaned[remove[labels]] = 0
+    return cleaned
 
 
 def load_model_prediction(spec, em_volume, resolution, gpu, overlap):
@@ -197,10 +223,18 @@ def make_figure(args):
             gpu=args.gpu,
             overlap=args.overlap,
         )
+        pred = remove_small_components(pred, args.min_component_size)
         predictions.append((spec["label"], pred))
         configs.append(config)
 
-    max_classes = max(config.data.num_classes for config in configs + [base_config])
+    max_observed_label = int(
+        max(
+            [lbl_remapped.max()]
+            + [pred.max() for _, pred in predictions]
+            + [config.data.num_classes - 1 for config in configs + [base_config]]
+        )
+    )
+    max_classes = max_observed_label + 1
     cmap, colors = build_color_map(max_classes)
     class_names = configs[-1].class_names
 
@@ -241,29 +275,49 @@ def make_figure(args):
             axes[row, col].set_title(label if row == 0 else "", fontsize=9)
             axes[row, col].axis("off")
 
-    visible_classes = sorted(
+    gt_visible_classes = sorted(
         int(v)
         for z in slices
         for v in np.unique(lbl_remapped[z])
         if int(v) != 0
     )
-    visible_classes = sorted(set(visible_classes))
+    gt_visible_classes = sorted(set(gt_visible_classes))
+    predicted_visible_classes = sorted(
+        {
+            int(v)
+            for z in slices
+            for _, pred in predictions
+            for v in np.unique(pred[z])
+            if int(v) != 0
+        }
+    )
+    predicted_only_classes = [
+        class_id for class_id in predicted_visible_classes if class_id not in gt_visible_classes
+    ]
     legend_handles = [
         mpatches.Patch(
             color=colors[cid],
             label=f"{cid}: {class_names.get(cid, f'Class {cid}')}",
         )
-        for cid in visible_classes
+        for cid in gt_visible_classes
         if cid < len(colors)
     ]
+    legend_handles.extend(
+        mpatches.Patch(
+            color=colors[cid],
+            label=f"{cid}: {class_names.get(cid, f'Class {cid}')} (predicted only)",
+        )
+        for cid in predicted_only_classes
+        if cid < len(colors)
+    )
     if legend_handles:
         fig.legend(
             handles=legend_handles,
             loc="lower center",
-            ncol=min(len(legend_handles), 6),
+            ncol=min(len(legend_handles), 5),
             frameon=False,
             fontsize=8,
-            title="Ground-truth classes visible in selected slices",
+            title="Classes visible in selected slices",
             title_fontsize=9,
         )
 
@@ -290,14 +344,25 @@ def make_figure(args):
 
     support_path = out_dir / f"{stem}_slice_support.csv"
     with support_path.open("w") as f:
-        f.write("z_slice,class_id,class_name,gt_pixels\n")
+        f.write("z_slice,source,class_id,class_name,pixels\n")
         for z in slices:
             vals, counts = np.unique(lbl_remapped[z], return_counts=True)
             for cid, count in zip(vals, counts):
                 cid = int(cid)
                 if cid == 0:
                     continue
-                f.write(f"{z},{cid},{class_names.get(cid, f'Class {cid}')},{int(count)}\n")
+                f.write(
+                    f"{z},ground_truth,{cid},{class_names.get(cid, f'Class {cid}')},{int(count)}\n"
+                )
+            for label, pred in predictions:
+                vals, counts = np.unique(pred[z], return_counts=True)
+                for cid, count in zip(vals, counts):
+                    cid = int(cid)
+                    if cid == 0:
+                        continue
+                    f.write(
+                        f"{z},{label},{cid},{class_names.get(cid, f'Class {cid}')},{int(count)}\n"
+                    )
     print(f"Wrote {support_path}")
     print(f"Selected slices: {slices}")
 
@@ -309,7 +374,13 @@ def parse_args():
     parser.add_argument("--gpu", default=None)
     parser.add_argument("--overlap", type=float, default=0.5)
     parser.add_argument("--num-slices", type=int, default=2)
-    parser.add_argument("--min-separation", type=int, default=12)
+    parser.add_argument("--min-separation", type=int, default=64)
+    parser.add_argument(
+        "--min-component-size",
+        type=int,
+        default=128,
+        help="Remove predicted 3D connected components smaller than this many voxels. Use 0 to disable.",
+    )
     parser.add_argument("--slices", type=int, nargs="*", default=None)
     parser.add_argument("--output-dir", default="paper/figures")
     parser.add_argument("--output-name", default="qualitative_crop234_multislice")
