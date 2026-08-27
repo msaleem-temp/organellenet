@@ -24,6 +24,8 @@ runs/*/splits/
 runs/*/config.yaml
 runs/paper_tables
 runs/*/paper_tables
+runs/paper_tables_stress_resolution/
+runs/stress_test_combined/
 
 # ----- Large data files -----
 *.pth
