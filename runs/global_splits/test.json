@@ -9,6 +9,126 @@
             2.0,
             2.0
         ],
+        "class": "cell",
+        "center_z": 35,
+        "center_y": 105,
+        "center_x": 304,
+        "l_center": [
+            35,
+            105,
+            304
+        ],
+        "e_center": [
+            1415,
+            2685,
+            5639
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "cell",
+        "center_z": 309,
+        "center_y": 310,
+        "center_x": 391,
+        "l_center": [
+            309,
+            310,
+            391
+        ],
+        "e_center": [
+            1689,
+            2890,
+            5726
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "cell",
+        "center_z": 257,
+        "center_y": 344,
+        "center_x": 97,
+        "l_center": [
+            257,
+            344,
+            97
+        ],
+        "e_center": [
+            1637,
+            2924,
+            5432
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "cell",
+        "center_z": 168,
+        "center_y": 376,
+        "center_x": 253,
+        "l_center": [
+            168,
+            376,
+            253
+        ],
+        "e_center": [
+            1548,
+            2956,
+            5588
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
         "class": "endo",
         "center_z": 309,
         "center_y": 94,
@@ -442,6 +562,1626 @@
             1777,
             2885,
             5586
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "cyto",
+        "center_z": 182,
+        "center_y": 111,
+        "center_x": 279,
+        "l_center": [
+            182,
+            111,
+            279
+        ],
+        "e_center": [
+            1562,
+            2691,
+            5614
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "cyto",
+        "center_z": 209,
+        "center_y": 272,
+        "center_x": 80,
+        "l_center": [
+            209,
+            272,
+            80
+        ],
+        "e_center": [
+            1589,
+            2852,
+            5415
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "cyto",
+        "center_z": 136,
+        "center_y": 368,
+        "center_x": 310,
+        "l_center": [
+            136,
+            368,
+            310
+        ],
+        "e_center": [
+            1516,
+            2948,
+            5645
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "cyto",
+        "center_z": 60,
+        "center_y": 259,
+        "center_x": 143,
+        "l_center": [
+            60,
+            259,
+            143
+        ],
+        "e_center": [
+            1440,
+            2839,
+            5478
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "cyto",
+        "center_z": 372,
+        "center_y": 139,
+        "center_x": 334,
+        "l_center": [
+            372,
+            139,
+            334
+        ],
+        "e_center": [
+            1752,
+            2719,
+            5669
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ecs",
+        "center_z": 320,
+        "center_y": 13,
+        "center_x": 337,
+        "l_center": [
+            320,
+            13,
+            337
+        ],
+        "e_center": [
+            1700,
+            2593,
+            5672
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ecs",
+        "center_z": 250,
+        "center_y": 62,
+        "center_x": 200,
+        "l_center": [
+            250,
+            62,
+            200
+        ],
+        "e_center": [
+            1630,
+            2642,
+            5535
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ecs",
+        "center_z": 150,
+        "center_y": 18,
+        "center_x": 378,
+        "l_center": [
+            150,
+            18,
+            378
+        ],
+        "e_center": [
+            1530,
+            2598,
+            5713
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "endo_lum",
+        "center_z": 376,
+        "center_y": 103,
+        "center_x": 24,
+        "l_center": [
+            376,
+            103,
+            24
+        ],
+        "e_center": [
+            1756,
+            2683,
+            5359
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "endo_lum",
+        "center_z": 44,
+        "center_y": 127,
+        "center_x": 372,
+        "l_center": [
+            44,
+            127,
+            372
+        ],
+        "e_center": [
+            1424,
+            2707,
+            5707
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "endo_lum",
+        "center_z": 286,
+        "center_y": 102,
+        "center_x": 14,
+        "l_center": [
+            286,
+            102,
+            14
+        ],
+        "e_center": [
+            1666,
+            2682,
+            5349
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "endo_mem",
+        "center_z": 306,
+        "center_y": 64,
+        "center_x": 54,
+        "l_center": [
+            306,
+            64,
+            54
+        ],
+        "e_center": [
+            1686,
+            2644,
+            5389
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "endo_mem",
+        "center_z": 24,
+        "center_y": 171,
+        "center_x": 364,
+        "l_center": [
+            24,
+            171,
+            364
+        ],
+        "e_center": [
+            1404,
+            2751,
+            5699
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "endo_mem",
+        "center_z": 151,
+        "center_y": 153,
+        "center_x": 397,
+        "l_center": [
+            151,
+            153,
+            397
+        ],
+        "e_center": [
+            1531,
+            2733,
+            5732
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "endo_mem",
+        "center_z": 390,
+        "center_y": 63,
+        "center_x": 16,
+        "l_center": [
+            390,
+            63,
+            16
+        ],
+        "e_center": [
+            1770,
+            2643,
+            5351
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_lum",
+        "center_z": 270,
+        "center_y": 199,
+        "center_x": 171,
+        "l_center": [
+            270,
+            199,
+            171
+        ],
+        "e_center": [
+            1650,
+            2779,
+            5506
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_lum",
+        "center_z": 33,
+        "center_y": 218,
+        "center_x": 165,
+        "l_center": [
+            33,
+            218,
+            165
+        ],
+        "e_center": [
+            1413,
+            2798,
+            5500
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_lum",
+        "center_z": 249,
+        "center_y": 240,
+        "center_x": 43,
+        "l_center": [
+            249,
+            240,
+            43
+        ],
+        "e_center": [
+            1629,
+            2820,
+            5378
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_lum",
+        "center_z": 221,
+        "center_y": 355,
+        "center_x": 179,
+        "l_center": [
+            221,
+            355,
+            179
+        ],
+        "e_center": [
+            1601,
+            2935,
+            5514
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_lum",
+        "center_z": 88,
+        "center_y": 373,
+        "center_x": 396,
+        "l_center": [
+            88,
+            373,
+            396
+        ],
+        "e_center": [
+            1468,
+            2953,
+            5731
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_mem",
+        "center_z": 193,
+        "center_y": 375,
+        "center_x": 123,
+        "l_center": [
+            193,
+            375,
+            123
+        ],
+        "e_center": [
+            1573,
+            2955,
+            5458
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_mem",
+        "center_z": 63,
+        "center_y": 362,
+        "center_x": 290,
+        "l_center": [
+            63,
+            362,
+            290
+        ],
+        "e_center": [
+            1443,
+            2942,
+            5625
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_mem",
+        "center_z": 232,
+        "center_y": 181,
+        "center_x": 124,
+        "l_center": [
+            232,
+            181,
+            124
+        ],
+        "e_center": [
+            1612,
+            2761,
+            5459
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_mem",
+        "center_z": 196,
+        "center_y": 262,
+        "center_x": 251,
+        "l_center": [
+            196,
+            262,
+            251
+        ],
+        "e_center": [
+            1576,
+            2842,
+            5586
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_mem",
+        "center_z": 91,
+        "center_y": 108,
+        "center_x": 99,
+        "l_center": [
+            91,
+            108,
+            99
+        ],
+        "e_center": [
+            1471,
+            2688,
+            5434
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "er_mem",
+        "center_z": 24,
+        "center_y": 221,
+        "center_x": 297,
+        "l_center": [
+            24,
+            221,
+            297
+        ],
+        "e_center": [
+            1404,
+            2801,
+            5632
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "lyso_lum",
+        "center_z": 78,
+        "center_y": 365,
+        "center_x": 225,
+        "l_center": [
+            78,
+            365,
+            225
+        ],
+        "e_center": [
+            1458,
+            2945,
+            5560
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "lyso_mem",
+        "center_z": 67,
+        "center_y": 366,
+        "center_x": 245,
+        "l_center": [
+            67,
+            366,
+            245
+        ],
+        "e_center": [
+            1447,
+            2946,
+            5580
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mito_lum",
+        "center_z": 396,
+        "center_y": 250,
+        "center_x": 7,
+        "l_center": [
+            396,
+            250,
+            7
+        ],
+        "e_center": [
+            1776,
+            2830,
+            5342
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mito_lum",
+        "center_z": 388,
+        "center_y": 369,
+        "center_x": 95,
+        "l_center": [
+            388,
+            369,
+            95
+        ],
+        "e_center": [
+            1768,
+            2949,
+            5430
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mito_lum",
+        "center_z": 390,
+        "center_y": 323,
+        "center_x": 2,
+        "l_center": [
+            390,
+            323,
+            2
+        ],
+        "e_center": [
+            1770,
+            2903,
+            5337
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mito_mem",
+        "center_z": 386,
+        "center_y": 374,
+        "center_x": 71,
+        "l_center": [
+            386,
+            374,
+            71
+        ],
+        "e_center": [
+            1766,
+            2954,
+            5406
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mito_mem",
+        "center_z": 345,
+        "center_y": 290,
+        "center_x": 54,
+        "l_center": [
+            345,
+            290,
+            54
+        ],
+        "e_center": [
+            1725,
+            2870,
+            5389
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mt_in",
+        "center_z": 145,
+        "center_y": 166,
+        "center_x": 287,
+        "l_center": [
+            145,
+            166,
+            287
+        ],
+        "e_center": [
+            1525,
+            2746,
+            5622
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mt_in",
+        "center_z": 206,
+        "center_y": 73,
+        "center_x": 83,
+        "l_center": [
+            206,
+            73,
+            83
+        ],
+        "e_center": [
+            1586,
+            2653,
+            5418
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mt_in",
+        "center_z": 222,
+        "center_y": 156,
+        "center_x": 254,
+        "l_center": [
+            222,
+            156,
+            254
+        ],
+        "e_center": [
+            1602,
+            2736,
+            5589
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mt_out",
+        "center_z": 17,
+        "center_y": 157,
+        "center_x": 209,
+        "l_center": [
+            17,
+            157,
+            209
+        ],
+        "e_center": [
+            1397,
+            2737,
+            5544
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mt_out",
+        "center_z": 229,
+        "center_y": 155,
+        "center_x": 245,
+        "l_center": [
+            229,
+            155,
+            245
+        ],
+        "e_center": [
+            1609,
+            2735,
+            5580
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "mt_out",
+        "center_z": 76,
+        "center_y": 177,
+        "center_x": 324,
+        "l_center": [
+            76,
+            177,
+            324
+        ],
+        "e_center": [
+            1456,
+            2757,
+            5659
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "pm",
+        "center_z": 296,
+        "center_y": 126,
+        "center_x": 386,
+        "l_center": [
+            296,
+            126,
+            386
+        ],
+        "e_center": [
+            1676,
+            2706,
+            5721
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "pm",
+        "center_z": 266,
+        "center_y": 47,
+        "center_x": 137,
+        "l_center": [
+            266,
+            47,
+            137
+        ],
+        "e_center": [
+            1646,
+            2627,
+            5472
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_lum",
+        "center_z": 388,
+        "center_y": 315,
+        "center_x": 246,
+        "l_center": [
+            388,
+            315,
+            246
+        ],
+        "e_center": [
+            1768,
+            2895,
+            5581
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_lum",
+        "center_z": 237,
+        "center_y": 62,
+        "center_x": 28,
+        "l_center": [
+            237,
+            62,
+            28
+        ],
+        "e_center": [
+            1617,
+            2642,
+            5363
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_lum",
+        "center_z": 102,
+        "center_y": 88,
+        "center_x": 26,
+        "l_center": [
+            102,
+            88,
+            26
+        ],
+        "e_center": [
+            1482,
+            2668,
+            5361
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_lum",
+        "center_z": 350,
+        "center_y": 199,
+        "center_x": 238,
+        "l_center": [
+            350,
+            199,
+            238
+        ],
+        "e_center": [
+            1730,
+            2779,
+            5573
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_lum",
+        "center_z": 64,
+        "center_y": 58,
+        "center_x": 117,
+        "l_center": [
+            64,
+            58,
+            117
+        ],
+        "e_center": [
+            1444,
+            2638,
+            5452
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_lum",
+        "center_z": 125,
+        "center_y": 149,
+        "center_x": 217,
+        "l_center": [
+            125,
+            149,
+            217
+        ],
+        "e_center": [
+            1505,
+            2729,
+            5552
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_mem",
+        "center_z": 355,
+        "center_y": 203,
+        "center_x": 242,
+        "l_center": [
+            355,
+            203,
+            242
+        ],
+        "e_center": [
+            1735,
+            2783,
+            5577
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_mem",
+        "center_z": 107,
+        "center_y": 89,
+        "center_x": 37,
+        "l_center": [
+            107,
+            89,
+            37
+        ],
+        "e_center": [
+            1487,
+            2669,
+            5372
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_mem",
+        "center_z": 43,
+        "center_y": 376,
+        "center_x": 238,
+        "l_center": [
+            43,
+            376,
+            238
+        ],
+        "e_center": [
+            1423,
+            2956,
+            5573
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_mem",
+        "center_z": 220,
+        "center_y": 61,
+        "center_x": 32,
+        "l_center": [
+            220,
+            61,
+            32
+        ],
+        "e_center": [
+            1600,
+            2641,
+            5367
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_mem",
+        "center_z": 386,
+        "center_y": 315,
+        "center_x": 242,
+        "l_center": [
+            386,
+            315,
+            242
+        ],
+        "e_center": [
+            1766,
+            2895,
+            5577
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_mem",
+        "center_z": 62,
+        "center_y": 49,
+        "center_x": 120,
+        "l_center": [
+            62,
+            49,
+            120
+        ],
+        "e_center": [
+            1442,
+            2629,
+            5455
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_cos7-1a",
+        "crop": "crop234",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            2.0,
+            2.0,
+            2.0
+        ],
+        "class": "ves_mem",
+        "center_z": 134,
+        "center_y": 154,
+        "center_x": 199,
+        "l_center": [
+            134,
+            154,
+            199
+        ],
+        "e_center": [
+            1514,
+            2734,
+            5534
         ],
         "e_shape": [
             128,

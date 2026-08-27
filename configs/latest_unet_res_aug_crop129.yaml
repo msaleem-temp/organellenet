@@ -1,0 +1,56 @@
+# ============================================================================
+# Latest UNet + EM Aug + Resolution Augmentation — crop129 medium holdout
+# ============================================================================
+inherits: base.yaml
+
+experiment_name: latest-unet-14cls-res-aug-crop129
+
+data:
+  max_jitter: 48
+  num_classes: 14
+  target_classes:
+    - endo
+    - ld
+    - lyso
+    - mito
+    - mt
+    - np
+    - nuc
+    - perox
+    - ves
+    - vim
+    - golgi
+    - er
+    - eres
+  blueprint_json: latest_baseline_centroids.json
+  split_ratios: [0.85, 0.09, 0.06]
+  excluded_crop: crop129
+
+model:
+  out_channels: 14
+  strides: [1, 2, 2, 2]
+
+training:
+  batch_size: 4
+  accumulation_steps: 2
+  early_stop_patience: 15
+  early_stop_metric: val_dice
+  scheduler_mode: max
+  print_freq: 200
+  num_epochs: 100
+
+augmentation:
+  enabled: true
+  flip: true
+  rotate90: true
+  intensity_scale_range: [0.8, 1.2]
+  intensity_shift_range: [-0.1, 0.1]
+  gaussian_noise_std: 0.03
+  gamma_range: [0.7, 1.5]
+  elastic_enabled: true
+  elastic_alpha: 80.0
+  elastic_sigma: 10.0
+  elastic_prob: 0.3
+  resolution_aug_enabled: true
+  resolution_scale_range: [0.25, 1.0]
+  resolution_aug_prob: 0.4

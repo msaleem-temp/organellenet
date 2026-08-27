@@ -196,6 +196,7 @@ def main():
         patch_dim=config.data.patch_dim,
         max_jitter=0,
         augmentation_config=None,  # Never augment during evaluation
+        scale_conditioned=config.model.scale_conditioned,
     )
 
     # 4. Build model and load weights

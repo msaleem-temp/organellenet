@@ -21,9 +21,26 @@ import torch
 
 from code.utils.config import load_config
 from code.utils.paths import setup_run_directory
-from code.data.zarr_utils import extract_aligned_volumes
+from code.data.zarr_utils import extract_aligned_volumes, get_scale_trans
 from code.models.unet import build_model, get_raw_model
 from code.evaluation.visualize import run_sliding_window_inference, plot_inference_results
+
+
+class ConditionedResolutionWrapper(torch.nn.Module):
+    """Append constant resolution channels for scale-conditioned inference."""
+
+    def __init__(self, base_model, resolution):
+        super().__init__()
+        self.base_model = base_model
+        self.resolution = resolution
+
+    def forward(self, x):
+        b, _, z, y, x_dim = x.shape
+        channels = [
+            torch.full((b, 1, z, y, x_dim), value, device=x.device, dtype=x.dtype)
+            for value in self.resolution
+        ]
+        return self.base_model(torch.cat([x] + channels, dim=1))
 
 
 def parse_args():
@@ -76,6 +93,8 @@ def main():
         config.paths.data_dir, args.dataset, f"{args.dataset}.zarr"
     )
     em_volume, lbl_volume = extract_aligned_volumes(dataset_base, args.crop)
+    em_base = os.path.join(dataset_base, "recon-1", "em", "fibsem-uint8")
+    scale_em, _ = get_scale_trans(em_base, "s0")
 
     # 4. Remap labels
     max_raw_id = max(256, int(lbl_volume.max()) + 1)
@@ -88,8 +107,12 @@ def main():
     print(f"Unique classes after remapping: {np.unique(lbl_remapped)}")
 
     # 5. Run sliding window inference
+    infer_model = model
+    if getattr(config.model, "scale_conditioned", False):
+        infer_model = ConditionedResolutionWrapper(model, scale_em)
+
     pred_volume = run_sliding_window_inference(
-        model=model,
+        model=infer_model,
         em_volume=em_volume,
         device=device,
         roi_size=(config.data.patch_dim,) * 3,

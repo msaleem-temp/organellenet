@@ -1,0 +1,6662 @@
+[
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 23,
+        "center_y": 31,
+        "center_x": 123,
+        "l_center": [
+            23,
+            31,
+            123
+        ],
+        "e_center": [
+            9969,
+            2585,
+            5924
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 238,
+        "center_y": 23,
+        "center_x": 167,
+        "l_center": [
+            238,
+            23,
+            167
+        ],
+        "e_center": [
+            10184,
+            2577,
+            5968
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 184,
+        "center_y": 131,
+        "center_x": 254,
+        "l_center": [
+            184,
+            131,
+            254
+        ],
+        "e_center": [
+            10130,
+            2685,
+            6055
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 105,
+        "center_y": 267,
+        "center_x": 124,
+        "l_center": [
+            105,
+            267,
+            124
+        ],
+        "e_center": [
+            10051,
+            2821,
+            5925
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 119,
+        "center_y": 4,
+        "center_x": 267,
+        "l_center": [
+            119,
+            4,
+            267
+        ],
+        "e_center": [
+            10065,
+            2558,
+            6068
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 274,
+        "center_y": 188,
+        "center_x": 9,
+        "l_center": [
+            274,
+            188,
+            9
+        ],
+        "e_center": [
+            10220,
+            2742,
+            5810
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 10,
+        "center_y": 253,
+        "center_x": 38,
+        "l_center": [
+            10,
+            253,
+            38
+        ],
+        "e_center": [
+            9956,
+            2807,
+            5839
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 175,
+        "center_y": 22,
+        "center_x": 62,
+        "l_center": [
+            175,
+            22,
+            62
+        ],
+        "e_center": [
+            10121,
+            2576,
+            5863
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 25,
+        "center_y": 213,
+        "center_x": 275,
+        "l_center": [
+            25,
+            213,
+            275
+        ],
+        "e_center": [
+            9971,
+            2767,
+            6076
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 31,
+        "center_y": 84,
+        "center_x": 244,
+        "l_center": [
+            31,
+            84,
+            244
+        ],
+        "e_center": [
+            9977,
+            2638,
+            6045
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 230,
+        "center_y": 190,
+        "center_x": 152,
+        "l_center": [
+            230,
+            190,
+            152
+        ],
+        "e_center": [
+            10176,
+            2744,
+            5953
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 297,
+        "center_y": 286,
+        "center_x": 276,
+        "l_center": [
+            297,
+            286,
+            276
+        ],
+        "e_center": [
+            10243,
+            2840,
+            6077
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 156,
+        "center_y": 249,
+        "center_x": 11,
+        "l_center": [
+            156,
+            249,
+            11
+        ],
+        "e_center": [
+            10102,
+            2803,
+            5812
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cell",
+        "center_z": 149,
+        "center_y": 292,
+        "center_x": 250,
+        "l_center": [
+            149,
+            292,
+            250
+        ],
+        "e_center": [
+            10095,
+            2846,
+            6051
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 215,
+        "center_y": 216,
+        "center_x": 124,
+        "l_center": [
+            215,
+            216,
+            124
+        ],
+        "e_center": [
+            10161,
+            2770,
+            5925
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 194,
+        "center_y": 182,
+        "center_x": 294,
+        "l_center": [
+            194,
+            182,
+            294
+        ],
+        "e_center": [
+            10140,
+            2736,
+            6095
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 118,
+        "center_y": 91,
+        "center_x": 69,
+        "l_center": [
+            118,
+            91,
+            69
+        ],
+        "e_center": [
+            10064,
+            2645,
+            5870
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 41,
+        "center_y": 266,
+        "center_x": 210,
+        "l_center": [
+            41,
+            266,
+            210
+        ],
+        "e_center": [
+            9987,
+            2820,
+            6011
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 262,
+        "center_y": 56,
+        "center_x": 190,
+        "l_center": [
+            262,
+            56,
+            190
+        ],
+        "e_center": [
+            10208,
+            2610,
+            5991
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 141,
+        "center_y": 298,
+        "center_x": 37,
+        "l_center": [
+            141,
+            298,
+            37
+        ],
+        "e_center": [
+            10087,
+            2852,
+            5838
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 49,
+        "center_y": 52,
+        "center_x": 268,
+        "l_center": [
+            49,
+            52,
+            268
+        ],
+        "e_center": [
+            9995,
+            2606,
+            6069
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 17,
+        "center_y": 51,
+        "center_x": 18,
+        "l_center": [
+            17,
+            51,
+            18
+        ],
+        "e_center": [
+            9963,
+            2605,
+            5819
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 191,
+        "center_y": 172,
+        "center_x": 9,
+        "l_center": [
+            191,
+            172,
+            9
+        ],
+        "e_center": [
+            10137,
+            2726,
+            5810
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 299,
+        "center_y": 1,
+        "center_x": 46,
+        "l_center": [
+            299,
+            1,
+            46
+        ],
+        "e_center": [
+            10245,
+            2555,
+            5847
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 297,
+        "center_y": 133,
+        "center_x": 100,
+        "l_center": [
+            297,
+            133,
+            100
+        ],
+        "e_center": [
+            10243,
+            2687,
+            5901
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo",
+        "center_z": 17,
+        "center_y": 217,
+        "center_x": 99,
+        "l_center": [
+            17,
+            217,
+            99
+        ],
+        "e_center": [
+            9963,
+            2771,
+            5900
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso",
+        "center_z": 136,
+        "center_y": 154,
+        "center_x": 241,
+        "l_center": [
+            136,
+            154,
+            241
+        ],
+        "e_center": [
+            10082,
+            2708,
+            6042
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso",
+        "center_z": 284,
+        "center_y": 21,
+        "center_x": 121,
+        "l_center": [
+            284,
+            21,
+            121
+        ],
+        "e_center": [
+            10230,
+            2575,
+            5922
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso",
+        "center_z": 38,
+        "center_y": 291,
+        "center_x": 233,
+        "l_center": [
+            38,
+            291,
+            233
+        ],
+        "e_center": [
+            9984,
+            2845,
+            6034
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso",
+        "center_z": 253,
+        "center_y": 63,
+        "center_x": 226,
+        "l_center": [
+            253,
+            63,
+            226
+        ],
+        "e_center": [
+            10199,
+            2617,
+            6027
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 68,
+        "center_y": 32,
+        "center_x": 163,
+        "l_center": [
+            68,
+            32,
+            163
+        ],
+        "e_center": [
+            10014,
+            2586,
+            5964
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 20,
+        "center_y": 145,
+        "center_x": 284,
+        "l_center": [
+            20,
+            145,
+            284
+        ],
+        "e_center": [
+            9966,
+            2699,
+            6085
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 12,
+        "center_y": 215,
+        "center_x": 190,
+        "l_center": [
+            12,
+            215,
+            190
+        ],
+        "e_center": [
+            9958,
+            2769,
+            5991
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 189,
+        "center_y": 45,
+        "center_x": 251,
+        "l_center": [
+            189,
+            45,
+            251
+        ],
+        "e_center": [
+            10135,
+            2599,
+            6052
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 285,
+        "center_y": 207,
+        "center_x": 80,
+        "l_center": [
+            285,
+            207,
+            80
+        ],
+        "e_center": [
+            10231,
+            2761,
+            5881
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 5,
+        "center_y": 127,
+        "center_x": 107,
+        "l_center": [
+            5,
+            127,
+            107
+        ],
+        "e_center": [
+            9951,
+            2681,
+            5908
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 159,
+        "center_y": 119,
+        "center_x": 139,
+        "l_center": [
+            159,
+            119,
+            139
+        ],
+        "e_center": [
+            10105,
+            2673,
+            5940
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 120,
+        "center_y": 49,
+        "center_x": 58,
+        "l_center": [
+            120,
+            49,
+            58
+        ],
+        "e_center": [
+            10066,
+            2603,
+            5859
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 27,
+        "center_y": 10,
+        "center_x": 277,
+        "l_center": [
+            27,
+            10,
+            277
+        ],
+        "e_center": [
+            9973,
+            2564,
+            6078
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito",
+        "center_z": 99,
+        "center_y": 226,
+        "center_x": 289,
+        "l_center": [
+            99,
+            226,
+            289
+        ],
+        "e_center": [
+            10045,
+            2780,
+            6090
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox",
+        "center_z": 25,
+        "center_y": 115,
+        "center_x": 15,
+        "l_center": [
+            25,
+            115,
+            15
+        ],
+        "e_center": [
+            9971,
+            2669,
+            5816
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox",
+        "center_z": 286,
+        "center_y": 242,
+        "center_x": 155,
+        "l_center": [
+            286,
+            242,
+            155
+        ],
+        "e_center": [
+            10232,
+            2796,
+            5956
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox",
+        "center_z": 34,
+        "center_y": 284,
+        "center_x": 299,
+        "l_center": [
+            34,
+            284,
+            299
+        ],
+        "e_center": [
+            9980,
+            2838,
+            6100
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 125,
+        "center_y": 173,
+        "center_x": 151,
+        "l_center": [
+            125,
+            173,
+            151
+        ],
+        "e_center": [
+            10071,
+            2727,
+            5952
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 28,
+        "center_y": 98,
+        "center_x": 35,
+        "l_center": [
+            28,
+            98,
+            35
+        ],
+        "e_center": [
+            9974,
+            2652,
+            5836
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 294,
+        "center_y": 94,
+        "center_x": 17,
+        "l_center": [
+            294,
+            94,
+            17
+        ],
+        "e_center": [
+            10240,
+            2648,
+            5818
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 166,
+        "center_y": 296,
+        "center_x": 65,
+        "l_center": [
+            166,
+            296,
+            65
+        ],
+        "e_center": [
+            10112,
+            2850,
+            5866
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 286,
+        "center_y": 157,
+        "center_x": 248,
+        "l_center": [
+            286,
+            157,
+            248
+        ],
+        "e_center": [
+            10232,
+            2711,
+            6049
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 219,
+        "center_y": 298,
+        "center_x": 284,
+        "l_center": [
+            219,
+            298,
+            284
+        ],
+        "e_center": [
+            10165,
+            2852,
+            6085
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 246,
+        "center_y": 28,
+        "center_x": 260,
+        "l_center": [
+            246,
+            28,
+            260
+        ],
+        "e_center": [
+            10192,
+            2582,
+            6061
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 196,
+        "center_y": 160,
+        "center_x": 36,
+        "l_center": [
+            196,
+            160,
+            36
+        ],
+        "e_center": [
+            10142,
+            2714,
+            5837
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 36,
+        "center_y": 239,
+        "center_x": 202,
+        "l_center": [
+            36,
+            239,
+            202
+        ],
+        "e_center": [
+            9982,
+            2793,
+            6003
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 140,
+        "center_y": 123,
+        "center_x": 275,
+        "l_center": [
+            140,
+            123,
+            275
+        ],
+        "e_center": [
+            10086,
+            2677,
+            6076
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 179,
+        "center_y": 17,
+        "center_x": 153,
+        "l_center": [
+            179,
+            17,
+            153
+        ],
+        "e_center": [
+            10125,
+            2571,
+            5954
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 169,
+        "center_y": 0,
+        "center_x": 0,
+        "l_center": [
+            169,
+            0,
+            0
+        ],
+        "e_center": [
+            10115,
+            2554,
+            5801
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves",
+        "center_z": 14,
+        "center_y": 279,
+        "center_x": 64,
+        "l_center": [
+            14,
+            279,
+            64
+        ],
+        "e_center": [
+            9960,
+            2833,
+            5865
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 172,
+        "center_y": 289,
+        "center_x": 197,
+        "l_center": [
+            172,
+            289,
+            197
+        ],
+        "e_center": [
+            10118,
+            2843,
+            5998
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 48,
+        "center_y": 170,
+        "center_x": 242,
+        "l_center": [
+            48,
+            170,
+            242
+        ],
+        "e_center": [
+            9994,
+            2724,
+            6043
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 243,
+        "center_y": 21,
+        "center_x": 11,
+        "l_center": [
+            243,
+            21,
+            11
+        ],
+        "e_center": [
+            10189,
+            2575,
+            5812
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 226,
+        "center_y": 7,
+        "center_x": 259,
+        "l_center": [
+            226,
+            7,
+            259
+        ],
+        "e_center": [
+            10172,
+            2561,
+            6060
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 282,
+        "center_y": 237,
+        "center_x": 35,
+        "l_center": [
+            282,
+            237,
+            35
+        ],
+        "e_center": [
+            10228,
+            2791,
+            5836
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 199,
+        "center_y": 149,
+        "center_x": 219,
+        "l_center": [
+            199,
+            149,
+            219
+        ],
+        "e_center": [
+            10145,
+            2703,
+            6020
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 58,
+        "center_y": 268,
+        "center_x": 100,
+        "l_center": [
+            58,
+            268,
+            100
+        ],
+        "e_center": [
+            10004,
+            2822,
+            5901
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 293,
+        "center_y": 166,
+        "center_x": 137,
+        "l_center": [
+            293,
+            166,
+            137
+        ],
+        "e_center": [
+            10239,
+            2720,
+            5938
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 73,
+        "center_y": 27,
+        "center_x": 132,
+        "l_center": [
+            73,
+            27,
+            132
+        ],
+        "e_center": [
+            10019,
+            2581,
+            5933
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 59,
+        "center_y": 46,
+        "center_x": 6,
+        "l_center": [
+            59,
+            46,
+            6
+        ],
+        "e_center": [
+            10005,
+            2600,
+            5807
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 284,
+        "center_y": 196,
+        "center_x": 297,
+        "l_center": [
+            284,
+            196,
+            297
+        ],
+        "e_center": [
+            10230,
+            2750,
+            6098
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 101,
+        "center_y": 53,
+        "center_x": 291,
+        "l_center": [
+            101,
+            53,
+            291
+        ],
+        "e_center": [
+            10047,
+            2607,
+            6092
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 16,
+        "center_y": 174,
+        "center_x": 33,
+        "l_center": [
+            16,
+            174,
+            33
+        ],
+        "e_center": [
+            9962,
+            2728,
+            5834
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 160,
+        "center_y": 293,
+        "center_x": 22,
+        "l_center": [
+            160,
+            293,
+            22
+        ],
+        "e_center": [
+            10106,
+            2847,
+            5823
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "cyto",
+        "center_z": 200,
+        "center_y": 145,
+        "center_x": 29,
+        "l_center": [
+            200,
+            145,
+            29
+        ],
+        "e_center": [
+            10146,
+            2699,
+            5830
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 81,
+        "center_y": 294,
+        "center_x": 193,
+        "l_center": [
+            81,
+            294,
+            193
+        ],
+        "e_center": [
+            10027,
+            2848,
+            5994
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 180,
+        "center_y": 148,
+        "center_x": 56,
+        "l_center": [
+            180,
+            148,
+            56
+        ],
+        "e_center": [
+            10126,
+            2702,
+            5857
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 45,
+        "center_y": 239,
+        "center_x": 56,
+        "l_center": [
+            45,
+            239,
+            56
+        ],
+        "e_center": [
+            9991,
+            2793,
+            5857
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 268,
+        "center_y": 275,
+        "center_x": 210,
+        "l_center": [
+            268,
+            275,
+            210
+        ],
+        "e_center": [
+            10214,
+            2829,
+            6011
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 244,
+        "center_y": 149,
+        "center_x": 176,
+        "l_center": [
+            244,
+            149,
+            176
+        ],
+        "e_center": [
+            10190,
+            2703,
+            5977
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 212,
+        "center_y": 272,
+        "center_x": 93,
+        "l_center": [
+            212,
+            272,
+            93
+        ],
+        "e_center": [
+            10158,
+            2826,
+            5894
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 95,
+        "center_y": 89,
+        "center_x": 270,
+        "l_center": [
+            95,
+            89,
+            270
+        ],
+        "e_center": [
+            10041,
+            2643,
+            6071
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 266,
+        "center_y": 45,
+        "center_x": 18,
+        "l_center": [
+            266,
+            45,
+            18
+        ],
+        "e_center": [
+            10212,
+            2599,
+            5819
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 202,
+        "center_y": 22,
+        "center_x": 169,
+        "l_center": [
+            202,
+            22,
+            169
+        ],
+        "e_center": [
+            10148,
+            2576,
+            5970
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 289,
+        "center_y": 290,
+        "center_x": 1,
+        "l_center": [
+            289,
+            290,
+            1
+        ],
+        "e_center": [
+            10235,
+            2844,
+            5802
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 61,
+        "center_y": 73,
+        "center_x": 83,
+        "l_center": [
+            61,
+            73,
+            83
+        ],
+        "e_center": [
+            10007,
+            2627,
+            5884
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 116,
+        "center_y": 218,
+        "center_x": 282,
+        "l_center": [
+            116,
+            218,
+            282
+        ],
+        "e_center": [
+            10062,
+            2772,
+            6083
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 289,
+        "center_y": 115,
+        "center_x": 295,
+        "l_center": [
+            289,
+            115,
+            295
+        ],
+        "e_center": [
+            10235,
+            2669,
+            6096
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ecs",
+        "center_z": 56,
+        "center_y": 7,
+        "center_x": 190,
+        "l_center": [
+            56,
+            7,
+            190
+        ],
+        "e_center": [
+            10002,
+            2561,
+            5991
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 214,
+        "center_y": 208,
+        "center_x": 37,
+        "l_center": [
+            214,
+            208,
+            37
+        ],
+        "e_center": [
+            10160,
+            2762,
+            5838
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 43,
+        "center_y": 47,
+        "center_x": 264,
+        "l_center": [
+            43,
+            47,
+            264
+        ],
+        "e_center": [
+            9989,
+            2601,
+            6065
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 87,
+        "center_y": 44,
+        "center_x": 97,
+        "l_center": [
+            87,
+            44,
+            97
+        ],
+        "e_center": [
+            10033,
+            2598,
+            5898
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 248,
+        "center_y": 62,
+        "center_x": 187,
+        "l_center": [
+            248,
+            62,
+            187
+        ],
+        "e_center": [
+            10194,
+            2616,
+            5988
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 188,
+        "center_y": 188,
+        "center_x": 286,
+        "l_center": [
+            188,
+            188,
+            286
+        ],
+        "e_center": [
+            10134,
+            2742,
+            6087
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 96,
+        "center_y": 259,
+        "center_x": 215,
+        "l_center": [
+            96,
+            259,
+            215
+        ],
+        "e_center": [
+            10042,
+            2813,
+            6016
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 251,
+        "center_y": 36,
+        "center_x": 69,
+        "l_center": [
+            251,
+            36,
+            69
+        ],
+        "e_center": [
+            10197,
+            2590,
+            5870
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 142,
+        "center_y": 295,
+        "center_x": 78,
+        "l_center": [
+            142,
+            295,
+            78
+        ],
+        "e_center": [
+            10088,
+            2849,
+            5879
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 16,
+        "center_y": 149,
+        "center_x": 40,
+        "l_center": [
+            16,
+            149,
+            40
+        ],
+        "e_center": [
+            9962,
+            2703,
+            5841
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 292,
+        "center_y": 152,
+        "center_x": 117,
+        "l_center": [
+            292,
+            152,
+            117
+        ],
+        "e_center": [
+            10238,
+            2706,
+            5918
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_lum",
+        "center_z": 109,
+        "center_y": 158,
+        "center_x": 144,
+        "l_center": [
+            109,
+            158,
+            144
+        ],
+        "e_center": [
+            10055,
+            2712,
+            5945
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 113,
+        "center_y": 277,
+        "center_x": 13,
+        "l_center": [
+            113,
+            277,
+            13
+        ],
+        "e_center": [
+            10059,
+            2831,
+            5814
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 220,
+        "center_y": 191,
+        "center_x": 61,
+        "l_center": [
+            220,
+            191,
+            61
+        ],
+        "e_center": [
+            10166,
+            2745,
+            5862
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 168,
+        "center_y": 165,
+        "center_x": 290,
+        "l_center": [
+            168,
+            165,
+            290
+        ],
+        "e_center": [
+            10114,
+            2719,
+            6091
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 33,
+        "center_y": 262,
+        "center_x": 211,
+        "l_center": [
+            33,
+            262,
+            211
+        ],
+        "e_center": [
+            9979,
+            2816,
+            6012
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 262,
+        "center_y": 40,
+        "center_x": 85,
+        "l_center": [
+            262,
+            40,
+            85
+        ],
+        "e_center": [
+            10208,
+            2594,
+            5886
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 44,
+        "center_y": 57,
+        "center_x": 234,
+        "l_center": [
+            44,
+            57,
+            234
+        ],
+        "e_center": [
+            9990,
+            2611,
+            6035
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 144,
+        "center_y": 61,
+        "center_x": 5,
+        "l_center": [
+            144,
+            61,
+            5
+        ],
+        "e_center": [
+            10090,
+            2615,
+            5806
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 0,
+        "center_y": 54,
+        "center_x": 68,
+        "l_center": [
+            0,
+            54,
+            68
+        ],
+        "e_center": [
+            9946,
+            2608,
+            5869
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 291,
+        "center_y": 27,
+        "center_x": 215,
+        "l_center": [
+            291,
+            27,
+            215
+        ],
+        "e_center": [
+            10237,
+            2581,
+            6016
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 136,
+        "center_y": 299,
+        "center_x": 141,
+        "l_center": [
+            136,
+            299,
+            141
+        ],
+        "e_center": [
+            10082,
+            2853,
+            5942
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 116,
+        "center_y": 159,
+        "center_x": 158,
+        "l_center": [
+            116,
+            159,
+            158
+        ],
+        "e_center": [
+            10062,
+            2713,
+            5959
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "endo_mem",
+        "center_z": 17,
+        "center_y": 218,
+        "center_x": 100,
+        "l_center": [
+            17,
+            218,
+            100
+        ],
+        "e_center": [
+            9963,
+            2772,
+            5901
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 212,
+        "center_y": 108,
+        "center_x": 137,
+        "l_center": [
+            212,
+            108,
+            137
+        ],
+        "e_center": [
+            10158,
+            2662,
+            5938
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 252,
+        "center_y": 151,
+        "center_x": 29,
+        "l_center": [
+            252,
+            151,
+            29
+        ],
+        "e_center": [
+            10198,
+            2705,
+            5830
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 63,
+        "center_y": 210,
+        "center_x": 161,
+        "l_center": [
+            63,
+            210,
+            161
+        ],
+        "e_center": [
+            10009,
+            2764,
+            5962
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 273,
+        "center_y": 279,
+        "center_x": 270,
+        "l_center": [
+            273,
+            279,
+            270
+        ],
+        "e_center": [
+            10219,
+            2833,
+            6071
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 131,
+        "center_y": 295,
+        "center_x": 42,
+        "l_center": [
+            131,
+            295,
+            42
+        ],
+        "e_center": [
+            10077,
+            2849,
+            5843
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 105,
+        "center_y": 6,
+        "center_x": 143,
+        "l_center": [
+            105,
+            6,
+            143
+        ],
+        "e_center": [
+            10051,
+            2560,
+            5944
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 136,
+        "center_y": 279,
+        "center_x": 277,
+        "l_center": [
+            136,
+            279,
+            277
+        ],
+        "e_center": [
+            10082,
+            2833,
+            6078
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 155,
+        "center_y": 132,
+        "center_x": 293,
+        "l_center": [
+            155,
+            132,
+            293
+        ],
+        "e_center": [
+            10101,
+            2686,
+            6094
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 5,
+        "center_y": 12,
+        "center_x": 39,
+        "l_center": [
+            5,
+            12,
+            39
+        ],
+        "e_center": [
+            9951,
+            2566,
+            5840
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 50,
+        "center_y": 70,
+        "center_x": 240,
+        "l_center": [
+            50,
+            70,
+            240
+        ],
+        "e_center": [
+            9996,
+            2624,
+            6041
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 218,
+        "center_y": 15,
+        "center_x": 277,
+        "l_center": [
+            218,
+            15,
+            277
+        ],
+        "e_center": [
+            10164,
+            2569,
+            6078
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 30,
+        "center_y": 131,
+        "center_x": 8,
+        "l_center": [
+            30,
+            131,
+            8
+        ],
+        "e_center": [
+            9976,
+            2685,
+            5809
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 277,
+        "center_y": 237,
+        "center_x": 117,
+        "l_center": [
+            277,
+            237,
+            117
+        ],
+        "e_center": [
+            10223,
+            2791,
+            5918
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_lum",
+        "center_z": 282,
+        "center_y": 130,
+        "center_x": 281,
+        "l_center": [
+            282,
+            130,
+            281
+        ],
+        "e_center": [
+            10228,
+            2684,
+            6082
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 220,
+        "center_y": 45,
+        "center_x": 128,
+        "l_center": [
+            220,
+            45,
+            128
+        ],
+        "e_center": [
+            10166,
+            2599,
+            5929
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 113,
+        "center_y": 113,
+        "center_x": 142,
+        "l_center": [
+            113,
+            113,
+            142
+        ],
+        "e_center": [
+            10059,
+            2667,
+            5943
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 279,
+        "center_y": 224,
+        "center_x": 59,
+        "l_center": [
+            279,
+            224,
+            59
+        ],
+        "e_center": [
+            10225,
+            2778,
+            5860
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 132,
+        "center_y": 239,
+        "center_x": 263,
+        "l_center": [
+            132,
+            239,
+            263
+        ],
+        "e_center": [
+            10078,
+            2793,
+            6064
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 11,
+        "center_y": 277,
+        "center_x": 206,
+        "l_center": [
+            11,
+            277,
+            206
+        ],
+        "e_center": [
+            9957,
+            2831,
+            6007
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 269,
+        "center_y": 281,
+        "center_x": 272,
+        "l_center": [
+            269,
+            281,
+            272
+        ],
+        "e_center": [
+            10215,
+            2835,
+            6073
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 140,
+        "center_y": 14,
+        "center_x": 14,
+        "l_center": [
+            140,
+            14,
+            14
+        ],
+        "e_center": [
+            10086,
+            2568,
+            5815
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 219,
+        "center_y": 16,
+        "center_x": 295,
+        "l_center": [
+            219,
+            16,
+            295
+        ],
+        "e_center": [
+            10165,
+            2570,
+            6096
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 99,
+        "center_y": 90,
+        "center_x": 275,
+        "l_center": [
+            99,
+            90,
+            275
+        ],
+        "e_center": [
+            10045,
+            2644,
+            6076
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 180,
+        "center_y": 265,
+        "center_x": 0,
+        "l_center": [
+            180,
+            265,
+            0
+        ],
+        "e_center": [
+            10126,
+            2819,
+            5801
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 6,
+        "center_y": 102,
+        "center_x": 25,
+        "l_center": [
+            6,
+            102,
+            25
+        ],
+        "e_center": [
+            9952,
+            2656,
+            5826
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 272,
+        "center_y": 131,
+        "center_x": 257,
+        "l_center": [
+            272,
+            131,
+            257
+        ],
+        "e_center": [
+            10218,
+            2685,
+            6058
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "er_mem",
+        "center_z": 283,
+        "center_y": 107,
+        "center_x": 5,
+        "l_center": [
+            283,
+            107,
+            5
+        ],
+        "e_center": [
+            10229,
+            2661,
+            5806
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_lum",
+        "center_z": 34,
+        "center_y": 291,
+        "center_x": 226,
+        "l_center": [
+            34,
+            291,
+            226
+        ],
+        "e_center": [
+            9980,
+            2845,
+            6027
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_lum",
+        "center_z": 257,
+        "center_y": 69,
+        "center_x": 214,
+        "l_center": [
+            257,
+            69,
+            214
+        ],
+        "e_center": [
+            10203,
+            2623,
+            6015
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_lum",
+        "center_z": 64,
+        "center_y": 142,
+        "center_x": 90,
+        "l_center": [
+            64,
+            142,
+            90
+        ],
+        "e_center": [
+            10010,
+            2696,
+            5891
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_lum",
+        "center_z": 149,
+        "center_y": 167,
+        "center_x": 244,
+        "l_center": [
+            149,
+            167,
+            244
+        ],
+        "e_center": [
+            10095,
+            2721,
+            6045
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_lum",
+        "center_z": 289,
+        "center_y": 1,
+        "center_x": 141,
+        "l_center": [
+            289,
+            1,
+            141
+        ],
+        "e_center": [
+            10235,
+            2555,
+            5942
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_mem",
+        "center_z": 296,
+        "center_y": 26,
+        "center_x": 155,
+        "l_center": [
+            296,
+            26,
+            155
+        ],
+        "e_center": [
+            10242,
+            2580,
+            5956
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_mem",
+        "center_z": 35,
+        "center_y": 276,
+        "center_x": 234,
+        "l_center": [
+            35,
+            276,
+            234
+        ],
+        "e_center": [
+            9981,
+            2830,
+            6035
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_mem",
+        "center_z": 134,
+        "center_y": 183,
+        "center_x": 229,
+        "l_center": [
+            134,
+            183,
+            229
+        ],
+        "e_center": [
+            10080,
+            2737,
+            6030
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_mem",
+        "center_z": 192,
+        "center_y": 14,
+        "center_x": 66,
+        "l_center": [
+            192,
+            14,
+            66
+        ],
+        "e_center": [
+            10138,
+            2568,
+            5867
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "lyso_mem",
+        "center_z": 269,
+        "center_y": 87,
+        "center_x": 230,
+        "l_center": [
+            269,
+            87,
+            230
+        ],
+        "e_center": [
+            10215,
+            2641,
+            6031
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 184,
+        "center_y": 37,
+        "center_x": 244,
+        "l_center": [
+            184,
+            37,
+            244
+        ],
+        "e_center": [
+            10130,
+            2591,
+            6045
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 2,
+        "center_y": 75,
+        "center_x": 272,
+        "l_center": [
+            2,
+            75,
+            272
+        ],
+        "e_center": [
+            9948,
+            2629,
+            6073
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 17,
+        "center_y": 4,
+        "center_x": 127,
+        "l_center": [
+            17,
+            4,
+            127
+        ],
+        "e_center": [
+            9963,
+            2558,
+            5928
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 148,
+        "center_y": 33,
+        "center_x": 108,
+        "l_center": [
+            148,
+            33,
+            108
+        ],
+        "e_center": [
+            10094,
+            2587,
+            5909
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 3,
+        "center_y": 187,
+        "center_x": 228,
+        "l_center": [
+            3,
+            187,
+            228
+        ],
+        "e_center": [
+            9949,
+            2741,
+            6029
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 285,
+        "center_y": 194,
+        "center_x": 1,
+        "l_center": [
+            285,
+            194,
+            1
+        ],
+        "e_center": [
+            10231,
+            2748,
+            5802
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 30,
+        "center_y": 147,
+        "center_x": 119,
+        "l_center": [
+            30,
+            147,
+            119
+        ],
+        "e_center": [
+            9976,
+            2701,
+            5920
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 132,
+        "center_y": 138,
+        "center_x": 206,
+        "l_center": [
+            132,
+            138,
+            206
+        ],
+        "e_center": [
+            10078,
+            2692,
+            6007
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 100,
+        "center_y": 210,
+        "center_x": 294,
+        "l_center": [
+            100,
+            210,
+            294
+        ],
+        "e_center": [
+            10046,
+            2764,
+            6095
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 287,
+        "center_y": 223,
+        "center_x": 115,
+        "l_center": [
+            287,
+            223,
+            115
+        ],
+        "e_center": [
+            10233,
+            2777,
+            5916
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_lum",
+        "center_z": 294,
+        "center_y": 1,
+        "center_x": 164,
+        "l_center": [
+            294,
+            1,
+            164
+        ],
+        "e_center": [
+            10240,
+            2555,
+            5965
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 14,
+        "center_y": 223,
+        "center_x": 190,
+        "l_center": [
+            14,
+            223,
+            190
+        ],
+        "e_center": [
+            9960,
+            2777,
+            5991
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 115,
+        "center_y": 204,
+        "center_x": 286,
+        "l_center": [
+            115,
+            204,
+            286
+        ],
+        "e_center": [
+            10061,
+            2758,
+            6087
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 104,
+        "center_y": 96,
+        "center_x": 162,
+        "l_center": [
+            104,
+            96,
+            162
+        ],
+        "e_center": [
+            10050,
+            2650,
+            5963
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 224,
+        "center_y": 60,
+        "center_x": 271,
+        "l_center": [
+            224,
+            60,
+            271
+        ],
+        "e_center": [
+            10170,
+            2614,
+            6072
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 299,
+        "center_y": 170,
+        "center_x": 11,
+        "l_center": [
+            299,
+            170,
+            11
+        ],
+        "e_center": [
+            10245,
+            2724,
+            5812
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 47,
+        "center_y": 15,
+        "center_x": 239,
+        "l_center": [
+            47,
+            15,
+            239
+        ],
+        "e_center": [
+            9993,
+            2569,
+            6040
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 27,
+        "center_y": 20,
+        "center_x": 101,
+        "l_center": [
+            27,
+            20,
+            101
+        ],
+        "e_center": [
+            9973,
+            2574,
+            5902
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 15,
+        "center_y": 131,
+        "center_x": 286,
+        "l_center": [
+            15,
+            131,
+            286
+        ],
+        "e_center": [
+            9961,
+            2685,
+            6087
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 134,
+        "center_y": 68,
+        "center_x": 49,
+        "l_center": [
+            134,
+            68,
+            49
+        ],
+        "e_center": [
+            10080,
+            2622,
+            5850
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 295,
+        "center_y": 1,
+        "center_x": 190,
+        "l_center": [
+            295,
+            1,
+            190
+        ],
+        "e_center": [
+            10241,
+            2555,
+            5991
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 7,
+        "center_y": 150,
+        "center_x": 87,
+        "l_center": [
+            7,
+            150,
+            87
+        ],
+        "e_center": [
+            9953,
+            2704,
+            5888
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 279,
+        "center_y": 222,
+        "center_x": 117,
+        "l_center": [
+            279,
+            222,
+            117
+        ],
+        "e_center": [
+            10225,
+            2776,
+            5918
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_mem",
+        "center_z": 176,
+        "center_y": 1,
+        "center_x": 158,
+        "l_center": [
+            176,
+            1,
+            158
+        ],
+        "e_center": [
+            10122,
+            2555,
+            5959
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_ribo",
+        "center_z": 3,
+        "center_y": 72,
+        "center_x": 283,
+        "l_center": [
+            3,
+            72,
+            283
+        ],
+        "e_center": [
+            9949,
+            2626,
+            6084
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_ribo",
+        "center_z": 10,
+        "center_y": 101,
+        "center_x": 162,
+        "l_center": [
+            10,
+            101,
+            162
+        ],
+        "e_center": [
+            9956,
+            2655,
+            5963
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_ribo",
+        "center_z": 8,
+        "center_y": 238,
+        "center_x": 289,
+        "l_center": [
+            8,
+            238,
+            289
+        ],
+        "e_center": [
+            9954,
+            2792,
+            6090
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_ribo",
+        "center_z": 192,
+        "center_y": 38,
+        "center_x": 263,
+        "l_center": [
+            192,
+            38,
+            263
+        ],
+        "e_center": [
+            10138,
+            2592,
+            6064
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_ribo",
+        "center_z": 152,
+        "center_y": 36,
+        "center_x": 96,
+        "l_center": [
+            152,
+            36,
+            96
+        ],
+        "e_center": [
+            10098,
+            2590,
+            5897
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_ribo",
+        "center_z": 96,
+        "center_y": 150,
+        "center_x": 278,
+        "l_center": [
+            96,
+            150,
+            278
+        ],
+        "e_center": [
+            10042,
+            2704,
+            6079
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_ribo",
+        "center_z": 43,
+        "center_y": 1,
+        "center_x": 59,
+        "l_center": [
+            43,
+            1,
+            59
+        ],
+        "e_center": [
+            9989,
+            2555,
+            5860
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "mito_ribo",
+        "center_z": 96,
+        "center_y": 7,
+        "center_x": 197,
+        "l_center": [
+            96,
+            7,
+            197
+        ],
+        "e_center": [
+            10042,
+            2561,
+            5998
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox_lum",
+        "center_z": 25,
+        "center_y": 99,
+        "center_x": 5,
+        "l_center": [
+            25,
+            99,
+            5
+        ],
+        "e_center": [
+            9971,
+            2653,
+            5806
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox_lum",
+        "center_z": 293,
+        "center_y": 250,
+        "center_x": 171,
+        "l_center": [
+            293,
+            250,
+            171
+        ],
+        "e_center": [
+            10239,
+            2804,
+            5972
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox_lum",
+        "center_z": 23,
+        "center_y": 297,
+        "center_x": 294,
+        "l_center": [
+            23,
+            297,
+            294
+        ],
+        "e_center": [
+            9969,
+            2851,
+            6095
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox_mem",
+        "center_z": 293,
+        "center_y": 233,
+        "center_x": 185,
+        "l_center": [
+            293,
+            233,
+            185
+        ],
+        "e_center": [
+            10239,
+            2787,
+            5986
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox_mem",
+        "center_z": 20,
+        "center_y": 94,
+        "center_x": 14,
+        "l_center": [
+            20,
+            94,
+            14
+        ],
+        "e_center": [
+            9966,
+            2648,
+            5815
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "perox_mem",
+        "center_z": 28,
+        "center_y": 284,
+        "center_x": 287,
+        "l_center": [
+            28,
+            284,
+            287
+        ],
+        "e_center": [
+            9974,
+            2838,
+            6088
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 219,
+        "center_y": 10,
+        "center_x": 248,
+        "l_center": [
+            219,
+            10,
+            248
+        ],
+        "e_center": [
+            10165,
+            2564,
+            6049
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 152,
+        "center_y": 159,
+        "center_x": 206,
+        "l_center": [
+            152,
+            159,
+            206
+        ],
+        "e_center": [
+            10098,
+            2713,
+            6007
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 134,
+        "center_y": 138,
+        "center_x": 20,
+        "l_center": [
+            134,
+            138,
+            20
+        ],
+        "e_center": [
+            10080,
+            2692,
+            5821
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 41,
+        "center_y": 67,
+        "center_x": 114,
+        "l_center": [
+            41,
+            67,
+            114
+        ],
+        "e_center": [
+            9987,
+            2621,
+            5915
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 179,
+        "center_y": 41,
+        "center_x": 138,
+        "l_center": [
+            179,
+            41,
+            138
+        ],
+        "e_center": [
+            10125,
+            2595,
+            5939
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 73,
+        "center_y": 285,
+        "center_x": 165,
+        "l_center": [
+            73,
+            285,
+            165
+        ],
+        "e_center": [
+            10019,
+            2839,
+            5966
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 184,
+        "center_y": 259,
+        "center_x": 66,
+        "l_center": [
+            184,
+            259,
+            66
+        ],
+        "e_center": [
+            10130,
+            2813,
+            5867
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 273,
+        "center_y": 176,
+        "center_x": 236,
+        "l_center": [
+            273,
+            176,
+            236
+        ],
+        "e_center": [
+            10219,
+            2730,
+            6037
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 207,
+        "center_y": 285,
+        "center_x": 255,
+        "l_center": [
+            207,
+            285,
+            255
+        ],
+        "e_center": [
+            10153,
+            2839,
+            6056
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 166,
+        "center_y": 10,
+        "center_x": 11,
+        "l_center": [
+            166,
+            10,
+            11
+        ],
+        "e_center": [
+            10112,
+            2564,
+            5812
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 49,
+        "center_y": 191,
+        "center_x": 269,
+        "l_center": [
+            49,
+            191,
+            269
+        ],
+        "e_center": [
+            9995,
+            2745,
+            6070
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 297,
+        "center_y": 104,
+        "center_x": 90,
+        "l_center": [
+            297,
+            104,
+            90
+        ],
+        "e_center": [
+            10243,
+            2658,
+            5891
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "pm",
+        "center_z": 4,
+        "center_y": 164,
+        "center_x": 16,
+        "l_center": [
+            4,
+            164,
+            16
+        ],
+        "e_center": [
+            9950,
+            2718,
+            5817
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 125,
+        "center_y": 170,
+        "center_x": 151,
+        "l_center": [
+            125,
+            170,
+            151
+        ],
+        "e_center": [
+            10071,
+            2724,
+            5952
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 48,
+        "center_y": 155,
+        "center_x": 45,
+        "l_center": [
+            48,
+            155,
+            45
+        ],
+        "e_center": [
+            9994,
+            2709,
+            5846
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 157,
+        "center_y": 112,
+        "center_x": 276,
+        "l_center": [
+            157,
+            112,
+            276
+        ],
+        "e_center": [
+            10103,
+            2666,
+            6077
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 293,
+        "center_y": 93,
+        "center_x": 8,
+        "l_center": [
+            293,
+            93,
+            8
+        ],
+        "e_center": [
+            10239,
+            2647,
+            5809
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 154,
+        "center_y": 268,
+        "center_x": 22,
+        "l_center": [
+            154,
+            268,
+            22
+        ],
+        "e_center": [
+            10100,
+            2822,
+            5823
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 290,
+        "center_y": 73,
+        "center_x": 148,
+        "l_center": [
+            290,
+            73,
+            148
+        ],
+        "e_center": [
+            10236,
+            2627,
+            5949
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 160,
+        "center_y": 69,
+        "center_x": 25,
+        "l_center": [
+            160,
+            69,
+            25
+        ],
+        "e_center": [
+            10106,
+            2623,
+            5826
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 248,
+        "center_y": 236,
+        "center_x": 143,
+        "l_center": [
+            248,
+            236,
+            143
+        ],
+        "e_center": [
+            10194,
+            2790,
+            5944
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 139,
+        "center_y": 231,
+        "center_x": 294,
+        "l_center": [
+            139,
+            231,
+            294
+        ],
+        "e_center": [
+            10085,
+            2785,
+            6095
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 50,
+        "center_y": 46,
+        "center_x": 150,
+        "l_center": [
+            50,
+            46,
+            150
+        ],
+        "e_center": [
+            9996,
+            2600,
+            5951
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 284,
+        "center_y": 258,
+        "center_x": 279,
+        "l_center": [
+            284,
+            258,
+            279
+        ],
+        "e_center": [
+            10230,
+            2812,
+            6080
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 282,
+        "center_y": 93,
+        "center_x": 280,
+        "l_center": [
+            282,
+            93,
+            280
+        ],
+        "e_center": [
+            10228,
+            2647,
+            6081
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_lum",
+        "center_z": 33,
+        "center_y": 241,
+        "center_x": 199,
+        "l_center": [
+            33,
+            241,
+            199
+        ],
+        "e_center": [
+            9979,
+            2795,
+            6000
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 230,
+        "center_y": 156,
+        "center_x": 76,
+        "l_center": [
+            230,
+            156,
+            76
+        ],
+        "e_center": [
+            10176,
+            2710,
+            5877
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 75,
+        "center_y": 105,
+        "center_x": 152,
+        "l_center": [
+            75,
+            105,
+            152
+        ],
+        "e_center": [
+            10021,
+            2659,
+            5953
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 216,
+        "center_y": 55,
+        "center_x": 174,
+        "l_center": [
+            216,
+            55,
+            174
+        ],
+        "e_center": [
+            10162,
+            2609,
+            5975
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 198,
+        "center_y": 277,
+        "center_x": 30,
+        "l_center": [
+            198,
+            277,
+            30
+        ],
+        "e_center": [
+            10144,
+            2831,
+            5831
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 142,
+        "center_y": 119,
+        "center_x": 276,
+        "l_center": [
+            142,
+            119,
+            276
+        ],
+        "e_center": [
+            10088,
+            2673,
+            6077
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 250,
+        "center_y": 34,
+        "center_x": 60,
+        "l_center": [
+            250,
+            34,
+            60
+        ],
+        "e_center": [
+            10196,
+            2588,
+            5861
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 37,
+        "center_y": 268,
+        "center_x": 272,
+        "l_center": [
+            37,
+            268,
+            272
+        ],
+        "e_center": [
+            9983,
+            2822,
+            6073
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 9,
+        "center_y": 152,
+        "center_x": 53,
+        "l_center": [
+            9,
+            152,
+            53
+        ],
+        "e_center": [
+            9955,
+            2706,
+            5854
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 58,
+        "center_y": 282,
+        "center_x": 106,
+        "l_center": [
+            58,
+            282,
+            106
+        ],
+        "e_center": [
+            10004,
+            2836,
+            5907
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 257,
+        "center_y": 278,
+        "center_x": 293,
+        "l_center": [
+            257,
+            278,
+            293
+        ],
+        "e_center": [
+            10203,
+            2832,
+            6094
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 296,
+        "center_y": 200,
+        "center_x": 196,
+        "l_center": [
+            296,
+            200,
+            196
+        ],
+        "e_center": [
+            10242,
+            2754,
+            5997
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 88,
+        "center_y": 41,
+        "center_x": 11,
+        "l_center": [
+            88,
+            41,
+            11
+        ],
+        "e_center": [
+            10034,
+            2595,
+            5812
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    },
+    {
+        "dataset": "jrc_mus-kidney",
+        "crop": "crop129",
+        "em_scale": "s0",
+        "label_scale": "s0",
+        "resolution": [
+            8.0,
+            8.0,
+            8.0
+        ],
+        "class": "ves_mem",
+        "center_z": 280,
+        "center_y": 95,
+        "center_x": 278,
+        "l_center": [
+            280,
+            95,
+            278
+        ],
+        "e_center": [
+            10226,
+            2649,
+            6079
+        ],
+        "e_shape": [
+            128,
+            128,
+            128
+        ]
+    }
+]

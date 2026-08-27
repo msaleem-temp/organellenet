@@ -11,6 +11,8 @@ __pycache__/
 dist/
 build/
 *.egg
+.matplotlib-cache/*
+.matplotlib-cache/
 
 # ----- Training runs (large files) -----
 # Ignore checkpoints, logs, plots, and results inside runs/
@@ -80,5 +82,3 @@ paper/*.tex
 paper/*.pdf
 analysis/*
 
-.matplotlib-cache/*
-..matplotlib-cache
