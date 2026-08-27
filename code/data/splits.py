@@ -118,6 +118,8 @@ def prepare_splits(
     with open(test_path, "w") as f:
         json.dump(test_patches, f, indent=4)
 
+    total = len(train_patches) + len(val_patches) + len(test_patches)
+
     stats = {
         "total": total,
         "train": len(train_patches),
@@ -126,9 +128,9 @@ def prepare_splits(
     }
 
     print(f"Total Patches: {total}")
-    print(f"-> Train ({split_ratios[0]*100:.0f}%): {stats['train']}")
-    print(f"-> Val   ({split_ratios[1]*100:.0f}%): {stats['val']}")
-    print(f"-> Test  ({split_ratios[2]*100:.0f}%): {stats['test']}")
+    print(f"-> Train: {stats['train']}")
+    print(f"-> Val  : {stats['val']}")
+    print(f"-> Test : {stats['test']}")
 
     return {
         "train_path": train_path,
