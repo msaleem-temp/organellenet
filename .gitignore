@@ -79,3 +79,6 @@ paper/*
 paper/*.tex
 paper/*.pdf
 analysis/*
+
+.matplotlib-cache/*
+..matplotlib-cache
