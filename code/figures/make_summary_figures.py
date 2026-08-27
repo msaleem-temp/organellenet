@@ -70,7 +70,7 @@ def plot_summary(rows):
     ax.set_xlabel("Score")
     ax.set_xlim(0, max(max(miou), max(mdice)) * 1.18)
     ax.set_yticks(y)
-    ax.set_yticklabels(labels, fontsize=8)
+    ax.set_yticklabels(labels, fontsize=20)
     ax.invert_yaxis()
     ax.grid(axis="x", color="0.88", linewidth=0.8)
     ax.set_axisbelow(True)

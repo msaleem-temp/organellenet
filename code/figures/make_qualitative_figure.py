@@ -46,6 +46,11 @@ DEFAULT_MODELS = [
     "Latest Fixed p128|configs/latest_unet_fixed.yaml|runs/latest-unet-14cls-fixed/ckpts/best_model.pth|128",
 ]
 
+TITLE_FONTSIZE = 24
+SLICE_LABEL_FONTSIZE = 22
+LEGEND_FONTSIZE = 20
+LEGEND_TITLE_FONTSIZE = 22
+
 
 class ConditionedResolutionWrapper(torch.nn.Module):
     """Append constant resolution channels for scale-conditioned inference."""
@@ -243,14 +248,18 @@ def make_figure(args):
     fig, axes = plt.subplots(
         n_rows,
         n_cols,
-        figsize=(2.55 * n_cols, 2.55 * n_rows + 0.75),
+        figsize=(3.25 * n_cols, 3.25 * n_rows + 1.35),
         squeeze=False,
     )
 
     for row, z in enumerate(slices):
         axes[row, 0].imshow(normalize_em_slice(em_volume[z]), cmap="gray")
-        axes[row, 0].set_ylabel(f"z={z}", fontsize=9)
-        axes[row, 0].set_title("Raw EM" if row == 0 else "", fontsize=9)
+        axes[row, 0].set_ylabel(f"z={z}", fontsize=SLICE_LABEL_FONTSIZE)
+        axes[row, 0].set_title(
+            "Raw EM" if row == 0 else "",
+            fontsize=TITLE_FONTSIZE,
+            pad=10,
+        )
         axes[row, 0].set_xticks([])
         axes[row, 0].set_yticks([])
 
@@ -261,7 +270,11 @@ def make_figure(args):
             vmax=max_classes - 1,
             interpolation="nearest",
         )
-        axes[row, 1].set_title("Ground truth" if row == 0 else "", fontsize=9)
+        axes[row, 1].set_title(
+            "Ground truth" if row == 0 else "",
+            fontsize=TITLE_FONTSIZE,
+            pad=10,
+        )
         axes[row, 1].axis("off")
 
         for col, (label, pred) in enumerate(predictions, start=2):
@@ -272,7 +285,11 @@ def make_figure(args):
                 vmax=max_classes - 1,
                 interpolation="nearest",
             )
-            axes[row, col].set_title(label if row == 0 else "", fontsize=9)
+            axes[row, col].set_title(
+                label if row == 0 else "",
+                fontsize=TITLE_FONTSIZE,
+                pad=10,
+            )
             axes[row, col].axis("off")
 
     gt_visible_classes = sorted(
@@ -316,18 +333,18 @@ def make_figure(args):
             loc="lower center",
             ncol=min(len(legend_handles), 5),
             frameon=False,
-            fontsize=8,
+            fontsize=LEGEND_FONTSIZE,
             title="Classes visible in selected slices",
-            title_fontsize=9,
+            title_fontsize=LEGEND_TITLE_FONTSIZE,
         )
 
     fig.subplots_adjust(
         left=0.02,
         right=0.995,
         top=0.92,
-        bottom=0.12 if legend_handles else 0.03,
-        wspace=0.025,
-        hspace=0.04,
+        bottom=0.20 if legend_handles else 0.03,
+        wspace=0.035,
+        hspace=0.08,
     )
 
     out_dir = ROOT / args.output_dir
