@@ -72,3 +72,10 @@ results/
 results_analysis.md
 runs/*/run_meta.txt
 runs/saleem_results.pdf
+
+#--- Paper artefacts ---
+paper/
+paper/*
+paper/*.tex
+paper/*.pdf
+analysis/*

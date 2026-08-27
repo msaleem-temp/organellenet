@@ -152,7 +152,22 @@ class SegmentationEvaluator:
         }
 
 
-def run_evaluation(model, test_loader, num_classes, device, class_names=None):
+def decode_segmentation_output(output, target_type="labels", sdt_threshold=0.0):
+    """Decode label logits or SDT regression channels to class indices."""
+    if target_type != "sdt":
+        return torch.argmax(output, dim=1)
+
+    foreground_scores = output[:, 1:]
+    best_scores, best_classes = torch.max(foreground_scores, dim=1)
+    pred = torch.zeros_like(best_classes, dtype=torch.long)
+    pred[best_scores > sdt_threshold] = best_classes[best_scores > sdt_threshold] + 1
+    return pred
+
+
+def run_evaluation(
+    model, test_loader, num_classes, device, class_names=None,
+    target_type="labels", sdt_threshold=0.0
+):
     """
     Run evaluation on a test set and print results.
 
@@ -183,7 +198,9 @@ def run_evaluation(model, test_loader, num_classes, device, class_names=None):
             lbl_batch = lbl_batch.to(device)
 
             outputs = model(em_batch)
-            predicted_batch = torch.argmax(outputs, dim=1)
+            predicted_batch = decode_segmentation_output(
+                outputs, target_type=target_type, sdt_threshold=sdt_threshold
+            )
 
             evaluator.update(predicted_batch, lbl_batch)
 
@@ -218,6 +235,7 @@ def run_evaluation(model, test_loader, num_classes, device, class_names=None):
     print(f"Mean HD95:      {np.mean(metrics['hd95'][1:]):.4f}")
 
     return metrics
+
 
 
 def save_metrics_to_file(metrics, class_names, output_path):

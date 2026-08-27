@@ -45,6 +45,25 @@ from code.models.unet import build_model, get_raw_model
 from code.evaluation.evaluator import compute_hd95
 
 
+def decode_predictions(output, config, sdt_threshold=0.0):
+    """
+    Convert model outputs to categorical labels for evaluation.
+
+    Label models emit class logits and are decoded with argmax. SDT models emit
+    one signed-distance channel per class, so foreground is decoded from the
+    zero level set and overlapping positives are resolved by the largest score.
+    """
+    if getattr(config.data, "target_type", "labels") != "sdt":
+        return torch.argmax(output, dim=1)
+
+    scores = output.squeeze(0)
+    foreground_scores = scores[1:]
+    best_scores, best_classes = torch.max(foreground_scores, dim=0)
+    pred = torch.zeros_like(best_classes, dtype=torch.long)
+    pred[best_scores > sdt_threshold] = best_classes[best_scores > sdt_threshold] + 1
+    return pred.unsqueeze(0)
+
+
 def compute_per_class_metrics(pred, target, num_classes):
     """
     Compute per-class IoU and Dice for a single 3D patch.
@@ -133,6 +152,8 @@ def parse_args():
                         help="Evaluate only the first N patches (for debugging)")
     parser.add_argument("--name", type=str, default=None, help="Override experiment name")
     parser.add_argument("--patch-dim", type=int, default=None, help="Override patch dim")
+    parser.add_argument("--sdt-threshold", type=float, default=0.0,
+                        help="Zero-level threshold for SDT foreground decoding")
     return parser.parse_args()
 
 
@@ -211,7 +232,9 @@ def main():
                 # Forward pass
                 em_batch = em_tensor.unsqueeze(0).to(device)
                 output = model(em_batch)
-                pred = torch.argmax(output, dim=1).squeeze(0).cpu().numpy()
+                pred = decode_predictions(
+                    output, config, sdt_threshold=args.sdt_threshold
+                ).squeeze(0).cpu().numpy()
                 target = lbl_tensor.numpy()
 
                 # Per-class metrics for this patch
@@ -253,6 +276,16 @@ def main():
                     "patch_class": metadata.get("class"),
                     "em_scale": metadata.get("em_scale"),
                     "label_scale": metadata.get("label_scale"),
+                    "prediction_decode": (
+                        "sdt_zero_level_set"
+                        if getattr(config.data, "target_type", "labels") == "sdt"
+                        else "argmax_logits"
+                    ),
+                    "sdt_threshold": (
+                        args.sdt_threshold
+                        if getattr(config.data, "target_type", "labels") == "sdt"
+                        else None
+                    ),
                     "per_class_iou": iou_named,
                     "per_class_dice": dice_named,
                     "per_class_hd95": hd95_named,

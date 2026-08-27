@@ -96,6 +96,7 @@ def main():
         num_classes=config.data.num_classes,
         device=device,
         class_names=config.class_names,
+        target_type=config.data.target_type,
     )
 
     # 6. Save results

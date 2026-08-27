@@ -85,6 +85,12 @@ def compute_global_dataset_metrics(records, classes):
             np.mean(recs) if recs else 0.0, 
             np.mean(f1s) if f1s else 0.0)
 
+
+def has_cross_resolution_support(records):
+    """Return True only when at least two resolution bands have evidence."""
+    bands = {get_resolution_band(r.get("resolution", [])) for r in records}
+    return len(bands) >= 2
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate CSV tables")
     parser.add_argument("--inputs", nargs="+", required=True)
@@ -188,7 +194,7 @@ def main():
     out_path = os.path.join(args.output_dir, "per_resolution_band.csv")
     with open(out_path, "w", newline="") as f:
         writer = csv.writer(f)
-        header = ["Resolution Band", "N patches"]
+        header = ["Resolution Band", "N patches", "Evidence Status"]
         for label in args.labels:
             header.extend([f"{label} mIoU", f"{label} mDice"])
         writer.writerow(header)
@@ -198,16 +204,42 @@ def main():
             first_label = args.labels[0]
             band_patches = [r for r in all_results[first_label] if get_resolution_band(r.get("resolution", [])) == band]
             row.append(str(len(band_patches)))
+            row.append("evaluated" if band_patches else "not evaluated")
 
             for label in args.labels:
                 band_records = [r for r in all_results[label] if get_resolution_band(r.get("resolution", [])) == band]
                 if not band_records:
-                    row.extend(["N/A", "N/A"])
+                    row.extend(["N/E", "N/E"])
                     continue
                 miou, mdice, _, _, _ = compute_global_dataset_metrics(band_records, sorted_classes)
                 row.append(f"{miou:.4f}")
                 row.append(f"{mdice:.4f}")
             writer.writerow(row)
+
+    print("Generating resolution_band_support.csv ...")
+    out_path = os.path.join(args.output_dir, "resolution_band_support.csv")
+    with open(out_path, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "Model", "Fine patches", "Medium patches", "Coarse patches",
+            "Resolution-augmentation claim supported?"
+        ])
+        for label in args.labels:
+            records = all_results[label]
+            counts = {
+                band: len([
+                    r for r in records
+                    if get_resolution_band(r.get("resolution", [])) == band
+                ])
+                for band in bands
+            }
+            writer.writerow([
+                label,
+                counts["fine"],
+                counts["medium"],
+                counts["coarse"],
+                "yes" if has_cross_resolution_support(records) else "no",
+            ])
 
     # Table 4: Resolution × Class Heatmap
     print("Generating resolution_x_class.csv ...")
@@ -224,7 +256,7 @@ def main():
             row = [band_labels_map[band], str(len(band_records))]
             for cls in sorted_classes:
                 iou, _, _, _, _ = compute_global_class_metrics(band_records, cls)
-                row.append(f"{iou:.4f}" if iou is not None else "N/A")
+                row.append(f"{iou:.4f}" if iou is not None else "N/E")
             writer.writerow(row)
 
     # Table 4b: Resolution × Class Heatmap Delta (Missing from rewrite)
@@ -252,7 +284,7 @@ def main():
                         delta = prop_iou - base_iou
                         row.append(f"{delta:+.4f}")
                     else:
-                        row.append("N/A")
+                        row.append("N/E")
                 writer.writerow(row)
         print(f"  → {out_path2}")
 
@@ -278,7 +310,12 @@ def main():
                 b_iou, _, _, _, _ = compute_global_dataset_metrics(band_records, sorted_classes)
                 band_ious[band] = b_iou if band_records else float("nan")
 
-            gap = band_ious.get("fine", 0) - band_ious.get("coarse", 0)
+            gap = float("nan")
+            if (
+                not np.isnan(band_ious.get("fine", float("nan")))
+                and not np.isnan(band_ious.get("coarse", float("nan")))
+            ):
+                gap = band_ious["fine"] - band_ious["coarse"]
 
             writer.writerow([
                 label,
