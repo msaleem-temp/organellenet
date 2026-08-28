@@ -409,13 +409,15 @@ scp organellenet_results.tar.gz your_local_machine:~/
 
 ---
 
-## 14. NewInML Matched Central 64³ ROI Evaluation
+## 14. NewInML Matched Anchor 64³ ROI Evaluation
 
 Use these commands for the final five-run NewInML paper tables. They evaluate
 the same 73 `jrc_cos7-1a/crop234` anchor records from `runs/global_splits/test.json`.
 The 64³ models are scored on their native 64³ patches. The 128³ models run
-with native 128³ patches, then metrics are computed only on the exact central
-64³ ROI.
+with native 128³ patches, then metrics are computed only on the exact 64³
+label-coordinate ROI that the native 64³ patch would use for the same anchor.
+This matters for anchors near crop boundaries, where the central 64³ crop of a
+clamped 128³ patch is not necessarily the same physical region.
 
 ```bash
 python code/evaluation/evaluate_detailed.py \

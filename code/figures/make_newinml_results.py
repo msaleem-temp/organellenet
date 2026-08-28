@@ -86,11 +86,29 @@ UNSUPPORTED_CLASSES = [
 ]
 
 
+def result_path(run, filename):
+    return ROOT / "runs" / run / "results" / filename
+
+
 def load_jsonl(run, filename):
-    path = ROOT / "runs" / run / "results" / filename
+    path = result_path(run, filename)
     with path.open() as f:
         return [json.loads(line) for line in f if line.strip()]
 
+
+def verify_inputs_exist(filename):
+    missing = [
+        result_path(run_info["run"], filename)
+        for run_info in RUNS
+        if not result_path(run_info["run"], filename).exists()
+    ]
+    if missing:
+        formatted = "\n".join(f"  - {path}" for path in missing)
+        raise FileNotFoundError(
+            f"Missing required NewInML result JSONL files:\n{formatted}\n"
+            "Run the matched-ROI evaluation commands for every retained model, "
+            "then rerun this table generator."
+        )
 
 def record_signature(record):
     return (
@@ -227,7 +245,7 @@ def assert_matched_roi(results):
         if result["total_voxels"] != expected_total:
             raise RuntimeError(
                 f"{run_info['run']} scored {result['total_voxels']} voxels; "
-                f"expected {expected_total} for 73 central 64^3 ROIs."
+                f"expected {expected_total} for 73 anchor-matched 64^3 ROIs."
             )
         if result["patch_size"] != 64:
             raise RuntimeError(
@@ -411,13 +429,14 @@ def parse_args():
     parser.add_argument(
         "--matched-roi",
         action="store_true",
-        help="Use matched-ROI output filenames and assert common central 64^3 scoring.",
+        help="Use matched-ROI output filenames and assert common anchor-matched 64^3 scoring.",
     )
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
+    verify_inputs_exist(args.input_filename)
     records_by_run = {
         run_info["run"]: load_jsonl(run_info["run"], args.input_filename)
         for run_info in RUNS

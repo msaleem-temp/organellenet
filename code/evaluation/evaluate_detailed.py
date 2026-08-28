@@ -134,17 +134,52 @@ def compute_per_class_metrics(pred, target, num_classes):
     }
 
 
-def central_crop_zyx(volume, crop_dim):
-    """Return the central crop from a [Z, Y, X] volume."""
-    if crop_dim is None:
-        return volume
+def clamped_label_start(metadata, label_shape, patch_dim):
+    """Return the clamped label-space start used by PatchDataset without jitter."""
+    l_center = np.array(metadata["l_center"], dtype=float)
+    base_l_start = np.floor(l_center - (patch_dim / 2.0)).astype(int)
+    max_l_start = np.maximum(np.array(label_shape) - patch_dim, 0)
+    return np.clip(base_l_start, 0, max_l_start).astype(int)
+
+
+def matched_score_slices(test_dataset, idx, native_patch_dim, score_roi_dim):
+    """
+    Slice a native prediction/target to the same label-space ROI as a native
+    score_roi_dim patch for this anchor.
+    """
+    metadata = test_dataset.get_patch_metadata(idx)
+    _, label_zarr = test_dataset._get_zarr_handles(
+        metadata["dataset"],
+        metadata["crop"],
+        metadata["em_scale"],
+        metadata["label_scale"],
+    )
+    native_start = clamped_label_start(metadata, label_zarr.shape, native_patch_dim)
+    score_start = clamped_label_start(metadata, label_zarr.shape, score_roi_dim)
+    offset = score_start - native_start
+
+    if np.any(offset < 0) or np.any(offset + score_roi_dim > native_patch_dim):
+        raise ValueError(
+            "Matched ROI is outside the native patch: "
+            f"idx={idx}, native_start={native_start.tolist()}, "
+            f"score_start={score_start.tolist()}, offset={offset.tolist()}, "
+            f"native_patch_dim={native_patch_dim}, score_roi_dim={score_roi_dim}"
+        )
+
+    z0, y0, x0 = offset.tolist()
+    slices = (
+        slice(z0, z0 + score_roi_dim),
+        slice(y0, y0 + score_roi_dim),
+        slice(x0, x0 + score_roi_dim),
+    )
+    return slices, native_start.tolist(), score_start.tolist(), offset.tolist()
+
+
+def crop_zyx(volume, slices):
+    """Return a [Z, Y, X] crop using precomputed slices."""
     if volume.ndim != 3:
         raise ValueError(f"Expected [Z, Y, X] volume, got shape {volume.shape}")
-    if any(size < crop_dim for size in volume.shape):
-        raise ValueError(f"Cannot crop {volume.shape} to {crop_dim}^3")
-    starts = [(size - crop_dim) // 2 for size in volume.shape]
-    z0, y0, x0 = starts
-    return volume[z0 : z0 + crop_dim, y0 : y0 + crop_dim, x0 : x0 + crop_dim]
+    return volume[slices]
 
 
 def parse_args():
@@ -169,7 +204,11 @@ def parse_args():
         "--score-roi-dim",
         type=int,
         default=None,
-        help="If set, compute metrics only on the central score-roi-dim^3 ROI.",
+        help=(
+            "If set, compute metrics on the anchor-matched score-roi-dim^3 ROI. "
+            "For larger native patches, this crops the same label-coordinate "
+            "region that a native score-roi-dim patch would load."
+        ),
     )
     parser.add_argument("--sdt-threshold", type=float, default=0.0,
                         help="Zero-level threshold for SDT foreground decoding")
@@ -196,7 +235,7 @@ def main():
     print(
         "Score ROI: "
         + (
-            f"central {args.score_roi_dim}^3"
+            f"anchor-matched {args.score_roi_dim}^3"
             if args.score_roi_dim is not None
             else "full native patch"
         )
@@ -266,9 +305,23 @@ def main():
                 ).squeeze(0).cpu().numpy()
                 target = lbl_tensor.numpy()
                 native_patch_shape = list(target.shape)
+                native_patch_start_label = None
+                score_roi_start_label = None
+                score_roi_offset = None
                 if args.score_roi_dim is not None:
-                    pred = central_crop_zyx(pred, args.score_roi_dim)
-                    target = central_crop_zyx(target, args.score_roi_dim)
+                    (
+                        score_slices,
+                        native_patch_start_label,
+                        score_roi_start_label,
+                        score_roi_offset,
+                    ) = matched_score_slices(
+                        test_dataset,
+                        idx,
+                        native_patch_dim=config.data.patch_dim,
+                        score_roi_dim=args.score_roi_dim,
+                    )
+                    pred = crop_zyx(pred, score_slices)
+                    target = crop_zyx(target, score_slices)
 
                 # Per-class metrics for this patch
                 patch_metrics = compute_per_class_metrics(pred, target, num_classes)
@@ -311,8 +364,11 @@ def main():
                     "label_scale": metadata.get("label_scale"),
                     "native_patch_shape": native_patch_shape,
                     "score_roi_shape": list(target.shape),
+                    "native_patch_start_label": native_patch_start_label,
+                    "score_roi_start_label": score_roi_start_label,
+                    "score_roi_offset": score_roi_offset,
                     "score_roi": (
-                        "central"
+                        "anchor_matched"
                         if args.score_roi_dim is not None
                         else "full_patch"
                     ),
