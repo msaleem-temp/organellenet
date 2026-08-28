@@ -29,17 +29,33 @@ DEFAULT_CLASSES = [
 ]
 
 DEFAULT_MODELS = [
-    "Static (p128)",
-    "Dynamic (p128)",
-    "Latest (p128)",
-    "Latest Fixed (p128)",
+    {"source_name": "Static (p128)", "display_name": "13-class static"},
+    {"source_name": "Dynamic (p128)", "display_name": "13-class jitter"},
+    {"source_name": "Latest (p128)", "display_name": "14-class + jitter"},
+    {
+        "source_name": "Latest Fixed (p128)",
+        "display_name": "14-class + ER/Golgi fix",
+    },
 ]
+
+AXIS_FONTSIZE = 20
+RADIUS_FONTSIZE = 20
+LEGEND_FONTSIZE = 20
 
 
 def to_float(value):
     if value in {"", "N/A", None}:
         return np.nan
     return float(value)
+
+
+def parse_model_spec(spec):
+    if isinstance(spec, dict):
+        return spec["source_name"], spec["display_name"]
+    parts = spec.split("|", maxsplit=1)
+    if len(parts) == 1:
+        return spec, spec
+    return parts[0], parts[1]
 
 
 def load_values(path, classes, models, metric):
@@ -49,9 +65,10 @@ def load_values(path, classes, models, metric):
             rows[row["Class"]] = row
 
     values = {}
-    for model in models:
-        col = f"{model} {metric}"
-        values[model] = [to_float(rows[cls].get(col)) for cls in classes]
+    for spec in models:
+        csv_model, display_model = parse_model_spec(spec)
+        col = f"{csv_model} {metric}"
+        values[display_model] = [to_float(rows[cls].get(col)) for cls in classes]
     return values
 
 
@@ -60,7 +77,7 @@ def plot_radar(values, classes, output_dir, output_name, metric):
     angles = np.linspace(0, 2 * math.pi, n, endpoint=False).tolist()
     angles += angles[:1]
 
-    fig, ax = plt.subplots(figsize=(4.6, 4.2), subplot_kw={"polar": True})
+    fig, ax = plt.subplots(figsize=(10.5, 9.5), subplot_kw={"polar": True})
 
     colors = ["#315c73", "#c77b32", "#6f8f3a", "#8d4f73", "#5b6fa8"]
     for idx, (model, vals) in enumerate(values.items()):
@@ -69,20 +86,29 @@ def plot_radar(values, classes, output_dir, output_name, metric):
         ax.fill(angles, closed, color=colors[idx % len(colors)], alpha=0.08)
 
     ax.set_xticks(angles[:-1])
-    ax.set_xticklabels(classes, fontsize=8)
+    ax.set_xticklabels(classes, fontsize=AXIS_FONTSIZE)
+    ax.tick_params(axis="x", pad=18)
+    ax.tick_params(axis="y", pad=10)
     ax.set_ylim(0, 1.0)
     ax.set_yticks([0.25, 0.50, 0.75, 1.00])
-    ax.set_yticklabels(["0.25", "0.50", "0.75", "1.00"], fontsize=7)
+    ax.set_yticklabels(["0.25", "0.50", "0.75", "1.00"], fontsize=RADIUS_FONTSIZE)
     ax.grid(color="0.82", linewidth=0.7)
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, -0.28), ncol=2, frameon=False, fontsize=8)
+    ax.legend(
+        loc="lower center",
+        bbox_to_anchor=(0.5, -0.22),
+        ncol=2,
+        frameon=False,
+        fontsize=LEGEND_FONTSIZE,
+    )
+    fig.subplots_adjust(left=0.14, right=0.86, top=0.90, bottom=0.28)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     for ext in ("png", "pdf", "svg"):
         path = output_dir / f"{output_name}.{ext}"
         if ext == "png":
-            fig.savefig(path, dpi=300, bbox_inches="tight")
+            fig.savefig(path, dpi=300, bbox_inches="tight", pad_inches=0.35)
         else:
-            fig.savefig(path, bbox_inches="tight")
+            fig.savefig(path, bbox_inches="tight", pad_inches=0.35)
         print(f"Wrote {path}")
     plt.close(fig)
 

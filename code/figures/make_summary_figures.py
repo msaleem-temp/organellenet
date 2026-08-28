@@ -22,20 +22,20 @@ import matplotlib.pyplot as plt
 
 
 DISPLAY_LABELS = {
-    "Dynamic (p128)": "Dynamic jitter, 128-voxel patches",
-    "Static (p128)": "Static anchors, 128-voxel patches",
-    "Static (p128, valdice)": "Static anchors, 128-voxel validation-Dice checkpoint",
-    "Latest (p128)": "Latest 14-class model, 128-voxel patches",
-    "Scale Conditioned": "Scale-conditioned model, 128-voxel patches",
-    "Latest Fixed (p128)": "Corrected-label model, 128-voxel patches",
-    "Latest+EM (p128)": "EM augmentation, 128-voxel patches",
-    "Latest (p64)": "Latest 14-class model, 64-voxel patches",
-    "Latest+Res (p128)": "Resolution augmentation, 128-voxel patches",
-    "SDT Baseline": "Signed-distance target, 128-voxel patches",
-    "Latest+EM (p64)": "EM augmentation, 64-voxel patches",
-    "Latest+Res (p64)": "Resolution augmentation, 64-voxel patches",
-    "Static (p64, valdice)": "Static anchors, 64-voxel validation-Dice checkpoint",
-    "Static (p64)": "Static anchors, 64-voxel patches",
+    "Dynamic (p128)": "13-class jitter, 128-voxel patches",
+    "Static (p128)": "13-class static, 128-voxel patches",
+    "Static (p128, valdice)": "13-class static, 128-voxel validation-Dice checkpoint",
+    "Latest (p128)": "14-class + jitter, 128-voxel patches",
+    "Scale Conditioned": "14-class + EM aug. + scale channels, 128-voxel patches",
+    "Latest Fixed (p128)": "14-class + corrected ER/Golgi sampling, 128-voxel patches",
+    "Latest+EM (p128)": "14-class + EM aug., 128-voxel patches",
+    "Latest (p64)": "14-class + jitter, 64-voxel patches",
+    "Latest+Res (p128)": "14-class + EM/resolution aug., 128-voxel patches",
+    "SDT Baseline": "14-class signed-distance target, 64-voxel patches",
+    "Latest+EM (p64)": "14-class + EM aug., 64-voxel patches",
+    "Latest+Res (p64)": "14-class + EM/resolution aug., 64-voxel patches",
+    "Static (p64, valdice)": "13-class static, 64-voxel validation-Dice checkpoint",
+    "Static (p64)": "13-class static, 64-voxel patches",
 }
 
 
@@ -64,7 +64,7 @@ def plot_summary(rows):
     y = np.arange(len(labels))
     height = 0.38
 
-    fig, ax = plt.subplots(figsize=(7.2, 6.2))
+    fig, ax = plt.subplots(figsize=(9.2, 6.8))
     ax.barh(y + height / 2, miou, height, label="Mean IoU", color="#376b8c")
     ax.barh(y - height / 2, mdice, height, label="Mean Dice", color="#c27d38")
     ax.set_xlabel("Score")
@@ -76,7 +76,7 @@ def plot_summary(rows):
     ax.set_axisbelow(True)
     ax.legend(frameon=False)
     ax.set_title("Held-out crop performance by model variant")
-    fig.tight_layout()
+    fig.subplots_adjust(left=0.46, right=0.98, top=0.92, bottom=0.10)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT_DIR / "summary_model_comparison.png", dpi=300)
