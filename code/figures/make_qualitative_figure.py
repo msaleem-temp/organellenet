@@ -40,10 +40,10 @@ from code.utils.config import load_config
 
 
 DEFAULT_MODELS = [
-    "Categorical 64^3|configs/latest_unet.yaml|runs/latest-unet-14cls-jitter48-p64/ckpts/best_model.pth|64",
-    "Categorical 128^3|configs/latest_unet.yaml|runs/latest-unet-14cls-jitter48-dice/ckpts/best_model.pth|128",
-    "EM augmentation 128^3|configs/latest_unet_em_aug.yaml|runs/latest-unet-14cls-em-aug/ckpts/best_model.pth|128",
-    "SDT 64^3|configs/sdt_unet.yaml|runs/sdt-unet-14cls-baseline/ckpts/best_model.pth|64",
+    "Categorical\n64^3|configs/latest_unet.yaml|runs/latest-unet-14cls-jitter48-p64/ckpts/best_model.pth|64",
+    "Categorical\n128^3|configs/latest_unet.yaml|runs/latest-unet-14cls-jitter48-dice/ckpts/best_model.pth|128",
+    "EM aug.\n128^3|configs/latest_unet_em_aug.yaml|runs/latest-unet-14cls-em-aug/ckpts/best_model.pth|128",
+    "SDT\n64^3|configs/sdt_unet.yaml|runs/sdt-unet-14cls-baseline/ckpts/best_model.pth|64",
 ]
 
 SUPPORTED_CLASS_IDS = {1, 2, 3, 4, 8, 11}
@@ -338,7 +338,7 @@ def make_figure(args):
     fig, axes = plt.subplots(
         n_rows,
         n_cols,
-        figsize=(3.25 * n_cols, 3.25 * n_rows + 1.35),
+        figsize=(3.55 * n_cols, 3.35 * n_rows + 1.55),
         squeeze=False,
     )
 
