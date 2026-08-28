@@ -25,15 +25,15 @@ if _PROJECT_ROOT not in sys.path:
 # Default semantic → instance label mapping (shared across all baselines)
 # ---------------------------------------------------------------------------
 LABEL_MAP_13CLS = {
-    3: 1, 4: 1, 5: 1,                                          # 1. Mitochondria
+    3: 1, 4: 1, 5: 1, 50: 1,                                   # 1. Mitochondria
     8: 2, 9: 2,                                                 # 2. Vesicles
     10: 3, 11: 3,                                               # 3. Endosomes
     12: 4, 13: 4,                                               # 4. Lysosomes
-    14: 5, 15: 5,                                               # 5. Lipid Droplets
-    20: 6, 21: 6, 24: 6, 25: 6, 26: 6, 27: 6, 28: 6, 29: 6,   # 6. Nucleus
+    14: 5, 15: 5, 44: 5,                                       # 5. Lipid Droplets
+    20: 6, 21: 6, 24: 6, 25: 6, 26: 6, 27: 6, 28: 6, 29: 6, 37: 6,  # 6. Nucleus
     22: 7, 23: 7,                                               # 7. Nuclear Pores
     30: 8, 36: 8,                                               # 8. Microtubules
-    47: 9, 48: 9,                                               # 9. Peroxisomes
+    47: 9, 48: 9, 49: 9,                                       # 9. Peroxisomes
     6: 10, 7: 10,                                               # 10. Golgi Apparatus
     16: 11, 17: 11,                                             # 11. Endoplasmic Reticulum
     18: 12, 19: 12,                                             # 12. ER Exit Sites
