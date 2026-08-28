@@ -134,6 +134,19 @@ def compute_per_class_metrics(pred, target, num_classes):
     }
 
 
+def central_crop_zyx(volume, crop_dim):
+    """Return the central crop from a [Z, Y, X] volume."""
+    if crop_dim is None:
+        return volume
+    if volume.ndim != 3:
+        raise ValueError(f"Expected [Z, Y, X] volume, got shape {volume.shape}")
+    if any(size < crop_dim for size in volume.shape):
+        raise ValueError(f"Cannot crop {volume.shape} to {crop_dim}^3")
+    starts = [(size - crop_dim) // 2 for size in volume.shape]
+    z0, y0, x0 = starts
+    return volume[z0 : z0 + crop_dim, y0 : y0 + crop_dim, x0 : x0 + crop_dim]
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="OrganelleNet — Detailed Per-Patch Evaluation"
@@ -152,6 +165,12 @@ def parse_args():
                         help="Evaluate only the first N patches (for debugging)")
     parser.add_argument("--name", type=str, default=None, help="Override experiment name")
     parser.add_argument("--patch-dim", type=int, default=None, help="Override patch dim")
+    parser.add_argument(
+        "--score-roi-dim",
+        type=int,
+        default=None,
+        help="If set, compute metrics only on the central score-roi-dim^3 ROI.",
+    )
     parser.add_argument("--sdt-threshold", type=float, default=0.0,
                         help="Zero-level threshold for SDT foreground decoding")
     return parser.parse_args()
@@ -173,6 +192,15 @@ def main():
     print(f"\n{'='*60}")
     print(f"Detailed Evaluation: {config.experiment_name}")
     print(f"Checkpoint: {args.checkpoint}")
+    print(f"Native evaluation patch_dim: {config.data.patch_dim}")
+    print(
+        "Score ROI: "
+        + (
+            f"central {args.score_roi_dim}^3"
+            if args.score_roi_dim is not None
+            else "full native patch"
+        )
+    )
     print(f"{'='*60}")
 
     # 2. Locate test JSON
@@ -237,6 +265,10 @@ def main():
                     output, config, sdt_threshold=args.sdt_threshold
                 ).squeeze(0).cpu().numpy()
                 target = lbl_tensor.numpy()
+                native_patch_shape = list(target.shape)
+                if args.score_roi_dim is not None:
+                    pred = central_crop_zyx(pred, args.score_roi_dim)
+                    target = central_crop_zyx(target, args.score_roi_dim)
 
                 # Per-class metrics for this patch
                 patch_metrics = compute_per_class_metrics(pred, target, num_classes)
@@ -277,6 +309,13 @@ def main():
                     "patch_class": metadata.get("class"),
                     "em_scale": metadata.get("em_scale"),
                     "label_scale": metadata.get("label_scale"),
+                    "native_patch_shape": native_patch_shape,
+                    "score_roi_shape": list(target.shape),
+                    "score_roi": (
+                        "central"
+                        if args.score_roi_dim is not None
+                        else "full_patch"
+                    ),
                     "prediction_decode": (
                         "sdt_zero_level_set"
                         if getattr(config.data, "target_type", "labels") == "sdt"

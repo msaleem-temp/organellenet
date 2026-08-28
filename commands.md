@@ -407,3 +407,83 @@ tar czf organellenet_results.tar.gz \
 scp organellenet_results.tar.gz your_local_machine:~/
 ```
 
+---
+
+## 14. NewInML Matched Central 64³ ROI Evaluation
+
+Use these commands for the final five-run NewInML paper tables. They evaluate
+the same 73 `jrc_cos7-1a/crop234` anchor records from `runs/global_splits/test.json`.
+The 64³ models are scored on their native 64³ patches. The 128³ models run
+with native 128³ patches, then metrics are computed only on the exact central
+64³ ROI.
+
+```bash
+python code/evaluation/evaluate_detailed.py \
+    --config configs/latest_unet.yaml \
+    --checkpoint runs/latest-unet-14cls-jitter48-p64/ckpts/best_model.pth \
+    --output runs/latest-unet-14cls-jitter48-p64/results/detailed_metrics_matched_roi.jsonl \
+    --test-json runs/global_splits/test.json \
+    --name latest-unet-14cls-jitter48-p64 \
+    --patch-dim 64 \
+    --score-roi-dim 64 \
+    --gpu 0
+```
+
+```bash
+python code/evaluation/evaluate_detailed.py \
+    --config configs/latest_unet.yaml \
+    --checkpoint runs/latest-unet-14cls-jitter48-dice/ckpts/best_model.pth \
+    --output runs/latest-unet-14cls-jitter48-dice/results/detailed_metrics_matched_roi.jsonl \
+    --test-json runs/global_splits/test.json \
+    --name latest-unet-14cls-jitter48-dice \
+    --patch-dim 128 \
+    --score-roi-dim 64 \
+    --gpu 0
+```
+
+```bash
+python code/evaluation/evaluate_detailed.py \
+    --config configs/latest_unet_em_aug.yaml \
+    --checkpoint runs/latest-unet-14cls-em-aug-p64/ckpts/best_model.pth \
+    --output runs/latest-unet-14cls-em-aug-p64/results/detailed_metrics_matched_roi.jsonl \
+    --test-json runs/global_splits/test.json \
+    --name latest-unet-14cls-em-aug-p64 \
+    --patch-dim 64 \
+    --score-roi-dim 64 \
+    --gpu 0
+```
+
+```bash
+python code/evaluation/evaluate_detailed.py \
+    --config configs/latest_unet_em_aug.yaml \
+    --checkpoint runs/latest-unet-14cls-em-aug/ckpts/best_model.pth \
+    --output runs/latest-unet-14cls-em-aug/results/detailed_metrics_matched_roi.jsonl \
+    --test-json runs/global_splits/test.json \
+    --name latest-unet-14cls-em-aug \
+    --patch-dim 128 \
+    --score-roi-dim 64 \
+    --gpu 0
+```
+
+The SDT model was trained with `configs/sdt_unet.yaml`, which sets
+`data.patch_dim: 64`. Re-evaluate it with the same native 64³ patch size:
+
+```bash
+python code/evaluation/evaluate_detailed.py \
+    --config configs/sdt_unet.yaml \
+    --checkpoint runs/sdt-unet-14cls-baseline/ckpts/best_model.pth \
+    --output runs/sdt-unet-14cls-baseline/results/detailed_metrics_matched_roi.jsonl \
+    --test-json runs/global_splits/test.json \
+    --name sdt-unet-14cls-baseline \
+    --patch-dim 64 \
+    --score-roi-dim 64 \
+    --gpu 0
+```
+
+After all five JSONLs exist, regenerate the matched-ROI paper tables and heatmap:
+
+```bash
+python code/figures/make_newinml_results.py \
+    --input-filename detailed_metrics_matched_roi.jsonl \
+    --matched-roi
+```

@@ -1,6 +1,7 @@
 """Regenerate retained NewInML result tables and per-class IoU heatmap."""
 
 from pathlib import Path
+import argparse
 import csv
 import json
 import math
@@ -50,8 +51,8 @@ RUNS = [
     },
     {
         "run": "sdt-unet-14cls-baseline",
-        "name": "SDT target, 64^3",
-        "heatmap_name": "SDT 64$^3$",
+        "name": "SDT target, train 64^3",
+        "heatmap_name": "SDT train 64$^3$",
         "expected": (0.288849, 0.431083, 157343),
     },
 ]
@@ -85,8 +86,8 @@ UNSUPPORTED_CLASSES = [
 ]
 
 
-def load_jsonl(run):
-    path = ROOT / "runs" / run / "results" / "detailed_metrics.jsonl"
+def load_jsonl(run, filename):
+    path = ROOT / "runs" / run / "results" / filename
     with path.open() as f:
         return [json.loads(line) for line in f if line.strip()]
 
@@ -179,6 +180,19 @@ def aggregate(records):
     total_voxels, per_record_voxels = total_evaluated_voxels(records)
     return {
         "per_class": per_class,
+        "gt_voxels": {
+            cls: per_class[cls][0] + per_class[cls][2]
+            for cls in SUPPORTED_CLASSES
+        },
+        "patch_support": {
+            cls: sum(
+                int(r.get("per_class_tp", {}).get(cls, 0))
+                + int(r.get("per_class_fn", {}).get(cls, 0))
+                > 0
+                for r in records
+            )
+            for cls in SUPPORTED_CLASSES
+        },
         "macro_iou": macro_iou,
         "macro_dice": macro_dice,
         "unsupported_fp": unsupported_fp,
@@ -187,6 +201,46 @@ def aggregate(records):
         "per_record_voxels": per_record_voxels,
         "patch_size": patch_size_from_voxels(per_record_voxels),
     }
+
+
+def native_patch_size(records):
+    shapes = {
+        tuple(record.get("native_patch_shape") or [])
+        for record in records
+        if record.get("native_patch_shape")
+    }
+    if not shapes:
+        return None
+    if len(shapes) != 1:
+        raise RuntimeError(f"Mixed native patch shapes found: {sorted(shapes)}")
+    shape = next(iter(shapes))
+    if len(shape) != 3 or len(set(shape)) != 1:
+        raise RuntimeError(f"Unexpected native patch shape: {shape}")
+    return shape[0]
+
+
+def assert_matched_roi(results):
+    expected_total = 73 * 64**3
+    reference = None
+    for run_info in RUNS:
+        result = results[run_info["run"]]
+        if result["total_voxels"] != expected_total:
+            raise RuntimeError(
+                f"{run_info['run']} scored {result['total_voxels']} voxels; "
+                f"expected {expected_total} for 73 central 64^3 ROIs."
+            )
+        if result["patch_size"] != 64:
+            raise RuntimeError(
+                f"{run_info['run']} scored {result['patch_size']}^3, expected 64^3."
+            )
+        gt_voxels = result["gt_voxels"]
+        if reference is None:
+            reference = gt_voxels
+        elif gt_voxels != reference:
+            raise RuntimeError(
+                f"{run_info['run']} has different TP+FN supported-class totals: "
+                f"{gt_voxels} vs {reference}"
+            )
 
 
 def assert_expected(results):
@@ -203,15 +257,16 @@ def assert_expected(results):
             raise RuntimeError(f"{run} unsupported FP changed: {actual['unsupported_fp']} vs {expected_fp}")
 
 
-def write_main_results(results):
+def write_main_results(results, records_by_run, output_name):
     SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
-    path = SNAPSHOT_DIR / "newinml_main_results.csv"
+    path = SNAPSHOT_DIR / output_name
     with path.open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(
             [
                 "configuration",
-                "patch_size",
+                "native_eval_patch_size",
+                "score_roi_size",
                 "macro_iou_6cls",
                 "macro_dice_6cls",
                 "unsupported_fp_voxels",
@@ -221,9 +276,11 @@ def write_main_results(results):
         for run_info in RUNS:
             run = run_info["run"]
             result = results[run]
+            native_size = native_patch_size(records_by_run[run]) or result["patch_size"]
             writer.writerow(
                 [
                     run_info["name"],
+                    native_size,
                     result["patch_size"],
                     f"{result['macro_iou']:.6f}",
                     f"{result['macro_dice']:.6f}",
@@ -234,8 +291,8 @@ def write_main_results(results):
     print(f"Wrote {path}")
 
 
-def write_per_class_iou(results):
-    path = SNAPSHOT_DIR / "newinml_per_class_iou.csv"
+def write_per_class_iou(results, output_name):
+    path = SNAPSHOT_DIR / output_name
     with path.open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["configuration", *SUPPORTED_CLASSES])
@@ -253,8 +310,8 @@ def write_per_class_iou(results):
     print(f"Wrote {path}")
 
 
-def write_per_class_metrics(results):
-    path = SNAPSHOT_DIR / "newinml_per_class_metrics.csv"
+def write_per_class_metrics(results, output_name):
+    path = SNAPSHOT_DIR / output_name
     with path.open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["configuration", "class", "tp", "fp", "fn", "iou", "dice"])
@@ -276,8 +333,8 @@ def write_per_class_metrics(results):
     print(f"Wrote {path}")
 
 
-def write_unsupported_fp(results, records_by_run):
-    path = SNAPSHOT_DIR / "newinml_unsupported_fp.csv"
+def write_unsupported_fp(records_by_run, output_name):
+    path = SNAPSHOT_DIR / output_name
     with path.open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["configuration", *UNSUPPORTED_CLASSES])
@@ -296,7 +353,7 @@ def write_unsupported_fp(results, records_by_run):
     print(f"Wrote {path}")
 
 
-def plot_heatmap(results):
+def plot_heatmap(results, figure_name):
     FIGURE_DIR.mkdir(parents=True, exist_ok=True)
     matrix = np.array(
         [
@@ -305,14 +362,13 @@ def plot_heatmap(results):
         ]
     )
     row_labels = [run_info["heatmap_name"] for run_info in RUNS]
-    col_labels = [
-        f"{cls}\n(n={SUPPORTED_PATCH_COUNTS[cls]})" for cls in SUPPORTED_CLASSES
-    ]
+    patch_support = results[RUNS[0]["run"]]["patch_support"]
+    col_labels = [f"{cls}\n(n={patch_support[cls]})" for cls in SUPPORTED_CLASSES]
 
-    fig, ax = plt.subplots(figsize=(9.0, 4.7))
+    fig, ax = plt.subplots(figsize=(9.8, 4.8))
     image = ax.imshow(matrix, vmin=0.0, vmax=1.0, cmap="viridis", aspect="auto")
     ax.set_xticks(np.arange(len(col_labels)))
-    ax.set_xticklabels(col_labels, fontsize=12)
+    ax.set_xticklabels(col_labels, fontsize=10)
     ax.set_yticks(np.arange(len(row_labels)))
     ax.set_yticklabels(row_labels, fontsize=12)
     ax.tick_params(axis="both", length=0)
@@ -321,7 +377,7 @@ def plot_heatmap(results):
         for j in range(matrix.shape[1]):
             value = matrix[i, j]
             text_color = "white" if value < 0.55 else "black"
-            ax.text(j, i, f"{value:.3f}", ha="center", va="center", color=text_color, fontsize=11)
+            ax.text(j, i, f"{value:.3f}", ha="center", va="center", color=text_color, fontsize=10)
 
     for spine in ax.spines.values():
         spine.set_visible(False)
@@ -336,7 +392,7 @@ def plot_heatmap(results):
 
     fig.subplots_adjust(left=0.23, right=0.94, top=0.95, bottom=0.18)
     for ext in ("pdf", "svg", "png"):
-        path = FIGURE_DIR / f"newinml_per_class_iou.{ext}"
+        path = FIGURE_DIR / f"{figure_name}.{ext}"
         if ext == "png":
             fig.savefig(path, dpi=300, bbox_inches="tight", pad_inches=0.04)
         else:
@@ -345,16 +401,47 @@ def plot_heatmap(results):
     plt.close(fig)
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Generate NewInML retained-run tables.")
+    parser.add_argument(
+        "--input-filename",
+        default="detailed_metrics.jsonl",
+        help="JSONL filename under each run's results directory.",
+    )
+    parser.add_argument(
+        "--matched-roi",
+        action="store_true",
+        help="Use matched-ROI output filenames and assert common central 64^3 scoring.",
+    )
+    return parser.parse_args()
+
+
 def main():
-    records_by_run = {run_info["run"]: load_jsonl(run_info["run"]) for run_info in RUNS}
+    args = parse_args()
+    records_by_run = {
+        run_info["run"]: load_jsonl(run_info["run"], args.input_filename)
+        for run_info in RUNS
+    }
     verify_common_records(records_by_run)
     results = {run: aggregate(records) for run, records in records_by_run.items()}
-    assert_expected(results)
-    write_main_results(results)
-    write_per_class_iou(results)
-    write_per_class_metrics(results)
-    write_unsupported_fp(results, records_by_run)
-    plot_heatmap(results)
+    if args.matched_roi:
+        assert_matched_roi(results)
+        write_main_results(
+            results,
+            records_by_run,
+            "newinml_matched_roi_main_results.csv",
+        )
+        write_per_class_iou(results, "newinml_matched_roi_per_class_iou.csv")
+        write_per_class_metrics(results, "newinml_matched_roi_per_class_metrics.csv")
+        write_unsupported_fp(records_by_run, "newinml_matched_roi_unsupported_fp.csv")
+        plot_heatmap(results, "newinml_matched_roi_per_class_iou")
+    else:
+        assert_expected(results)
+        write_main_results(results, records_by_run, "newinml_main_results.csv")
+        write_per_class_iou(results, "newinml_per_class_iou.csv")
+        write_per_class_metrics(results, "newinml_per_class_metrics.csv")
+        write_unsupported_fp(records_by_run, "newinml_unsupported_fp.csv")
+        plot_heatmap(results, "newinml_per_class_iou")
 
     print("\nEvaluated patch sizes from JSONL confusion totals:")
     for run_info in RUNS:
