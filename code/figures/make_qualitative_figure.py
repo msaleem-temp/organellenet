@@ -46,7 +46,6 @@ DEFAULT_MODELS = [
     "SDT 64^3|configs/sdt_unet.yaml|runs/sdt-unet-14cls-baseline/ckpts/best_model.pth|64",
 ]
 
-PREFERRED_SLICES = [387, 399]
 SUPPORTED_CLASS_IDS = {1, 2, 3, 4, 8, 11}
 UNSUPPORTED_CLASS_IDS = {5, 6, 7, 9, 10, 12, 13}
 UNSUPPORTED_DISPLAY_NAME = "Unsupported class prediction"
@@ -107,11 +106,15 @@ def remap_labels(lbl_volume, config):
 
 
 def choose_slices(lbl_volume, num_slices, min_separation):
-    """Pick separated slices with many foreground classes and pixels."""
+    """Pick separated slices using ground truth supported classes only."""
     scores = []
     for z in range(lbl_volume.shape[0]):
         vals, counts = np.unique(lbl_volume[z], return_counts=True)
-        foreground = [(int(v), int(c)) for v, c in zip(vals, counts) if int(v) != 0]
+        foreground = [
+            (int(v), int(c))
+            for v, c in zip(vals, counts)
+            if int(v) in SUPPORTED_CLASS_IDS
+        ]
         if not foreground:
             continue
         class_count = len(foreground)
@@ -119,7 +122,7 @@ def choose_slices(lbl_volume, num_slices, min_separation):
         scores.append((class_count, fg_pixels, z))
 
     selected = []
-    for _, _, z in sorted(scores, reverse=True):
+    for _, _, z in sorted(scores, key=lambda item: (-item[0], -item[1], item[2])):
         if all(abs(z - kept) >= min_separation for kept in selected):
             selected.append(z)
         if len(selected) == num_slices:
@@ -128,6 +131,17 @@ def choose_slices(lbl_volume, num_slices, min_separation):
     if not selected:
         selected = [lbl_volume.shape[0] // 2]
     return sorted(selected)
+
+
+def ensure_zyx_prediction(pred, label):
+    """Normalize model predictions to a rank-3 [Z, Y, X] integer volume."""
+    pred = np.asarray(pred)
+    pred = np.squeeze(pred)
+    if pred.ndim != 3:
+        raise ValueError(
+            f"{label} prediction must reduce to [Z, Y, X], got shape {pred.shape}"
+        )
+    return pred.astype(np.int64, copy=False)
 
 
 def choose_display_window(lbl_volume, slices, display_size):
@@ -237,7 +251,7 @@ def load_model_prediction(spec, em_volume, resolution, gpu, overlap):
         with torch.no_grad():
             outputs = inferer(inputs=em_tensor, network=infer_model)
             pred = decode_predictions(outputs.squeeze(0).cpu(), config)
-        return pred.numpy(), config
+        return ensure_zyx_prediction(pred.cpu().numpy(), spec["label"]), config
 
     pred = run_sliding_window_inference(
         model=infer_model,
@@ -247,7 +261,7 @@ def load_model_prediction(spec, em_volume, resolution, gpu, overlap):
         sw_batch_size=1,
         overlap=overlap,
     )
-    return pred, config
+    return ensure_zyx_prediction(pred, spec["label"]), config
 
 
 def normalize_em_slice(em_slice):
@@ -270,9 +284,6 @@ def make_figure(args):
     selection_rule = "user-specified z slices"
     if args.slices:
         slices = args.slices
-    elif all(0 <= z < lbl_remapped.shape[0] for z in PREFERRED_SLICES[: args.num_slices]):
-        slices = PREFERRED_SLICES[: args.num_slices]
-        selection_rule = "pre-specified paper slices retained from previous figure"
     else:
         slices = choose_slices(
             lbl_remapped,
@@ -280,8 +291,9 @@ def make_figure(args):
             min_separation=args.min_separation,
         )
         selection_rule = (
-            "GT-only slice selection maximizing visible foreground classes and "
-            "foreground pixels with deterministic separation"
+            "GT-only slice selection maximizing visible supported foreground "
+            "classes, then foreground pixels, then lower z with deterministic "
+            "separation"
         )
     y0, y1, x0, x1, window_rule = choose_display_window(
         lbl_remapped,
