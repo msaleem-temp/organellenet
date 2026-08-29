@@ -42,7 +42,7 @@ from code.utils.config import load_config
 DEFAULT_MODELS = [
     "Categorical\n64^3|configs/latest_unet.yaml|runs/latest-unet-14cls-jitter48-p64/ckpts/best_model.pth|64",
     "Categorical\n128^3|configs/latest_unet.yaml|runs/latest-unet-14cls-jitter48-dice/ckpts/best_model.pth|128",
-    "EM aug.\n128^3|configs/latest_unet_em_aug.yaml|runs/latest-unet-14cls-em-aug/ckpts/best_model.pth|128",
+    "Cat.+aug.\n128^3|configs/latest_unet_em_aug.yaml|runs/latest-unet-14cls-em-aug/ckpts/best_model.pth|128",
     "SDT\n64^3|configs/sdt_unet.yaml|runs/sdt-unet-14cls-baseline/ckpts/best_model.pth|64",
 ]
 

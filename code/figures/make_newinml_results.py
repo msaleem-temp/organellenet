@@ -28,31 +28,31 @@ RUNS = [
     {
         "run": "latest-unet-14cls-jitter48-p64",
         "name": "Categorical, 64^3",
-        "heatmap_name": "Categorical 64$^3$",
+        "heatmap_name": "Categorical $64^3$",
         "expected": (0.279227, 0.407549, 230286),
     },
     {
         "run": "latest-unet-14cls-jitter48-dice",
         "name": "Categorical, 128^3",
-        "heatmap_name": "Categorical 128$^3$",
+        "heatmap_name": "Categorical $128^3$",
         "expected": (0.496438, 0.605558, 586723),
     },
     {
         "run": "latest-unet-14cls-em-aug-p64",
         "name": "EM augmentation, 64^3",
-        "heatmap_name": "EM augmentation 64$^3$",
+        "heatmap_name": "Categorical + aug. $64^3$",
         "expected": (0.157996, 0.245581, 153414),
     },
     {
         "run": "latest-unet-14cls-em-aug",
         "name": "EM augmentation, 128^3",
-        "heatmap_name": "EM augmentation 128$^3$",
+        "heatmap_name": "Categorical + aug. $128^3$",
         "expected": (0.390610, 0.529967, 708159),
     },
     {
         "run": "sdt-unet-14cls-baseline",
         "name": "SDT target, train 64^3",
-        "heatmap_name": "SDT train 64$^3$",
+        "heatmap_name": "SDT target $64^3$",
         "expected": (0.288849, 0.431083, 157343),
     },
 ]
