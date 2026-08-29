@@ -24,9 +24,9 @@ CACHE_DIR = ROOT / ".matplotlib-cache"
 os.environ.setdefault("MPLCONFIGDIR", str(CACHE_DIR))
 os.environ.setdefault("XDG_CACHE_HOME", str(CACHE_DIR))
 
-import matplotlib
+import matplotlib as mpl
 
-matplotlib.use("Agg")
+mpl.use("Agg")
 import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
@@ -38,6 +38,8 @@ from code.evaluation.visualize import run_sliding_window_inference
 from code.models.unet import build_model, get_raw_model
 from code.utils.config import load_config
 
+mpl.rcParams["pdf.fonttype"] = 42
+mpl.rcParams["ps.fonttype"] = 42
 
 DEFAULT_MODELS = [
     "Categorical\n64^3|configs/latest_unet.yaml|runs/latest-unet-14cls-jitter48-p64/ckpts/best_model.pth|64",

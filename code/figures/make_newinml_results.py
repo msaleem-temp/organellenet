@@ -18,11 +18,13 @@ CACHE_DIR = ROOT / ".matplotlib-cache"
 os.environ.setdefault("MPLCONFIGDIR", str(CACHE_DIR))
 os.environ.setdefault("XDG_CACHE_HOME", str(CACHE_DIR))
 
-import matplotlib
+import matplotlib as mpl
 
-matplotlib.use("Agg")
+mpl.use("Agg")
 import matplotlib.pyplot as plt
 
+mpl.rcParams["pdf.fonttype"] = 42
+mpl.rcParams["ps.fonttype"] = 42
 
 RUNS = [
     {
