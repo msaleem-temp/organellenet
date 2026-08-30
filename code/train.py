@@ -80,6 +80,8 @@ def main():
         excluded_crop=config.data.excluded_crop,
         seed=config.data.seed,
     )
+    print("\n[TEST] Splits prepared successfully. Halting execution for inspection.")
+    sys.exit(0)
 
     # 4. Build zarr map
     zarr_map = build_zarr_map(config.paths.data_dir)

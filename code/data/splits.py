@@ -69,23 +69,26 @@ def prepare_splits(
     excluded_datasets = set()
 
     for patch in blueprint:
+        cls = patch.get("class", "")
+        
+        # 1. Normalize class name first
+        if class_mapping and cls in class_mapping:
+            base_cls = class_mapping[cls]
+        elif strip_suffixes and "_" in cls and cls.rsplit("_", 1)[-1] in ["lum", "mem", "in", "out"]:
+            base_cls = cls.rsplit("_", 1)[0]
+        else:
+            base_cls = cls
+
+        # 2. Filter out non-target classes immediately
+        if base_cls not in target_set:
+            continue
+
+        # 3. Route valid patches to Test OR Train/Val
         if excluded_crop and patch.get("crop") == excluded_crop:
             excluded_datasets.add(patch.get("dataset"))
             test_patches.append(patch)
         else:
-            cls = patch.get("class", "")
-            
-            # 1. Explicit mapping override
-            if class_mapping and cls in class_mapping:
-                base_cls = class_mapping[cls]
-            # 2. Dynamic suffix stripping (if enabled)
-            elif strip_suffixes and "_" in cls and cls.rsplit("_", 1)[-1] in ["lum", "mem", "in", "out"]:
-                base_cls = cls.rsplit("_", 1)[0]
-            else:
-                base_cls = cls
-
-            if base_cls in target_set:
-                filtered_patches.append(patch)
+            filtered_patches.append(patch)
 
     print(f"Total original patches: {len(blueprint)}")
     print(f"Total filtered (train/val) patches: {len(filtered_patches)}")
