@@ -69,18 +69,11 @@ def prepare_splits(
     excluded_datasets = set()
 
     for patch in blueprint:
+        # 1. Get the exact class string from the JSON
         cls = patch.get("class", "")
         
-        # 1. Normalize class name first
-        if class_mapping and cls in class_mapping:
-            base_cls = class_mapping[cls]
-        elif strip_suffixes and "_" in cls and cls.rsplit("_", 1)[-1] in ["lum", "mem", "in", "out"]:
-            base_cls = cls.rsplit("_", 1)[0]
-        else:
-            base_cls = cls
-
-        # 2. Filter out non-target classes immediately
-        if base_cls not in target_set:
+        # 2. Strict filtering: Must match your 13 targets exactly
+        if cls not in target_set:
             continue
 
         # 3. Route valid patches to Test OR Train/Val
