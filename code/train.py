@@ -180,4 +180,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print("main function start from here...")
     main()
