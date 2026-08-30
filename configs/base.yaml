@@ -7,8 +7,8 @@
 experiment_name: unnamed-experiment
 
 paths:
-  main_dir: /mnt/graid/codebases_other/cellmap-segmentation-challenge/saleem/organellenet
-  data_dir: /mnt/graid/codebases_other/cellmap-segmentation-challenge/data
+  main_dir: /kaggle/working/organellenet
+  data_dir: /kaggle/input/datasets/xpertdl/cos7-1a-cos7-1b-jurkat-1
 
 data:
   patch_dim: 128
