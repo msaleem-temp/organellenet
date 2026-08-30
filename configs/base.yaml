@@ -7,8 +7,8 @@
 experiment_name: unnamed-experiment
 
 paths:
-  main_dir: /root/organellenet
-  data_dir: /mnt/voxelcell_vol1/raw_data
+  main_dir: /kaggle/working/organellenet
+  data_dir: /kaggle/working/virtual_data
 
 data:
   patch_dim: 128
