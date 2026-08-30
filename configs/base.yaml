@@ -8,7 +8,7 @@ experiment_name: unnamed-experiment
 
 paths:
   main_dir: /kaggle/working/organellenet
-  data_dir: /kaggle/input/datasets/xpertdl/cos7-1a-cos7-1b-jurkat-1/jrc_cos7-1a
+  data_dir: /kaggle/working/virtual_data
 
 data:
   patch_dim: 128
