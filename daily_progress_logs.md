@@ -23,14 +23,14 @@ _____________________________________________________________________
 2. For that, as there are 289 total crops, 239 for training and 25-25 for Validation and Training. 
 3. Instead of randomly crop selection, categorize them WRT to rare classes and keep that crops in training that have more rare representation. 
 
--> **Status:** 🟡 Pending
+-> **Status:** 🔵 In Process
 
 -> **Result:** N/A
 
 
 
 _____________________________________________________________________
-**Date:** August 30, 2026
+**Date:** August 31, 2026
 
 **Task:** Centroids Re-extraction
 
@@ -38,8 +38,20 @@ _____________________________________________________________________
 1. There are 289 total crops, while current json has only 268 crops. rest of the crops __ 21__ are missing. 
 2. Find that crops and extract centroids from all 289 crops. 
 
--> **Status:** 🔵 In Progress
+-> **Status:** 🟢 Done
+
+-> **Result:** After extracting patches across all 289 crops, total patches are: **13142**
+
+
+_____________________________________________________________________
+**Date:** August 31, 2026
+
+**Task:** Filtering Correct Target Class 
+
+-> **Hypotheses:**
+1. While filtering target classes, we are using 13 instance classes, As a result, target_class.json have only these 13 classes. While, in PyTorch dataset classes, we are using IDs of semantic classes which are useless because we have already excluded them while filtering.  
+
+
+-> **Status:** 🟡 Pending
 
 -> **Result:** N/A
-
-
