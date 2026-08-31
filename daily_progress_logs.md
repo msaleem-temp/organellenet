@@ -23,7 +23,7 @@ _____________________________________________________________________
 2. For that, as there are 289 total crops, 239 for training and 25-25 for Validation and Training. 
 3. Instead of randomly crop selection, categorize them WRT to rare classes and keep that crops in training that have more rare representation. 
 
--> **Status:** 🔵 In Progress
+-> **Status:** 🟡 Pending
 
 -> **Result:** N/A
 
@@ -38,7 +38,7 @@ _____________________________________________________________________
 1. There are 289 total crops, while current json has only 268 crops. rest of the crops __ 21__ are missing. 
 2. Find that crops and extract centroids from all 289 crops. 
 
--> **Status:** 🟡 Pending
+-> **Status:** 🔵 In Progress
 
 -> **Result:** N/A
 
