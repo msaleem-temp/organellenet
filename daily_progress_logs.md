@@ -23,9 +23,9 @@ _____________________________________________________________________
 2. For that, as there are 289 total crops, 239 for training and 25-25 for Validation and Training. 
 3. Instead of randomly crop selection, categorize them WRT to rare classes and keep that crops in training that have more rare representation. 
 
--> **Status:** 🟡 Pending
+-> **Status:** 🟢 Done
 
--> **Result:** N/A
+-> **Result:** 70% crops for training and 15-15 crops for val and testing.
 
 
 
