@@ -52,6 +52,6 @@ _____________________________________________________________________
 1. While filtering target classes, we are using 13 instance classes, As a result, target_class.json have only these 13 classes. While, in PyTorch dataset classes, we are using IDs of semantic classes which are useless because we have already excluded them while filtering.  
 
 
--> **Status:** 🔵 In prograss
+-> **Status:** 🟢 Done
 
--> **Result:** N/A
+-> **Result:** I found bug in my code, actually it was corrected by Dr. Samia.
