@@ -23,7 +23,7 @@ _____________________________________________________________________
 2. For that, as there are 289 total crops, 239 for training and 25-25 for Validation and Training. 
 3. Instead of randomly crop selection, categorize them WRT to rare classes and keep that crops in training that have more rare representation. 
 
--> **Status:** 🔵 In Process
+-> **Status:** 🟡 Pending
 
 -> **Result:** N/A
 
@@ -52,6 +52,6 @@ _____________________________________________________________________
 1. While filtering target classes, we are using 13 instance classes, As a result, target_class.json have only these 13 classes. While, in PyTorch dataset classes, we are using IDs of semantic classes which are useless because we have already excluded them while filtering.  
 
 
--> **Status:** 🟡 Pending
+-> **Status:** 🔵 In prograss
 
 -> **Result:** N/A
