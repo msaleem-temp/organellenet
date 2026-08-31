@@ -40,7 +40,7 @@ _____________________________________________________________________
 
 -> **Status:** 🟢 Done
 
--> **Result:** After extracting patches across all 289 crops, total patches are: **13142**
+-> **Result:** After extracting patches across all 289 crops, total patches are: **13162**
 
 
 _____________________________________________________________________
