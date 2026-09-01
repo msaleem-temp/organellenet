@@ -52,9 +52,9 @@ _____________________________________________________________________
 1. While filtering target classes, we are using 13 instance classes, During filtering, we should encode 40 classes into 13 main classes. 
 
 
--> **Status:** 🔵 In Progress
+-> **Status:** 🟢 Done
 
--> **Result:** N/A
+-> **Result:** It is not best Idea to encode outsite the pytorch classes.
 
 _____________________________________________________________________
 **Date:** Sep 1, 2026
