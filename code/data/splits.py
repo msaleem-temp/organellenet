@@ -149,7 +149,7 @@ def prepare_splits(
 
 
 
-def splits_handler():
+def split_handler():
     json_path = "/kaggle/input/datasets/jetminds/all-centroids-across-all-crops/all_centroids_across_all_crops.json"
 
     target_classes = {
