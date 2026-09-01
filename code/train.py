@@ -81,7 +81,8 @@ def main():
         seed=config.data.seed,
     )
 
-
+    print("Existed...")
+    sys.exit(0)
     # 4. Build zarr map
     zarr_map = build_zarr_map(config.paths.data_dir)
     print(f"Zarr map built: {len(zarr_map)} datasets found")
