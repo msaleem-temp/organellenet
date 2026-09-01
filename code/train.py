@@ -84,8 +84,13 @@ def main():
     # train_data_path = split_paths["train_path"]
     # print(train_data_path)
 
-    split_handler()
+    split_paths = split_handler(
+            blueprint_json_path=blueprint_path,
+            output_dir=split_output_dir,
+            target_classes=config.data.target_classes,
+    )
 
+    print(split_paths['train_path'])
     print("Existed...")
     sys.exit(0)
     # 4. Build zarr map
