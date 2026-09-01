@@ -293,10 +293,11 @@ def split_handler(
     print("=" * 60)
 
     # 9. Save Files
-    train_path = f"{output_dir}/train.json"
-    val_path = f"{output_dir}/val.json"
-    test_path = f"{output_dir}/test.json"
+    train_path = os.path.join(output_dir, "train.json")
+    val_path = os.path.join(output_dir, "val.json")
+    test_path = os.path.join(output_dir, "test.json")
 
+    
     print(f"This is train path: {train_path}")
     with open(train_path, 'w') as f:
         json.dump(train_patches, f, indent=4)
