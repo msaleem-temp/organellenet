@@ -67,3 +67,15 @@ _____________________________________________________________________
 -> **Status:** 🔵 In Progress
 
 -> **Result:** N/A
+
+_____________________________________________________________________
+**Date:** Sep 1, 2026
+
+**Task:** Adjust PyTorch Sampler.
+
+-> **Hypotheses:**
+1. Pytorch sampler is based on all classes individually and which distributes weights into classes. It should not do that. Correct logic is it should be based on sum of all classes. 
+
+-> **Status:** 🟡 Pending
+
+-> **Result:** N/A
