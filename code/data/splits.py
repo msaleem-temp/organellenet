@@ -149,37 +149,16 @@ def prepare_splits(
 
 
 
-def split_handler():
-    json_path = "/kaggle/input/datasets/jetminds/all-centroids-across-all-crops/all_centroids_across_all_crops.json"
+def split_handler(
+    blueprint_json_path: str,
+    output_dir: str,
+    target_classes: list,
+    )->dict:
 
-    target_classes = {
-        # 1. Mitochondria
-        'mito', 'mito_lum', 'mito_mem', 'mito_ribo',
-        # 2. Vesicles
-        'ves', 'ves_lum', 'ves_mem',
-        # 3. Endosomes
-        'endo', 'endo_lum', 'endo_mem',
-        # 4. Lysosomes
-        'lyso', 'lyso_lum', 'lyso_mem',
-        # 5. Lipid Droplets
-        'ld', 'ld_lum', 'ld_mem',
-        # 6. Nucleus
-        'nuc', 'ne', 'ne_mem', 'ne_lum', 'chrom', 'echrom', 'hchrom', 'nhchrom', 'nechrom', 'nucpl', 'nucleo',
-        # 7. Nuclear Pores
-        'np', 'np_in', 'np_out',
-        # 8. Microtubules
-        'mt', 'mt_in', 'mt_out',
-        # 9. Peroxisomes
-        'perox', 'perox_lum', 'perox_mem',
-        # 10. Golgi Apparatus
-        'golgi', 'golgi_lum', 'golgi_mem',
-        # 11. Endoplasmic Reticulum 
-        'er', 'er_lum', 'er_mem',
-        # 12. ER Exit Sites
-        'eres', 'eres_lum', 'eres_mem',
-        # 13. Vimentin
-        'vim'
-    }
+    # json_path = "/kaggle/input/datasets/jetminds/all-centroids-across-all-crops/all_centroids_across_all_crops.json"
+
+    json_path = blueprint_json_path
+   
     # Define sets for rare classes
     rare_np = {'np', 'np_in', 'np_out'}
     rare_nuc = {'nuc', 'ne', 'ne_mem', 'ne_lum', 'chrom', 'echrom', 'hchrom', 'nhchrom', 'nechrom', 'nucpl', 'nucleo'}
@@ -314,13 +293,19 @@ def split_handler():
     print("=" * 60)
 
     # 9. Save Files
-    with open("/kaggle/working/train_split.json", 'w') as f:
+    train_path = f"{output_dir}/train.json"
+    val_path = f"{output_dir}/val.json"
+    test_path = f"{output_dir}/test.json"
+
+    with open(train_path, 'w') as f:
         json.dump(train_patches, f, indent=4)
-    with open("/kaggle/working/val_split.json", 'w') as f:
+    with open(val_path, 'w') as f:
         json.dump(val_patches, f, indent=4)
-    with open("/kaggle/working/test_split.json", 'w') as f:
+    with open(test_path, 'w') as f:
         json.dump(test_patches, f, indent=4)
 
     return {
-        "train_path": None
+        "train_path": train_path,
+        "val_path":val_path,
+        "test_path":test_path 
     }
