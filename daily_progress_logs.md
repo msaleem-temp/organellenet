@@ -55,3 +55,15 @@ _____________________________________________________________________
 -> **Status:** 🟢 Done
 
 -> **Result:** I found bug in my code, actually it was corrected by Dr. Samia.
+
+_____________________________________________________________________
+**Date:** Sep 1, 2026
+
+**Task:** Classes Encoding in PyTorch dataset Class
+
+-> **Hypotheses:**
+1. Currently, in pytorch dataset class, semantic organelle classes such as mito_lum, _mito_mem and mito_rob as encoded as 1:3,1:4,1:5, but mito never encoded whose ID is 50. As result, model as 50 as background. 
+
+-> **Status:** 🔵 In Progress
+
+-> **Result:** N/A
