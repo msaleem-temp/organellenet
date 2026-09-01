@@ -46,15 +46,15 @@ _____________________________________________________________________
 _____________________________________________________________________
 **Date:** August 31, 2026
 
-**Task:** Filtering Correct Target Class 
+**Task:** Filtering Correct Target Class and Encoding them into 13 classes.
 
 -> **Hypotheses:**
-1. While filtering target classes, we are using 13 instance classes, As a result, target_class.json have only these 13 classes. While, in PyTorch dataset classes, we are using IDs of semantic classes which are useless because we have already excluded them while filtering.  
+1. While filtering target classes, we are using 13 instance classes, During filtering, we should encode 40 classes into 13 main classes. 
 
 
--> **Status:** 🟢 Done
+-> **Status:** 🔵 In Progress
 
--> **Result:** I found bug in my code, actually it was corrected by Dr. Samia.
+-> **Result:** N/A
 
 _____________________________________________________________________
 **Date:** Sep 1, 2026
@@ -85,5 +85,5 @@ _____________________________________________________________________
 
 **Task:** Update Code.
 
--> **Status:** 🔵 In Progress
+-> **Status:** 🟡 Pending
 
