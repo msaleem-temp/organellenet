@@ -80,6 +80,8 @@ def main():
         excluded_crop=config.data.excluded_crop,
         seed=config.data.seed,
     )
+    train_data_path = split_paths["train_path"]
+    print(train_data_path)
 
     print("Existed...")
     sys.exit(0)
