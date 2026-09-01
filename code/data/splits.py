@@ -11,6 +11,7 @@ import os
 import sys
 import json
 import random
+from collections import defaultdict
 
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT = os.path.abspath(os.path.join(_THIS_DIR, "..", ".."))
@@ -144,4 +145,182 @@ def prepare_splits(
         "val_path": val_path,
         "test_path": test_path,
         "stats": stats,
+    }
+
+
+
+def splits_handler():
+    json_path = "/kaggle/input/datasets/jetminds/all-centroids-across-all-crops/all_centroids_across_all_crops.json"
+
+    target_classes = {
+        # 1. Mitochondria
+        'mito', 'mito_lum', 'mito_mem', 'mito_ribo',
+        # 2. Vesicles
+        'ves', 'ves_lum', 'ves_mem',
+        # 3. Endosomes
+        'endo', 'endo_lum', 'endo_mem',
+        # 4. Lysosomes
+        'lyso', 'lyso_lum', 'lyso_mem',
+        # 5. Lipid Droplets
+        'ld', 'ld_lum', 'ld_mem',
+        # 6. Nucleus
+        'nuc', 'ne', 'ne_mem', 'ne_lum', 'chrom', 'echrom', 'hchrom', 'nhchrom', 'nechrom', 'nucpl', 'nucleo',
+        # 7. Nuclear Pores
+        'np', 'np_in', 'np_out',
+        # 8. Microtubules
+        'mt', 'mt_in', 'mt_out',
+        # 9. Peroxisomes
+        'perox', 'perox_lum', 'perox_mem',
+        # 10. Golgi Apparatus
+        'golgi', 'golgi_lum', 'golgi_mem',
+        # 11. Endoplasmic Reticulum 
+        'er', 'er_lum', 'er_mem',
+        # 12. ER Exit Sites
+        'eres', 'eres_lum', 'eres_mem',
+        # 13. Vimentin
+        'vim'
+    }
+    # Define sets for rare classes
+    rare_np = {'np', 'np_in', 'np_out'}
+    rare_nuc = {'nuc', 'ne', 'ne_mem', 'ne_lum', 'chrom', 'echrom', 'hchrom', 'nhchrom', 'nechrom', 'nucpl', 'nucleo'}
+    rare_perox = {'perox', 'perox_lum', 'perox_mem'}
+    rare_ld = {'ld', 'ld_lum', 'ld_mem'}
+
+    # 1. Load the master blueprint
+    with open(json_path, 'r') as f:
+        blueprint = json.load(f)
+
+    # 2. Filter and Profile (Now tracking exact patch counts per class)
+    crop_profiles = defaultdict(lambda: {"total": 0, "classes": set(), "class_counts": defaultdict(int)})
+    valid_patches = []
+
+    for patch in blueprint:
+        crop_id = patch.get("crop")
+        cls = patch.get("class")
+        
+        if cls in target_classes:
+            valid_patches.append(patch)
+            crop_profiles[crop_id]["total"] += 1
+            crop_profiles[crop_id]["classes"].add(cls)
+            crop_profiles[crop_id]["class_counts"][cls] += 1
+
+    # 3. Sort Crops by Diversity (Descending)
+    sorted_crop_ids = [
+        crop for crop, data in sorted(
+            crop_profiles.items(), 
+            key=lambda x: (len(x[1]["classes"]), x[1]["total"]), 
+            reverse=True
+        )
+    ]
+
+    # 4. Identify Injection Candidates
+    injection_candidates = []
+
+    for crop in sorted_crop_ids:
+        c_classes = crop_profiles[crop]["classes"]
+        
+        # Catch multi-rare crops
+        if (c_classes.intersection(rare_np) and 
+            c_classes.intersection(rare_nuc) and 
+            c_classes.intersection(rare_perox)):
+            injection_candidates.append(crop)
+
+    # 5. Build Initial Validation and Test Sets with STRICT Injections
+    val_crops = []
+    test_crops = []
+
+    # Inject exactly 2 multi-rare crops total (1 for val, 1 for test)
+    if len(injection_candidates) >= 2:
+        val_crops.append(injection_candidates[0])
+        test_crops.append(injection_candidates[1])
+    elif len(injection_candidates) == 1:
+        val_crops.append(injection_candidates[0])
+        
+    # Inject exactly 1 LD crop into Validation that has >= 10 LD patches
+    ld_injected = False
+    for crop in sorted_crop_ids:
+        if crop not in val_crops and crop not in test_crops:
+            c_counts = crop_profiles[crop]["class_counts"]
+            # Sum all sub-compartments of LD to get the total count for this crop
+            ld_count = sum(c_counts.get(ld_cls, 0) for ld_cls in rare_ld)
+            
+            if ld_count >= 10:
+                val_crops.append(crop)
+                ld_injected = True
+                break
+
+    # Fallback: if no single crop has >= 10 LD patches, pick the one with the highest available
+    if not ld_injected:
+        best_ld_crop = None
+        max_ld = 0
+        for crop in sorted_crop_ids:
+            if crop not in val_crops and crop not in test_crops:
+                c_counts = crop_profiles[crop]["class_counts"]
+                ld_count = sum(c_counts.get(ld_cls, 0) for ld_cls in rare_ld)
+                if ld_count > max_ld:
+                    max_ld = ld_count
+                    best_ld_crop = crop
+                    
+        if best_ld_crop:
+            val_crops.append(best_ld_crop)
+
+    pool = [c for c in sorted_crop_ids if c not in (val_crops + test_crops)]
+
+    # 6. Corrected Mathematical Slicing Order
+    val_target = 15
+    test_target = 15
+
+    needed_val = max(0, val_target - len(val_crops))
+    needed_test = max(0, test_target - len(test_crops))
+
+    # Calculate Train allocations first
+    train_total = len(pool) - needed_val - needed_test
+    train_high_div = int(train_total * 0.70)
+    train_low_div = train_total - train_high_div
+
+    # Step A: Train takes the absolute top diversity crops FIRST
+    train_crops = pool[:train_high_div]
+    pool = pool[train_high_div:]
+
+    # Step B: Val takes the next slice (medium diversity)
+    val_crops.extend(pool[:needed_val])
+    pool = pool[needed_val:]
+
+    # Step C: Test takes the next slice (medium-low diversity)
+    test_crops.extend(pool[:needed_test])
+    pool = pool[needed_test:]
+
+    # Step D: Train takes the remaining absolute bottom diversity
+    train_crops.extend(pool)
+
+    # 7. Route Patches
+    train_patches, val_patches, test_patches = [], [], []
+
+    for patch in valid_patches:
+        crop_id = patch.get("crop")
+        if crop_id in test_crops:
+            test_patches.append(patch)
+        elif crop_id in val_crops:
+            val_patches.append(patch)
+        elif crop_id in train_crops:
+            train_patches.append(patch)
+
+    # 8. Output Verification
+    print("=" * 60)
+    print(f"Total Available Target Crops: {len(sorted_crop_ids)}")
+    print(f"Total Train Crops: {len(train_crops):<3} | Patches: {len(train_patches)}")
+    print(f"Total Val Crops:   {len(val_crops):<3} | Patches: {len(val_patches)}")
+    print(f"Total Test Crops:  {len(test_crops):<3} | Patches: {len(test_patches)}")
+    print("=" * 60)
+
+    # 9. Save Files
+    with open("/kaggle/working/train_split.json", 'w') as f:
+        json.dump(train_patches, f, indent=4)
+    with open("/kaggle/working/val_split.json", 'w') as f:
+        json.dump(val_patches, f, indent=4)
+    with open("/kaggle/working/test_split.json", 'w') as f:
+        json.dump(test_patches, f, indent=4)
+
+    return {
+        "train_path": None
     }

@@ -26,6 +26,7 @@ from code.data.zarr_utils import build_zarr_map
 from code.data.dataset import PatchDataset
 from code.data.sampler import create_balanced_sampler
 from code.data.splits import prepare_splits
+from code.data.splits import split_handler
 from code.models.unet import build_model
 from code.training.losses import build_loss
 from code.training.trainer import Trainer
@@ -72,16 +73,18 @@ def main():
     blueprint_path = os.path.join(config.paths.json_dir, config.data.blueprint_json)
     split_output_dir = os.path.join(run_paths["run_dir"], "splits")
 
-    split_paths = prepare_splits(
-        blueprint_json_path=blueprint_path,
-        output_dir=split_output_dir,
-        target_classes=config.data.target_classes,
-        split_ratios=config.data.split_ratios,
-        excluded_crop=config.data.excluded_crop,
-        seed=config.data.seed,
-    )
-    train_data_path = split_paths["train_path"]
-    print(train_data_path)
+    # split_paths = prepare_splits(
+    #     blueprint_json_path=blueprint_path,
+    #     output_dir=split_output_dir,
+    #     target_classes=config.data.target_classes,
+    #     split_ratios=config.data.split_ratios,
+    #     excluded_crop=config.data.excluded_crop,
+    #     seed=config.data.seed,
+    # )
+    # train_data_path = split_paths["train_path"]
+    # print(train_data_path)
+
+    split_handler()
 
     print("Existed...")
     sys.exit(0)
