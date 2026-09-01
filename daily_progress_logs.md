@@ -64,9 +64,9 @@ _____________________________________________________________________
 -> **Hypotheses:**
 1. Currently, in pytorch dataset class, semantic organelle classes such as mito_lum, _mito_mem and mito_rob as encoded as 1:3,1:4,1:5, but mito never encoded whose ID is 50. As result, model as 50 as background. 
 
--> **Status:** 🔵 In Progress
+-> **Status:** 🟢 Done
 
--> **Result:** N/A
+-> **Result:** Hypotheses was correct. With previous encoding, model never learned real classes.
 
 _____________________________________________________________________
 **Date:** Sep 1, 2026
@@ -76,6 +76,6 @@ _____________________________________________________________________
 -> **Hypotheses:**
 1. Pytorch sampler is based on all classes individually and which distributes weights into classes. It should not do that. Correct logic is it should be based on sum of all classes. 
 
--> **Status:** 🟡 Pending
+-> **Status:** 🔵 In Progress 
 
 -> **Result:** N/A
