@@ -297,6 +297,7 @@ def split_handler(
     val_path = f"{output_dir}/val.json"
     test_path = f"{output_dir}/test.json"
 
+    print(f"This is train path: {train_path}")
     with open(train_path, 'w') as f:
         json.dump(train_patches, f, indent=4)
     with open(val_path, 'w') as f:
