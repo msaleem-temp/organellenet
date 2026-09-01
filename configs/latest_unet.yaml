@@ -11,20 +11,70 @@ experiment_name: latest-unet-14cls-jitter48-dice
 data:
   max_jitter: 48
   num_classes: 14
+
+  
   target_classes:
-    - endo
-    - ld
-    - lyso
+    # 1. Mitochondria
     - mito
-    - mt
-    - np
-    - nuc
-    - perox
+    - mito_lum
+    - mito_mem
+    - mito_ribo
+    # 2. Vesicles
     - ves
-    - vim
+    - ves_lum
+    - ves_mem
+    # 3. Endosomes
+    - endo
+    - endo_lum
+    - endo_mem
+    # 4. Lysosomes
+    - lyso
+    - lyso_lum
+    - lyso_mem
+    # 5. Lipid Droplets
+    - ld
+    - ld_lum
+    - ld_mem
+    # 6. Nucleus
+    - nuc
+    - ne
+    - ne_mem
+    - ne_lum
+    - chrom
+    - echrom
+    - hchrom
+    - nhchrom
+    - nechrom
+    - nucpl
+    - nucleo
+    # 7. Nuclear Pores
+    - np
+    - np_in
+    - np_out
+    # 8. Microtubules
+    - mt
+    - mt_in
+    - mt_out
+    # 9. Peroxisomes
+    - perox
+    - perox_lum
+    - perox_mem
+    # 10. Golgi Apparatus
     - golgi
+    - golgi_lum
+    - golgi_mem
+    # 11. Endoplasmic Reticulum 
     - er
+    - er_lum
+    - er_mem
+    # 12. ER Exit Sites
     - eres
+    - eres_lum
+    - eres_mem
+    # 13. Vimentin
+    - vim
+
+
   blueprint_json: latest_baseline_centroids.json
   split_ratios: [0.85, 0.09, 0.06]
   excluded_crop: crop234
