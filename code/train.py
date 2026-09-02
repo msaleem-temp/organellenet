@@ -90,7 +90,7 @@ def main():
             target_classes=config.data.target_classes,
     )
 
-    print(config.augmentation)
+    print(config.data.num_classes)
     print("Existed...")
     sys.exit(0)
     # 4. Build zarr map
