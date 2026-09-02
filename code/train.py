@@ -75,16 +75,6 @@ def main():
     blueprint_path = os.path.join(config.paths.json_dir, config.data.blueprint_json)
     split_output_dir = os.path.join(run_paths["run_dir"], "splits")
 
-    # split_paths = prepare_splits(
-    #     blueprint_json_path=blueprint_path,
-    #     output_dir=split_output_dir,
-    #     target_classes=config.data.target_classes,
-    #     split_ratios=config.data.split_ratios,
-    #     excluded_crop=config.data.excluded_crop,
-    #     seed=config.data.seed,
-    # )
-    # train_data_path = split_paths["train_path"]
-    # print(train_data_path)
 
     split_paths = split_handler(
             blueprint_json_path=blueprint_path,

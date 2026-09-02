@@ -231,7 +231,8 @@ def split_handler(
     train_path = os.path.join(output_dir, "train.json")
     val_path = os.path.join(output_dir, "val.json")
     test_path = os.path.join(output_dir, "test.json")
-
+    
+    train_patches = train_patches[:100]
     with open(train_path, 'w') as f:
         json.dump(train_patches, f, indent=4)
     with open(val_path, 'w') as f:
