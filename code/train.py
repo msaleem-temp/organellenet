@@ -24,7 +24,7 @@ from code.utils.config import load_config
 from code.utils.paths import setup_run_directory
 from code.data.zarr_utils import build_zarr_map
 from code.data.dataset import PatchDataset
-from code.data.sampler import create_balanced_sampler
+from code.data.sampler import create_balanced_sampler, sampler_test
 from code.data.splits import prepare_splits
 from code.data.splits import split_handler
 from code.models.unet import build_model
@@ -90,7 +90,7 @@ def main():
             target_classes=config.data.target_classes,
     )
 
-    print(split_paths['train_path'])
+    print(sampler_test())
     print("Existed...")
     sys.exit(0)
     # 4. Build zarr map

@@ -98,3 +98,6 @@ def create_balanced_sampler(dataset, balance_level: str = "raw") -> WeightedRand
                 print(f"{cls:<10}: {count} patches -> weight: {class_weights[cls]:.6f}")
 
     return sampler
+
+def sampler_test():
+    return "hello from sampler"
