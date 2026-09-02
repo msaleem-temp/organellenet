@@ -151,10 +151,7 @@ def main():
     model, device = build_model(config)
     criterion = build_loss(config, device)
 
-    print(model)
 
-    print("Existed...")
-    sys.exit(0)
 
     # 7.1. Log model parameters
     model_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
