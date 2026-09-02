@@ -143,16 +143,18 @@ def main():
         pin_memory=True,
         drop_last=False,
     )
-    print(config.training.sampler_balance_level)
 
-    print("Existed...")
-    sys.exit(0)
 
 
 
     # 7. Build model and loss
     model, device = build_model(config)
     criterion = build_loss(config, device)
+
+    print(model)
+
+    print("Existed...")
+    sys.exit(0)
 
     # 7.1. Log model parameters
     model_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
