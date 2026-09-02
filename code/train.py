@@ -79,7 +79,6 @@ def main():
     split_paths = split_handler(
             blueprint_json_path=blueprint_path,
             output_dir=split_output_dir,
-            target_classes=config.data.target_classes,
     )
 
 
