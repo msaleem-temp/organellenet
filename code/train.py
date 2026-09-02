@@ -31,6 +31,8 @@ from code.models.unet import build_model
 from code.training.losses import build_loss
 from code.training.trainer import Trainer
 
+from code.utils.plot import plot_slice
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="OrganelleNet Training")
@@ -118,9 +120,7 @@ def main():
         scale_conditioned=config.model.scale_conditioned,
     )
 
-    print(len(train_dataset))
-    print("Existed...")
-    sys.exit(0)
+
     # 6. Create data loaders
     train_sampler = create_balanced_sampler(
         train_dataset,
@@ -143,6 +143,10 @@ def main():
         pin_memory=True,
         drop_last=False,
     )
+    print(config.training.sampler_balance_level)
+
+    print("Existed...")
+    sys.exit(0)
 
 
 
