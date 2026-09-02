@@ -90,9 +90,7 @@ def main():
             target_classes=config.data.target_classes,
     )
 
-    print(config.data.num_classes)
-    print("Existed...")
-    sys.exit(0)
+
     # 4. Build zarr map
     zarr_map = build_zarr_map(config.paths.data_dir)
     print(f"Zarr map built: {len(zarr_map)} datasets found")
@@ -120,6 +118,9 @@ def main():
         scale_conditioned=config.model.scale_conditioned,
     )
 
+    print(len(train_dataset))
+    print("Existed...")
+    sys.exit(0)
     # 6. Create data loaders
     train_sampler = create_balanced_sampler(
         train_dataset,
@@ -142,6 +143,8 @@ def main():
         pin_memory=True,
         drop_last=False,
     )
+
+
 
     # 7. Build model and loss
     model, device = build_model(config)
