@@ -44,6 +44,8 @@ def parse_args():
     parser.add_argument("--batch-size", type=int, default=None, help="Override batch size")
     # ADD THIS LINE:
     parser.add_argument("--resume", type=str, default=None, help="Absolute path to a specific checkpoint to resume from")
+    parser.add_argument("--resume-log", type=str, default=None, help="Absolute path to historical CSV log to append to")
+
     return parser.parse_args()
 
 
@@ -67,7 +69,11 @@ def main():
 
     if args.resume is not None:
         config.training.resume_checkpoint = args.resume
-        
+
+    # ADD THESE TWO LINES:
+    if args.resume_log is not None:
+        config.training.resume_log = args.resume_log
+
     print(f"\n{'='*60}")
     print(f"Experiment: {config.experiment_name}")
     print(f"{'='*60}")

@@ -109,7 +109,7 @@ class Trainer:
         # 1. Check for manual override from the CLI/Config
         external_ckpt = getattr(self.config.training, "resume_checkpoint", None)
         
-        # 2. Decide which path to load from
+        # 2. Decide which path to load weights from
         if external_ckpt is not None and os.path.exists(external_ckpt):
             load_path = external_ckpt
         else:
@@ -133,14 +133,28 @@ class Trainer:
             print(f"Resumed at epoch {self.start_epoch} | Best metric: {self.best_metric:.4f}")
         else:
             print("No checkpoint found. Starting from scratch.")
-            # Initialize the CSV log header
-            header = "epoch,lr,train_loss,val_loss"
-            if self.use_dice_metric:
-                header += ",val_dice"
-            header += "\n"
-            with open(self.log_csv_path, "w") as f:
-                f.write(header)
 
+        # 4. Handle the CSV Log History
+        # We only act if the target CSV doesn't already exist in the writable directory
+        if not os.path.exists(self.log_csv_path):
+            os.makedirs(os.path.dirname(self.log_csv_path), exist_ok=True)
+            
+            # Fetch the path passed from the terminal
+            external_log = getattr(self.config.training, "resume_log", None)
+            
+            # If the user provided a historical path, copy it
+            if external_log is not None and os.path.exists(external_log):
+                shutil.copy(external_log, self.log_csv_path)
+                print(f"Recovered historical training logs from: {external_log}")
+            else:
+                # Fallback: start a fresh log
+                print("No historical logs provided. Creating fresh CSV header.")
+                header = "epoch,lr,train_loss,val_loss"
+                if self.use_dice_metric:
+                    header += ",val_dice"
+                header += "\n"
+                with open(self.log_csv_path, "w") as f:
+                    f.write(header)
     def _save_resume_checkpoint(self, epoch):
         """Save full training state for resumption."""
         raw_model = get_raw_model(self.model)
