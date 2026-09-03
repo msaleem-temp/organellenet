@@ -156,6 +156,8 @@ class Trainer:
                 header += "\n"
                 with open(self.log_csv_path, "w") as f:
                     f.write(header)
+
+                    
     def _save_resume_checkpoint(self, epoch):
         """Save full training state for resumption."""
         raw_model = get_raw_model(self.model)
