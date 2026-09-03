@@ -42,6 +42,8 @@ def parse_args():
     parser.add_argument("--name", type=str, default=None, help="Override experiment name")
     parser.add_argument("--patch-dim", type=int, default=None, help="Override patch dimension")
     parser.add_argument("--batch-size", type=int, default=None, help="Override batch size")
+    # ADD THIS LINE:
+    parser.add_argument("--resume", type=str, default=None, help="Absolute path to a specific checkpoint to resume from")
     return parser.parse_args()
 
 
@@ -63,6 +65,9 @@ def main():
     if args.batch_size is not None:
         config.training.batch_size = args.batch_size
 
+    if args.resume is not None:
+        config.training.resume_checkpoint = args.resume
+        
     print(f"\n{'='*60}")
     print(f"Experiment: {config.experiment_name}")
     print(f"{'='*60}")

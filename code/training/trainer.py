@@ -106,9 +106,19 @@ class Trainer:
 
     def try_resume(self):
         """Attempt to resume from a checkpoint if it exists."""
-        if os.path.exists(self.resume_ckpt_path):
-            print(f"Resuming from checkpoint: {self.resume_ckpt_path}")
-            checkpoint = torch.load(self.resume_ckpt_path, map_location=self.device)
+        # 1. Check for manual override from the CLI/Config
+        external_ckpt = getattr(self.config.training, "resume_checkpoint", None)
+        
+        # 2. Decide which path to load from
+        if external_ckpt is not None and os.path.exists(external_ckpt):
+            load_path = external_ckpt
+        else:
+            load_path = self.resume_ckpt_path
+
+        # 3. Load the weights
+        if os.path.exists(load_path):
+            print(f"Resuming from checkpoint: {load_path}")
+            checkpoint = torch.load(load_path, map_location=self.device)
 
             raw_model = get_raw_model(self.model)
             raw_model.load_state_dict(checkpoint["model_state_dict"])
