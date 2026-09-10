@@ -55,9 +55,6 @@ def main():
 
 
 
-    print(config.label_map)
-    sys.exit(0)
-    # 3. Setup Mapping & Variables
     semantic_to_instance_map = config.label_map
     
     macro_names = {
