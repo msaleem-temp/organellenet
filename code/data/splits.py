@@ -148,7 +148,7 @@ def prepare_splits(
     }
 
 
-def split_crop_handler(blueprint_json_path: str, output_dir: str) -> dict:
+def split_handler(blueprint_json_path: str, output_dir: str) -> dict:
     """
     Curated Train/Val/Test split generator for dynamic extraction.
     Parses the master blueprint to extract unique crop metadata (without centroids)
