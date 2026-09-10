@@ -24,7 +24,8 @@ from code.utils.config import load_config
 from code.utils.paths import setup_run_directory
 from code.data.zarr_utils import build_zarr_map
 from code.data.dataset import PatchDataset
-from code.data.sampler import create_balanced_sampler, sampler_test
+from code.data.dataset import DynamicCropDataset
+from code.data.sampler import create_balanced_sampler, create_rfs_sampler
 from code.data.splits import prepare_splits
 from code.data.splits import split_handler
 from code.models.unet import build_model
@@ -92,43 +93,32 @@ def main():
             output_dir=split_output_dir,
     )
 
-    print(f"Path: {blueprint_path}")
 
-    sys.exit(0)
 
 
     # 4. Build zarr map
     zarr_map = build_zarr_map(config.paths.data_dir)
     print(f"Zarr map built: {len(zarr_map)} datasets found")
 
-    # 5. Create datasets
-    train_dataset = PatchDataset(
-        json_path=split_paths["train_path"],
-        zarr_map=zarr_map,
-        label_map=config.label_map,
-        patch_dim=config.data.patch_dim,
-        max_jitter=config.data.max_jitter,
-        augmentation_config=config.augmentation,
-        target_type=config.data.target_type,
-        num_classes=config.data.num_classes,
-        scale_conditioned=config.model.scale_conditioned,
-    )
-    val_dataset = PatchDataset(
-        json_path=split_paths["val_path"],
-        zarr_map=zarr_map,
-        label_map=config.label_map,
-        patch_dim=config.data.patch_dim,
-        max_jitter=0,  # Always static for validation
-        target_type=config.data.target_type,
-        num_classes=config.data.num_classes,
-        scale_conditioned=config.model.scale_conditioned,
+    train_dataset = DynamicCropDataset(
+    crops_json_path=split_paths["train_path"], 
+    zarr_map=zarr_map, 
+    label_map=config.label_map,
+    patch_dim=config.data.patch_dim,    
     )
 
-
+    val_dataset = DynamicCropDataset(
+        crops_json_path=split_paths["val_path"], 
+        zarr_map=zarr_map, 
+        label_map=config.label_map,
+        patch_dim=config.data.patch_dim,
+    )
+  
     # 6. Create data loaders
-    train_sampler = create_balanced_sampler(
-        train_dataset,
-        balance_level=config.training.sampler_balance_level,
+    train_sampler = create_rfs_sampler(
+        dataset=train_dataset, 
+        weights_json_path=config.data.crop_rfs_weights, 
+        num_samples=config.data.num_samples
     )
 
     train_loader = DataLoader(
@@ -148,7 +138,9 @@ def main():
         drop_last=False,
     )
 
+    print(f"{len(train_loader)}")
 
+    sys.exit(0)
 
 
     # 7. Build model and loss

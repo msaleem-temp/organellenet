@@ -6,13 +6,11 @@
 # Dice-based scheduling/early-stopping, crop234 exclusion
 inherits: base.yaml
 
-experiment_name: latest-unet-14cls-jitter48-dice
+experiment_name: rfs-unet-13_classes
 
 data:
-  max_jitter: 48
-  num_classes: 14
-
-  
+  max_jitter: 0
+  num_classes: 13
   target_classes:
     # 1. Mitochondria
     - mito
@@ -76,12 +74,14 @@ data:
 
 
   blueprint_json: latest_baseline_centroids.json
+  crop_rfs_weights: crop_rfs_weights.json
   split_ratios: [0.85, 0.09, 0.06]
   excluded_crop: crop234
+  num_samples: 1600
 
 model:
-  out_channels: 14
-  strides: [1, 2, 2, 2]
+  out_channels: 13
+  strides: [2, 2, 2, 2]
 
 training:
   batch_size: 4
@@ -90,4 +90,4 @@ training:
   early_stop_metric: val_dice
   scheduler_mode: max
   print_freq: 1
-  num_epochs: 35
+  num_epochs: 3

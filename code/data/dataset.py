@@ -233,3 +233,133 @@ class PatchDataset(Dataset):
         Used by evaluate_detailed.py to record per-patch provenance alongside metrics.
         """
         return self.patches[idx]
+
+
+
+
+
+class DynamicCropDataset(Dataset):
+    def __init__(self, crops_json_path, zarr_map, label_map, patch_dim=128):
+       
+        self.patch_dim = patch_dim
+        self.zarr_map = zarr_map
+        
+        with open(crops_json_path, 'r') as f:
+            self.crops = json.load(f)
+            
+        # Use the provided label_map instead of hardcoding
+        self.label_lookup = np.zeros(256, dtype=np.int64)
+        for semantic_id, instance_id in label_map.items():
+            if semantic_id < 256:  # Safety check for lookup array bounds
+                self.label_lookup[semantic_id] = instance_id
+            
+        self.zarr_cache = {}
+
+    # ---> YOUR EXACT HELPER FUNCTION COPIED HERE <---
+    def get_scale_trans(self, path, level="s0"):
+        scale = np.array([1.0, 1.0, 1.0])
+        trans = np.array([0.0, 0.0, 0.0])
+        if path is None: return scale, trans
+        try:
+            with open(f"{path}/.zattrs", 'r') as f:
+                meta = json.load(f)
+                multiscales = meta.get("multiscales", [{}])[0]
+                for ds in multiscales.get("datasets", []):
+                    if ds.get("path") == level:
+                        for t in ds.get("coordinateTransformations", []):
+                            if t.get("type") == "scale": scale = np.array(t["scale"])[-3:] # Ensure 3D
+                            if t.get("type") == "translation": trans = np.array(t["translation"])[-3:]
+                        return scale, trans
+                if "coordinateTransformations" in multiscales:
+                    for t in multiscales["coordinateTransformations"]:
+                        if t.get("type") == "scale": scale = np.array(t["scale"])[-3:]
+                        if t.get("type") == "translation": trans = np.array(t["translation"])[-3:]
+        except Exception:
+            pass
+        return scale, trans
+
+    def _get_zarr_handles(self, dataset, crop_id, em_scale, label_scale):
+        cache_key = f"{dataset}_{crop_id}_{em_scale}_{label_scale}"
+        if cache_key in self.zarr_cache:
+            return self.zarr_cache[cache_key]
+            
+        valid_em_base = None
+        valid_lbl_base = None
+        for zarr_path in self.zarr_map.get(dataset, []):
+            base_recon = os.path.join(zarr_path, "recon-1")
+            temp_em = os.path.join(base_recon, "em", "fibsem-uint8")
+            temp_lbl = os.path.join(base_recon, "labels", "groundtruth", crop_id, "all")
+            if os.path.exists(temp_em) and os.path.exists(temp_lbl):
+                valid_em_base = temp_em
+                valid_lbl_base = temp_lbl
+                break
+                
+        if not valid_em_base: raise FileNotFoundError(f"Missing Zarr paths for {crop_id}")
+            
+        em_zarr = zarr.open(os.path.join(valid_em_base, str(em_scale)), mode='r')
+        label_zarr = zarr.open(os.path.join(valid_lbl_base, str(label_scale)), mode='r')
+        
+        # Load spatial metadata using your function
+        all_scale_lbl, all_trans_lbl = self.get_scale_trans(valid_lbl_base, str(label_scale))
+        em_scale_arr, em_trans_arr = self.get_scale_trans(valid_em_base, str(em_scale))
+        
+        self.zarr_cache[cache_key] = (em_zarr, label_zarr, all_scale_lbl, all_trans_lbl, em_scale_arr, em_trans_arr)
+        return self.zarr_cache[cache_key]
+
+    def __len__(self):
+        return len(self.crops)
+        
+    def __getitem__(self, idx):
+        crop_meta = self.crops[idx]
+        dataset = crop_meta["dataset"]
+        crop_id = crop_meta["crop"]
+        em_lvl = crop_meta["em_scale"]
+        lbl_lvl = crop_meta["label_scale"]
+        
+        em_zarr, label_zarr, all_scale_lbl, all_trans_lbl, em_scale, em_trans = self._get_zarr_handles(
+            dataset, crop_id, em_lvl, lbl_lvl
+        )
+        
+        # 1. Random Anchor Generation (Replacing your boolean sieve logic)
+        lbl_shape = np.array(label_zarr.shape)
+        half_patch = self.patch_dim // 2
+        
+        # Ensure we don't pick a center too close to the absolute edges
+        max_bounds = np.maximum(lbl_shape - half_patch, half_patch)
+        l_center = np.array([np.random.randint(half_patch, limit + 1) for limit in max_bounds])
+        
+        # ---> 2. YOUR EXACT PHYSICAL MAPPING MATH COPIED HERE <---
+        # Map to true physical nanometers
+        phys_center = (l_center * all_scale_lbl) + all_trans_lbl
+        
+        # Map physical nanometers back to unified Label and EM voxel spaces
+        # (l_center is already known, we just need e_center)
+        e_center = np.round((phys_center - em_trans) / em_scale).astype(int)
+        
+        # Calculate equivalent EM patch shape based on scale ratios
+        e_shape = np.round(np.array([self.patch_dim]*3) * (all_scale_lbl / em_scale)).astype(int)
+        
+        # ---> 3. Base Mathematical Centering <---
+        l_start = np.floor(l_center - (self.patch_dim / 2.0)).astype(int)
+        e_start = np.floor(e_center - (e_shape / 2.0)).astype(int)
+        
+        # 4. Safe Extraction (Your provided function)
+        lbl_np = extract_safe(label_zarr, l_start.tolist(), [self.patch_dim]*3, pad_value=0, out_dtype=np.int64)
+        em_np = extract_safe(em_zarr, e_start.tolist(), e_shape.tolist(), pad_value=0)
+        
+        # 5. Semantic Remapping & Tensor Conversion
+        remapped_lbl = self.label_lookup[lbl_np]
+        
+        em_tensor = torch.from_numpy(em_np.astype(np.float32) / 255.0).unsqueeze(0)
+        lbl_tensor = torch.from_numpy(remapped_lbl)
+        
+        # PyTorch Interpolation to fix mismatched tensor shapes caused by different resolution grids
+        if em_tensor.shape[1:] != lbl_tensor.shape:
+            em_tensor = torch.nn.functional.interpolate(
+                em_tensor.unsqueeze(0), 
+                size=lbl_tensor.shape, 
+                mode='trilinear', 
+                align_corners=False
+            ).squeeze(0)
+            
+        return em_tensor, lbl_tensor

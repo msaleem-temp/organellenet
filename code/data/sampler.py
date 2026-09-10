@@ -99,5 +99,43 @@ def create_balanced_sampler(dataset, balance_level: str = "raw") -> WeightedRand
 
     return sampler
 
-def sampler_test():
-    return "hello from sampler"
+
+def create_rfs_sampler(dataset, weights_json_path: str, num_samples: int = 1600) -> WeightedRandomSampler:
+    """
+    Creates a PyTorch WeightedRandomSampler based on offline Repeat Factor Sampling (RFS) weights.
+    
+    Parameters
+    ----------
+    dataset : DynamicCropDataset
+        The initialized dataset containing a `.crops` attribute.
+    weights_json_path : str
+        Path to the JSON file containing the pre-calculated crop RFS weights.
+    num_samples : int
+        The total number of dynamic patches to extract per epoch. Default is 1600.
+        
+    Returns
+    -------
+    WeightedRandomSampler
+    """
+    # 1. Load the offline RFS weights
+    with open(weights_json_path, 'r') as f:
+        rfs_weights_dict = json.load(f)
+        
+    # 2. Map the weights using the Dataset's internal list order
+    sample_weights = []
+    for crop_meta in dataset.crops:
+        crop_id = crop_meta["crop"]
+        # Default to 1.0 (baseline) if the crop has no rare targets
+        weight = rfs_weights_dict.get(crop_id, 1.0)
+        sample_weights.append(weight)
+        
+    # 3. Convert to PyTorch sampler format
+    weights_tensor = torch.DoubleTensor(sample_weights)
+    
+    sampler = WeightedRandomSampler(
+        weights=weights_tensor, 
+        num_samples=num_samples,
+        replacement=True
+    )
+    
+    return sampler

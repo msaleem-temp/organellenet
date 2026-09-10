@@ -53,7 +53,7 @@ LABEL_MAP_13CLS = {
 
 LABEL_MAP_14CLS = {
     **LABEL_MAP_13CLS,
-    38: 13,                                                     # 13. Vimentin
+    38: 0,                                                     # 13. Vimentin
 }
 
 CLASS_NAMES_13 = {
