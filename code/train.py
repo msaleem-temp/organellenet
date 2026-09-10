@@ -113,6 +113,7 @@ def main():
         label_map=config.label_map,
         patch_dim=config.data.patch_dim,
     )
+    # trf crop_weights json path
     crop_rfs_weights_path = os.path.join(config.paths.json_dir, config.data.crop_rfs_weights)
 
     # 6. Create data loaders
