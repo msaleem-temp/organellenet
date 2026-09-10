@@ -6,6 +6,7 @@ import sys
 import os
 import collections
 import torch
+import json
 from torch.utils.data import WeightedRandomSampler
 
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
