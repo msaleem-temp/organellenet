@@ -121,6 +121,10 @@ def main():
         num_samples=config.data.num_samples
     )
 
+
+    print(f"{len(train_sampler)}")
+
+    sys.exit(0)
     train_loader = DataLoader(
         train_dataset,
         batch_size=config.training.batch_size,
@@ -138,9 +142,7 @@ def main():
         drop_last=False,
     )
 
-    print(f"{len(train_loader)}")
 
-    sys.exit(0)
 
 
     # 7. Build model and loss
