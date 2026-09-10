@@ -92,6 +92,10 @@ def main():
             output_dir=split_output_dir,
     )
 
+    print(f"Path: {blueprint_path}")
+
+    sys.exit(0)
+
 
     # 4. Build zarr map
     zarr_map = build_zarr_map(config.paths.data_dir)
