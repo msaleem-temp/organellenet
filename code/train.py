@@ -114,7 +114,7 @@ def main():
         patch_dim=config.data.patch_dim,
     )
   
-    print(f"{len(config.data.crop_rfs_weights)}")
+    print(f"{config.data.crop_rfs_weights}")
   
     sys.exit(0)
     # 6. Create data loaders
