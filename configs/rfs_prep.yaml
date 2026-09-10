@@ -4,6 +4,6 @@ experiment_name: rfs-weights-computation
 
 data:
   num_classes: 13
-  blueprint_json: centroids_across_all_crops.json 
+  blueprint_json: latest_baseline_centroids.json
   num_samples: 1600
   crop_rfs_weights: crop_rfs_weights.json
