@@ -40,7 +40,7 @@ def main():
 
 
 
-    print(split_paths["train_path"])
+    print(config.paths.json_dir)
     sys.exit(0)
     data_dir = config.paths.data_dir
     print(f"Scanning for Zarr datasets in: {data_dir}")
