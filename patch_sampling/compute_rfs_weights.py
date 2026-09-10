@@ -1,5 +1,30 @@
+import os
+import json
+import glob
+import zarr
+import numpy as np 
 
-# --- 1. Setup Mapping & Names ---
+def building_datasets(kaggle_root="/kaggle/input"):
+    zarr_map = {}
+    search_patterns = [
+        f"{kaggle_root}/*/*.zarr",
+        f"{kaggle_root}/*/*/*.zarr",
+        f"{kaggle_root}/*/*/*/*.zarr",
+        f"{kaggle_root}/*/*/*/*/*.zarr",          
+        f"{kaggle_root}/*/*/*/*/*/*.zarr",        
+        f"{kaggle_root}/*/*/*/*/*/*/*.zarr"       
+    ]
+    
+    for pattern in search_patterns:
+        for zarr_path in glob.glob(pattern):
+            dataset_name = os.path.basename(zarr_path).replace(".zarr", "")
+            if dataset_name not in zarr_map:
+                zarr_map[dataset_name] = []
+            if zarr_path not in zarr_map[dataset_name]:
+                zarr_map[dataset_name].append(zarr_path)
+                
+    return zarr_map
+
 semantic_to_instance_map = {
     50: 1, 3: 1, 4: 1, 5: 1,
     41: 2, 8: 2, 9: 2,
