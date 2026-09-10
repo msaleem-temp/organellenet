@@ -114,6 +114,9 @@ def main():
         patch_dim=config.data.patch_dim,
     )
   
+    print(f"{len(config.data.crop_rfs_weights)}")
+  
+    sys.exit(0)
     # 6. Create data loaders
     train_sampler = create_rfs_sampler(
         dataset=train_dataset, 
@@ -122,9 +125,7 @@ def main():
     )
 
 
-    print(f"{len(train_sampler)}")
-
-    sys.exit(0)
+    
     train_loader = DataLoader(
         train_dataset,
         batch_size=config.training.batch_size,
