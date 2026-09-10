@@ -58,21 +58,7 @@ def main():
     print(config.label_map)
     sys.exit(0)
     # 3. Setup Mapping & Variables
-    semantic_to_instance_map = {
-        50: 1, 3: 1, 4: 1, 5: 1,
-        41: 2, 8: 2, 9: 2,
-        42: 3, 10: 3, 11: 3,
-        43: 4, 12: 4, 13: 4,
-        44: 5, 14: 5, 15: 5,
-        37: 6, 52: 6, 20: 6, 21: 6, 65: 6, 54: 6, 26: 6, 24: 6, 25: 6, 27: 6, 28: 6, 29: 6,
-        53: 7, 22: 7, 23: 7,
-        55: 8, 30: 8, 36: 8,
-        49: 9, 47: 9, 48: 9,
-        40: 10, 6: 10, 7: 10,
-        51: 11, 16: 11, 17: 11, 64: 11,
-        46: 12, 18: 12, 19: 12,
-        38: 0
-    }
+    semantic_to_instance_map = config.label_map
     
     macro_names = {
         0: "Background", 1: "Mito", 2: "Vesicles", 3: "Endosomes", 4: "Lysosomes",
