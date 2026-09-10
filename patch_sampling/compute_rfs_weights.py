@@ -14,6 +14,7 @@ if _PROJECT_ROOT not in sys.path:
 from code.utils.config import load_config
 from code.data.zarr_utils import build_zarr_map
 from code.utils.paths import setup_run_directory
+from code.data.splits import split_handler
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Compute RFS Weights")
@@ -23,15 +24,28 @@ def parse_args():
 def main():
     args = parse_args()
     config = load_config(args.config)
+
     run_paths = setup_run_directory(config, config_path=args.config)
-    # 1. Get data directory dynamically from the YAML config
+    print(f"Run directory: {run_paths['run_dir']}")
+
+    # 3. Prepare data splits
+    blueprint_path = os.path.join(config.paths.json_dir, config.data.blueprint_json)
+    split_output_dir = os.path.join(run_paths["run_dir"], "splits")
 
 
-    print(run_paths)
+    split_paths = split_handler(
+            blueprint_json_path=blueprint_path,
+            output_dir=split_output_dir,
+    )
+
+
+
+    print(split_paths)
+    sys.exit(0)
     data_dir = config.paths.data_dir
     print(f"Scanning for Zarr datasets in: {data_dir}")
     ZARR_MAP = build_zarr_map(data_dir)
-    
+
     # 2. Define input and output paths
     train_json_path = "/kaggle/working/train_crops.json"
     output_json_path = "/kaggle/working/crop_rfs_weights.json"
