@@ -103,9 +103,12 @@ class DataConfig:
         "golgi", "er", "eres",
     ])
     blueprint_json: str = "static_dynamic_baseline.json"
-    crop_rfs_weights: str = "crop_rfs_weights.json"
     split_ratios: List[float] = field(default_factory=lambda: [0.80, 0.10, 0.10])
     excluded_crop: Optional[str] = None
+   
+    # RFS addition
+    num_samples: int = 1600
+    crop_rfs_weights: str = "crop_rfs_weights.json"
 
 
 @dataclass
