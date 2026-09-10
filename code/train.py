@@ -113,14 +113,14 @@ def main():
         label_map=config.label_map,
         patch_dim=config.data.patch_dim,
     )
-  
-    print(f"{config.data.crop_rfs_weights}")
+    crop_rfs_weights_path = os.path.join(config.paths.json_dir, config.data.crop_rfs_weights)
+    print(f"{crop_rfs_weights_path}")
   
     sys.exit(0)
     # 6. Create data loaders
     train_sampler = create_rfs_sampler(
         dataset=train_dataset, 
-        weights_json_path=config.data.crop_rfs_weights, 
+        weights_json_path=crop_rfs_weights_path, 
         num_samples=config.data.num_samples
     )
 
