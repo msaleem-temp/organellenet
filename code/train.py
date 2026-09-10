@@ -141,10 +141,6 @@ def main():
         drop_last=False,
     )
 
-    print(f"Len {len(train_loader)}")
-  
-    sys.exit(0)
-
 
     # 7. Build model and loss
     model, device = build_model(config)
