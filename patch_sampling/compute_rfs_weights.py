@@ -53,6 +53,10 @@ def main():
     train_crops = [meta for meta in raw_train_crops if meta["crop"] != "crop247"]
     print(f"Removed crop247. Remaining training crops: {len(train_crops)}")
 
+
+
+    print(config.label_map)
+    sys.exit(0)
     # 3. Setup Mapping & Variables
     semantic_to_instance_map = {
         50: 1, 3: 1, 4: 1, 5: 1,
