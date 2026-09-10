@@ -141,7 +141,7 @@ def main():
         drop_last=False,
     )
 
-    print(f"Len {len(train_loaderh)}")
+    print(f"Len {len(train_loader)}")
   
     sys.exit(0)
 
