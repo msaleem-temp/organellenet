@@ -114,9 +114,7 @@ def main():
         patch_dim=config.data.patch_dim,
     )
     crop_rfs_weights_path = os.path.join(config.paths.json_dir, config.data.crop_rfs_weights)
-    print(f"{crop_rfs_weights_path}")
-  
-    sys.exit(0)
+
     # 6. Create data loaders
     train_sampler = create_rfs_sampler(
         dataset=train_dataset, 
@@ -143,7 +141,9 @@ def main():
         drop_last=False,
     )
 
-
+    print(f"Len {len(train_loaderh)}")
+  
+    sys.exit(0)
 
 
     # 7. Build model and loss
