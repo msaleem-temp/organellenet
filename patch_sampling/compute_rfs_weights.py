@@ -13,6 +13,7 @@ if _PROJECT_ROOT not in sys.path:
 
 from code.utils.config import load_config
 from code.data.zarr_utils import build_zarr_map
+from code.utils.paths import setup_run_directory
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Compute RFS Weights")
@@ -22,8 +23,11 @@ def parse_args():
 def main():
     args = parse_args()
     config = load_config(args.config)
-    
+    run_paths = setup_run_directory(config, config_path=args.config)
     # 1. Get data directory dynamically from the YAML config
+
+
+    print(run_paths)
     data_dir = config.paths.data_dir
     print(f"Scanning for Zarr datasets in: {data_dir}")
     ZARR_MAP = build_zarr_map(data_dir)
