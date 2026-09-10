@@ -32,6 +32,7 @@ organellenet/
 │   ├── evaluate.py              #   Evaluation entry point
 │   └── infer.py                 #   Sliding window inference entry point
 ├── patch_sampling/
+│   └── compute_rfs_weights.py   # Crop Weights computation for Repeat Factor Sampling
 │   └── improved.py              # Patch extraction from raw zarr volumes
 ├── legacy/                      # Original monolithic scripts (preserved)
 ├── runs/                        # Auto-created experiment output directories
