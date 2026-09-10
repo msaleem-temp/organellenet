@@ -40,14 +40,14 @@ def main():
 
 
 
-    print(split_paths)
+    print(split_paths["train_path"])
     sys.exit(0)
     data_dir = config.paths.data_dir
     print(f"Scanning for Zarr datasets in: {data_dir}")
     ZARR_MAP = build_zarr_map(data_dir)
 
     # 2. Define input and output paths
-    train_json_path = "/kaggle/working/train_crops.json"
+    train_json_path = split_paths["train_path"]
     output_json_path = "/kaggle/working/crop_rfs_weights.json"
     
     with open(train_json_path, 'r') as f:
