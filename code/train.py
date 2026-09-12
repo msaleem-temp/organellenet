@@ -84,7 +84,7 @@ def main():
         config.training.num_workers = args.workers
 
 
-    print(f"Name: {args.name}")
+    print(f"Name: {args.epochs}")
 
     sys.exit(0)
     print(f"\n{'='*60}")
