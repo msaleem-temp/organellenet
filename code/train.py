@@ -84,7 +84,7 @@ def main():
         config.training.num_workers = args.workers
 
 
-    print(f"Name: {config.model}")
+    print(f"Name: {config.name}")
 
     sys.exit(0)
     print(f"\n{'='*60}")
