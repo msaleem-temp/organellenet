@@ -36,44 +36,57 @@ from code.utils.plot import plot_slice
 
 def parse_args():
     parser = argparse.ArgumentParser(description="OrganelleNet Training")
-    parser.add_argument("--config", type=str, required=True, help="Path to YAML config file")
-    parser.add_argument("--gpu", type=str, default=None, help="GPU index (e.g., '0' or '0,1')")
-    parser.add_argument("--dry-run", action="store_true", help="Validate config and exit without training")
+    
+    # Existing arguments
+    parser.add_argument("--config", type=str, required=True, help="Path to YAML config")
+    parser.add_argument("--gpu", type=str, default=None, help="GPU index")
+    parser.add_argument("--dry-run", action="store_true", help="Validate and exit")
     parser.add_argument("--name", type=str, default=None, help="Override experiment name")
     parser.add_argument("--patch-dim", type=int, default=None, help="Override patch dimension")
     parser.add_argument("--batch-size", type=int, default=None, help="Override batch size")
-    # ADD THIS LINE:
-    parser.add_argument("--resume", type=str, default=None, help="Absolute path to a specific checkpoint to resume from")
-    parser.add_argument("--resume-log", type=str, default=None, help="Absolute path to historical CSV log to append to")
+    parser.add_argument("--resume", type=str, default=None, help="Path to checkpoint")
+    parser.add_argument("--resume-log", type=str, default=None, help="Path to historical CSV")
+    
+    # New Standardized CLI Overrides
+    parser.add_argument("--model", type=str, default=None, help="Model architecture (e.g., unet_2d)")
+    parser.add_argument("--loss", type=str, default=None, help="Loss function (e.g., dice_ce, tvbce)")
+    parser.add_argument("--epochs", type=int, default=None, help="Total training epochs")
+    parser.add_argument("--lr", type=float, default=None, help="Peak learning rate")
+    parser.add_argument("--weight-decay", type=float, default=None, help="Optimizer weight decay")
+    parser.add_argument("--workers", type=int, default=None, help="Dataloader workers")
 
     return parser.parse_args()
-
 
 def main():
     args = parse_args()
 
-    # GPU selection
-    if args.gpu is not None:
-        os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
-
     # 1. Load config
     config = load_config(args.config)
     
-    # CLI Overrides
+    # 2. Map CLI Overrides safely to the config object
     if args.name is not None:
         config.experiment_name = args.name
     if args.patch_dim is not None:
         config.data.patch_dim = args.patch_dim
     if args.batch_size is not None:
         config.training.batch_size = args.batch_size
+    if args.model is not None:
+        config.model.name = args.model
+    if args.loss is not None:
+        config.training.loss = args.loss
+    if args.epochs is not None:
+        config.training.epochs = args.epochs
+    if args.lr is not None:
+        config.training.lr = args.lr
+    if args.weight_decay is not None:
+        config.training.weight_decay = args.weight_decay
+    if args.workers is not None:
+        config.training.num_workers = args.workers
 
-    if args.resume is not None:
-        config.training.resume_checkpoint = args.resume
 
-    # ADD THESE TWO LINES:
-    if args.resume_log is not None:
-        config.training.resume_log = args.resume_log
-
+    print(config.model)
+    
+    sys.exit(0)
     print(f"\n{'='*60}")
     print(f"Experiment: {config.experiment_name}")
     print(f"{'='*60}")
